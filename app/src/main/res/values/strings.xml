@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ACC Settings</string>
+    <string name="acc">ACC</string>
+
+    <!-- Preference Titles -->
+    <string name="battery_header">Battery</string>
+    <string name="about_header">About</string>
+
+    <!-- Battery Preferences -->
+    <string name="status_title">Status</string>
+
+</resources>
