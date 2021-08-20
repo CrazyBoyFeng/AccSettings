@@ -1,5 +1,19 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:title="@string/about_header">
-    <Preference app:title="@string/app_name"></Preference>
-    <Preference app:title="@string/acc"></Preference>
+    <Preference
+        app:key="about_app"
+        app:title="@string/app_name">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://github.com/CrazyBoyFeng/AccSettings" />
+    </Preference>
+    <!--TODO get the acc version in program, if cannot, use static string-->
+    <Preference
+        app:key="about_acc"
+        app:title="@string/acc">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://github.com/VR-25/acc" />
+    </Preference>
 </PreferenceScreen>
