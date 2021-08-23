@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Feng/Documents/GitHub/AccSettings/app/src/main/res/drawable/ic_launcher.xml" value="0.11197916666666667" />
         <entry key="..\:/Feng/Documents/GitHub/AccSettings/app/src/main/res/drawable/ic_launcher_background.xml" value="0.11197916666666667" />
+        <entry key="..\:/Feng/Documents/GitHub/AccSettings/app/src/main/res/drawable/messages.xml" value="0.21979166666666666" />
         <entry key="..\:/Feng/Documents/GitHub/AccSettings/app/src/main/res/layout/demo_activity.xml" value="0.1" />
         <entry key="..\:/Feng/Documents/GitHub/AccSettings/app/src/main/res/layout/settings_activity.xml" value="0.1" />
         <entry key="..\:/Feng/Documents/GitHub/AccSettings/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.11197916666666667" />
@@ -12,6 +13,7 @@
         <entry key="..\:/Feng/Documents/GitHub/AccSettings/app/src/main/res/xml/about_preferences.xml" value="0.1" />
         <entry key="..\:/Feng/Documents/GitHub/AccSettings/app/src/main/res/xml/demo_preferences.xml" value="0.1" />
         <entry key="..\:/Feng/Documents/GitHub/AccSettings/app/src/main/res/xml/root_preferences.xml" value="0.25" />
+        <entry key="..\:/Feng/Documents/GitHub/AccSettings/app/src/main/res/xml/settings_preferences.xml" value="0.18" />
       </map>
     </option>
   </component>
