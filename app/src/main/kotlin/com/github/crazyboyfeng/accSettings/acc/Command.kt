@@ -8,7 +8,6 @@ object Command {
         if (result.isSuccess) {
             return result.out.joinToString("\n").trim()
         } else throw when (result.code) {
-            //TODO is there stdout or stderr?
             1 -> FailureException()
             2 -> IncorrectSyntaxException()
             3 -> MissingBusyboxBinaryException()
