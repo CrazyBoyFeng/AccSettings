@@ -8,9 +8,8 @@
             app:key="@string/acc_daemon"
             app:title="@string/daemon" />
         <Preference
-            app:title="@string/configuration"
             app:fragment="com.github.crazyboyfeng.accSettings.fragment.ConfigFragment"
-            />
+            app:title="@string/configuration" />
     </PreferenceCategory>
     <PreferenceCategory
         app:enabled="false"
