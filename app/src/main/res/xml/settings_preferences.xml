@@ -38,13 +38,12 @@
         app:iconSpaceReserved="false"
         app:title="@string/about">
         <Preference
-            app:summary="about_app"
+            app:summary="@string/version_name"
             app:title="@string/acc_settings">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/CrazyBoyFeng/AccSettings" />
         </Preference>
-        <!--TODO get the acc version in program, if cannot, use static string-->
         <Preference
             app:summary="@string/acc_version_name"
             app:title="@string/acc">
