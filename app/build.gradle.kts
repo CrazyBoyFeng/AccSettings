@@ -17,6 +17,7 @@ android {
         versionCode = 20210819
         versionName = "2021.8.19"
 //        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+        resValue("string", "version_name", versionName!!)
     }
 //    buildFeatures { viewBinding = true }
     buildTypes {
