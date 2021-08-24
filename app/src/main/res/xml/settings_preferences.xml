@@ -1,0 +1,57 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:initialExpandedChildrenCount="1"
+        app:title="@string/acc">
+        <SwitchPreference
+            app:key="@string/acc_daemon"
+            app:title="@string/daemon" />
+        <Preference
+            app:title="@string/configuration"
+            app:fragment="com.github.crazyboyfeng.accSettings.fragment.ConfigFragment"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:enabled="false"
+        app:iconSpaceReserved="false"
+        app:summary="test"
+        app:title="@string/battery">
+        <Preference
+            app:key="status"
+            app:title="@string/status" />
+        <Preference
+            app:key="capacity"
+            app:title="@string/capacity" />
+        <Preference
+            app:key="current"
+            app:title="@string/current" />
+        <Preference
+            app:key="temperature"
+            app:title="@string/temperature" />
+        <Preference
+            app:key="health"
+            app:title="@string/health" />
+        <!--    todo how is health defined?    -->
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/about">
+        <Preference
+            app:summary="about_app"
+            app:title="@string/acc_settings">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/CrazyBoyFeng/AccSettings" />
+        </Preference>
+        <!--TODO get the acc version in program, if cannot, use static string-->
+        <Preference
+            app:summary="@string/acc_version_name"
+            app:title="@string/acc">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/VR-25/acc" />
+        </Preference>
+        <!--TODO auto upload logs switch? or manually?-->
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,12 +1,18 @@
 <resources>
-    <string name="app_name">ACC Settings</string>
+    <string name="daemon">Daemon</string>
+    <string name="configuration">Configuration</string>
+
+    <string name="about">About</string>
+
+    <string name="acc_settings">ACC Settings</string>
     <string name="acc">ACC</string>
 
-    <!-- Preference Titles -->
-    <string name="battery_header">Battery</string>
-    <string name="about_header">About</string>
+    <string name="battery">Battery</string>
+    <string name="capacity">Capacity</string>
+    <string name="status">Status</string>
+    <string name="current">Current</string>
+    <string name="temperature">Temperature</string>
+    <string name="health">Health</string>
 
-    <!-- Battery Preferences -->
-    <string name="status_title">Status</string>
 
 </resources>
