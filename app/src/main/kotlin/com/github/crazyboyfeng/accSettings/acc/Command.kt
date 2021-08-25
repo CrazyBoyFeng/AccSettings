@@ -77,16 +77,10 @@ object Command {
         return Pair(0, null)
     }
 
-    class FailureException : AccException()
-    class IncorrectSyntaxException : AccException()
-    class MissingBusyboxBinaryException : AccException()
-    class NotRootException : AccException()
-    class DisableChargingFailedException : AccException()
-    class DaemonExistsException : AccException()
-    class DaemonNotExistsException : AccException()
-    class TestFailedException : AccException()
-    class ECurrentOutOfRangeException : AccException()
-    class InitFailedException : AccException()
-    class LockFailedException : AccException()
-    class ModuleDisabledException : AccException()
+    fun isDaemonRunning(): Boolean = try {
+        execAcc("daemon")
+        true
+    } catch (e: DaemonNotExistsException) {
+        false
+    }
 }
