@@ -4,6 +4,7 @@ import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 object Command {
     open class AccException : Exception {
@@ -67,6 +68,12 @@ object Command {
         getPropertyValue(execAcc("set", "print-default $property"))
 
     fun getInfo(property: String): String = getPropertyValue(execAcc("info $property="))
+
+    fun getInfo(): Properties {
+        val properties = Properties()
+        properties.load(execAcc("info").reader())
+        return properties
+    }
 
     fun getVersion(): Pair<Int, String?> {
         val version = execAcc("version")
