@@ -4,6 +4,7 @@ import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 object Command {
@@ -67,12 +68,10 @@ object Command {
     fun getDefaultConfig(property: String): String =
         getPropertyValue(execAcc("set", "print-default $property"))
 
-    fun getInfo(property: String): String = getPropertyValue(execAcc("info $property="))
-
-    fun getInfo(): Properties {
+    suspend fun getInfo(): Properties = withContext(Dispatchers.IO) {
         val properties = Properties()
         properties.load(execAcc("info").reader())
-        return properties
+        return@withContext properties
     }
 
     fun getVersion(): Pair<Int, String?> {
