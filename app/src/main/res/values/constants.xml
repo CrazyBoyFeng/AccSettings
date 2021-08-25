@@ -4,10 +4,10 @@
     <string name="acc_version_name">2021.8.4</string>
     <string name="acc_daemon">acc_daemon</string>
     <!--battery info-->
+    <string name="acc_info_status">STATUS</string>
     <string name="acc_info_capacity">CAPACITY</string>
-    <string name="acc_info_charge_type">CHARGE_TYPE</string>
     <string name="acc_info_temp">TEMP</string>
-    <string name="acc_info_voltage_now">VOLTAGE_NOW</string>
     <string name="acc_info_current_now">CURRENT_NOW</string>
-    <string name="acc_info_health">HEALTH</string>
+    <string name="acc_info_voltage_now">VOLTAGE_NOW</string>
+    <string name="acc_info_power_now">POWER_NOW</string>
 </resources>

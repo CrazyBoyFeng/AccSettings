@@ -8,10 +8,10 @@
     <string name="acc">ACC</string>
 
     <string name="battery">Battery</string>
-    <string name="capacity">Capacity</string>
-    <string name="charging">Charging</string>
-    <string name="temperature">Temperature</string>
-    <string name="voltage">Voltage</string>
-    <string name="current">Current</string>
-    <string name="health">Health</string>
+    <string name="status">Status</string>
+    <string name="capacity">Capacity (%)</string>
+    <string name="temperature">Temperature (℃)</string>
+    <string name="current">Current (A)</string>
+    <string name="voltage">Voltage (V)</string>
+    <string name="power">Power (W)</string>
 </resources>

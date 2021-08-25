@@ -14,23 +14,31 @@
     <PreferenceCategory
         app:enabled="false"
         app:iconSpaceReserved="false"
-        app:key="@string/acc_info_capacity"
         app:title="@string/battery">
-        <Preference
-            app:key="@string/acc_info_charge_type"
-            app:title="@string/charging" />
-        <Preference
+        <EditTextPreference
+            app:key="@string/acc_info_status"
+            app:title="@string/status"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            app:key="@string/acc_info_capacity"
+            app:title="@string/capacity"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
             app:key="@string/acc_info_temp"
-            app:title="@string/temperature" />
-        <Preference
-            app:key="@string/acc_info_voltage_now"
-            app:title="@string/voltage" />
-        <Preference
+            app:title="@string/temperature"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
             app:key="@string/acc_info_current_now"
-            app:title="@string/current" />
-        <Preference
-            app:key="@string/acc_info_health"
-            app:title="@string/health" />
+            app:title="@string/current"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            app:key="@string/acc_info_voltage_now"
+            app:title="@string/voltage"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            app:key="@string/acc_info_power_now"
+            app:title="@string/power"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
