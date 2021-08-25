@@ -13,33 +13,30 @@
             app:title="@string/configuration" />
     </PreferenceCategory>
     <PreferenceCategory
+        app:key="@string/acc_info_status"
         app:enabled="false"
         app:iconSpaceReserved="false"
         app:title="@string/battery">
-        <EditTextPreference
-            app:key="@string/acc_info_status"
-            app:title="@string/status"
-            app:useSimpleSummaryProvider="true" />
-        <EditTextPreference
+        <Preference
             app:key="@string/acc_info_capacity"
-            app:title="@string/capacity"
-            app:useSimpleSummaryProvider="true" />
-        <EditTextPreference
+            app:defaultValue="%"
+            app:title="@string/capacity"/>
+        <Preference
             app:key="@string/acc_info_temp"
-            app:title="@string/temperature"
-            app:useSimpleSummaryProvider="true" />
-        <EditTextPreference
+            app:defaultValue="℃"
+            app:title="@string/temperature"/>
+        <Preference
             app:key="@string/acc_info_current_now"
-            app:title="@string/current"
-            app:useSimpleSummaryProvider="true" />
-        <EditTextPreference
+            app:defaultValue="A"
+            app:title="@string/current"/>
+        <Preference
             app:key="@string/acc_info_voltage_now"
-            app:title="@string/voltage"
-            app:useSimpleSummaryProvider="true" />
-        <EditTextPreference
+            app:defaultValue="V"
+            app:title="@string/voltage"/>
+        <Preference
+            app:defaultValue="W"
             app:key="@string/acc_info_power_now"
-            app:title="@string/power"
-            app:useSimpleSummaryProvider="true" />
+            app:title="@string/power"/>
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"

@@ -8,7 +8,6 @@
     <string name="acc">ACC</string>
 
     <string name="battery">Battery</string>
-    <string name="status">Status</string>
     <string name="capacity">Capacity (%)</string>
     <string name="temperature">Temperature (℃)</string>
     <string name="current">Current (A)</string>
