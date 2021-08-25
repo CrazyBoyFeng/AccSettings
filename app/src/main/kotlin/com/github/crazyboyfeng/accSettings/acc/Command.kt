@@ -1,6 +1,9 @@
 package com.github.crazyboyfeng.accSettings.acc
 
 import com.topjohnwu.superuser.Shell
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 object Command {
     open class AccException : Exception {
@@ -77,15 +80,22 @@ object Command {
         return Pair(0, null)
     }
 
-    fun setDaemonRunning(daemonRunning:Boolean){
-        if(daemonRunning){
-            try {
-                execAcc("daemon start")
-            } catch (e: DaemonExistsException) { }
-        }else{
-            try {
-                execAcc("daemon stop")
-            } catch (e: DaemonNotExistsException) { }
+    fun setDaemonRunning(daemonRunning: Boolean) {
+        GlobalScope.launch(Dispatchers.IO) {
+            //todo what dispatcher should be use
+            if (daemonRunning) {
+                try {
+                    execAcc("daemon start")
+                } catch (e: DaemonExistsException) {
+                    println(e.localizedMessage)
+                }
+            } else {
+                try {
+                    execAcc("daemon stop")
+                } catch (e: DaemonNotExistsException) {
+                    println(e.localizedMessage)
+                }
+            }
         }
     }
 
