@@ -9,8 +9,7 @@ class ConfigDataStore: PreferenceDataStore() {
     }
 
     override fun getString(key: String, defValue: String?): String? {
-        val config = Command.getConfig(key)
-        val value= config.split('=', limit = 2)[1]
+        val value = Command.getConfig(key)
         return if(value.isEmpty()){
             defValue
         }else{
