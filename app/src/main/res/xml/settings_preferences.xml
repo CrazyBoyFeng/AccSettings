@@ -14,24 +14,23 @@
     <PreferenceCategory
         app:enabled="false"
         app:iconSpaceReserved="false"
-        app:summary="test"
+        app:key="@string/acc_info_capacity"
         app:title="@string/battery">
         <Preference
-            app:key="status"
-            app:title="@string/status" />
+            app:key="@string/acc_info_charge_type"
+            app:title="@string/charging" />
         <Preference
-            app:key="capacity"
-            app:title="@string/capacity" />
-        <Preference
-            app:key="current"
-            app:title="@string/current" />
-        <Preference
-            app:key="temperature"
+            app:key="@string/acc_info_temp"
             app:title="@string/temperature" />
         <Preference
-            app:key="health"
+            app:key="@string/acc_info_voltage_now"
+            app:title="@string/voltage" />
+        <Preference
+            app:key="@string/acc_info_current_now"
+            app:title="@string/current" />
+        <Preference
+            app:key="@string/acc_info_health"
             app:title="@string/health" />
-        <!--    todo how is health defined?    -->
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"

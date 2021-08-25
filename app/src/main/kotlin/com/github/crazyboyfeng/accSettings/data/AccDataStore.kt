@@ -15,4 +15,8 @@ class AccDataStore(private val context: Context) : PreferenceDataStore() {
         context.getString(R.string.acc_daemon) -> Command.setDaemonRunning(value)
         else -> super.putBoolean(key, value)
     }
+
+    override fun getString(key: String?, defValue: String?): String? {
+        return super.getString(key, defValue)
+    }
 }

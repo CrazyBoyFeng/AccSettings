@@ -9,10 +9,9 @@
 
     <string name="battery">Battery</string>
     <string name="capacity">Capacity</string>
-    <string name="status">Status</string>
-    <string name="current">Current</string>
+    <string name="charging">Charging</string>
     <string name="temperature">Temperature</string>
+    <string name="voltage">Voltage</string>
+    <string name="current">Current</string>
     <string name="health">Health</string>
-
-
 </resources>
