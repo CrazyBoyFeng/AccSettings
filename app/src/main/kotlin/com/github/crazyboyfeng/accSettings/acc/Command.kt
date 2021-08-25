@@ -60,10 +60,18 @@ object Command {
 
     fun getDefaultConfig(property: String = "") = execAcc("set", "print-default $property")
 
-    fun getVersion(): String = execAcc("version")
-    open class AccException : Exception {
-        constructor()
-        constructor(message: String) : super(message)
+    fun getVersion(): Pair<Int, String?> {
+        val version = execAcc("version")
+        if (version.startsWith('v')) {
+            try {
+                val versionCode = version.substringAfter('(').substringBefore(')').toInt()
+                val versionName = version.substringAfter('v').substringBefore(' ')
+                return Pair(versionCode, versionName)
+            } catch (e: NumberFormatException) {
+                e.printStackTrace()//may be cause by upgraded acc
+            }
+        }
+        return Pair(0, null)
     }
 
     class FailureException : AccException()
