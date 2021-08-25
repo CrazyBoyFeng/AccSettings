@@ -17,7 +17,19 @@ class AccDataStore(private val resources: Resources) : PreferenceDataStore() {
         else -> super.putBoolean(key, value)
     }
 
-    override fun getString(key: String?, defValue: String?): String? {
-        return super.getString(key, defValue)
+    override fun getString(key: String, defValue: String?): String {
+        val value = Command.getInfo(key)
+        return when (key) {
+            resources.getString((R.string.acc_info_temp)) -> (value.toFloat() / 10).toString()
+            else -> value
+        }
+    }
+
+    override fun putString(key: String, value: String?) {
+        Log.w(TAG, "putString: $key=$value")
+    }
+
+    companion object {
+        private const val TAG = "AccDataStore"
     }
 }
