@@ -66,7 +66,7 @@ object Command {
     fun getDefaultConfig(property: String): String =
         getPropertyValue(execAcc("set", "print-default $property"))
 
-    fun getInfo(property: String): String = getPropertyValue(execAcc("info $property"))
+    fun getInfo(property: String): String = getPropertyValue(execAcc("info $property="))
 
     fun getVersion(): Pair<Int, String?> {
         val version = execAcc("version")
