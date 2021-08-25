@@ -3,6 +3,24 @@ package com.github.crazyboyfeng.accSettings.acc
 import com.topjohnwu.superuser.Shell
 
 object Command {
+    open class AccException : Exception {
+        constructor()
+        constructor(message: String) : super(message)
+    }
+
+    class FailureException : AccException()
+    class IncorrectSyntaxException : AccException()
+    class NoBusyboxException : AccException()
+    class NotRootException : AccException()
+    class DisableChargingFailedException : AccException()
+    class DaemonExistsException : AccException()
+    class DaemonNotExistsException : AccException()
+    class TestFailedException : AccException()
+    class ECurrentOutOfRangeException : AccException()
+    class InitFailedException : AccException()
+    class LockFailedException : AccException()
+    class ModuleDisabledException : AccException()
+
     fun exec(command: String): String {
         val result = Shell.su(command).exec()
         if (result.isSuccess) {
@@ -10,7 +28,7 @@ object Command {
         } else throw when (result.code) {
             1 -> FailureException()
             2 -> IncorrectSyntaxException()
-            3 -> MissingBusyboxBinaryException()
+            3 -> NoBusyboxException()
             4 -> NotRootException()
             7 -> DisableChargingFailedException()
             8 -> DaemonExistsException()
