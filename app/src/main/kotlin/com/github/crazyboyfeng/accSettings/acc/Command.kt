@@ -77,6 +77,18 @@ object Command {
         return Pair(0, null)
     }
 
+    fun setDaemonRunning(daemonRunning:Boolean){
+        if(daemonRunning){
+            try {
+                execAcc("daemon start")
+            } catch (e: DaemonExistsException) { }
+        }else{
+            try {
+                execAcc("daemon stop")
+            } catch (e: DaemonNotExistsException) { }
+        }
+    }
+
     fun isDaemonRunning(): Boolean = try {
         execAcc("daemon")
         true
