@@ -59,14 +59,14 @@ object Command {
     fun setConfig(property: String, vararg values: String?) =
         execAcc("set \"$property=${values.joinToString(" ")}\"")
 
-    private fun getConfigValue(config: String) = config.split('=', limit = 2)[1]
+    private fun getPropertyValue(property: String) = property.split('=', limit = 2)[1]
 
-    fun getConfig(property: String): String = getConfigValue(execAcc("set", "print $property"))
+    fun getConfig(property: String): String = getPropertyValue(execAcc("set", "print $property"))
 
     fun getDefaultConfig(property: String): String =
-        getConfigValue(execAcc("set", "print-default $property"))
+        getPropertyValue(execAcc("set", "print-default $property"))
 
-    fun getInfo(property: String): String = getConfigValue(execAcc("info $property"))
+    fun getInfo(property: String): String = getPropertyValue(execAcc("info $property"))
 
     fun getVersion(): Pair<Int, String?> {
         val version = execAcc("version")
