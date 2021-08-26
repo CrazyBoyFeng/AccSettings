@@ -14,7 +14,7 @@ import kotlinx.coroutines.isActive
 
 class SettingsFragment : PreferenceFragmentCompat() {
     init {
-        Shell.su().exec()
+        Shell.sh().exec()
         updateInfo()
     }
 
