@@ -7,7 +7,7 @@ import com.github.crazyboyfeng.accSettings.data.ConfigDataStore
 
 class ConfigFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+//        preferenceManager.preferenceDataStore = ConfigDataStore()
         setPreferencesFromResource(R.xml.config_preferences, rootKey)
-        preferenceManager.preferenceDataStore = ConfigDataStore()
     }
 }
