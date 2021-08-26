@@ -4,10 +4,41 @@
     <string name="acc_version_name">2021.8.4</string>
     <string name="acc_daemon">acc_daemon</string>
     <!--battery info-->
-    <string name="acc_info_status">STATUS</string>
-    <string name="acc_info_capacity">CAPACITY</string>
-    <string name="acc_info_temp">TEMP</string>
-    <string name="acc_info_current_now">CURRENT_NOW</string>
-    <string name="acc_info_voltage_now">VOLTAGE_NOW</string>
-    <string name="acc_info_power_now">POWER_NOW</string>
+    <string name="info_status">STATUS</string>
+    <string name="info_capacity">CAPACITY</string>
+    <string name="info_temp">TEMP</string>
+    <string name="info_current_now">CURRENT_NOW</string>
+    <string name="info_voltage_now">VOLTAGE_NOW</string>
+    <string name="info_power_now">POWER_NOW</string>
+    <!--config-->
+    <!--capacity-->
+    <string name="set_shutdown_capacity">shutdown_capacity</string>
+    <string name="set_cooldown_capacity">cooldown_capacity</string>
+    <string name="set_resume_capacity">resume_capacity</string>
+    <string name="set_pause_capacity">pause_capacity</string>
+    <string name="set_capacity_freeze2">capacity_freeze2</string>
+    <!--temperature-->
+    <string name="set_cooldown_temp">cooldown_temp</string>
+    <string name="set_max_temp">max_temp</string>
+    <string name="set_max_temp_pause">max_temp_pause</string>
+    <string name="set_shutdown_temp">shutdown_temp</string>
+    <!--cooldownRatio-->
+    <string name="set_cooldown_charge">cooldown_charge</string>
+    <string name="set_cooldown_pause">cooldown_pause</string>
+    <string name="set_cooldown_custom">cooldown_custom</string>
+    <string name="set_cooldown_current">cooldown_current</string>
+    <string name="set_reset_batt_stats_on_pause">reset_batt_stats_on_pause</string>
+    <string name="set_reset_batt_stats_on_unplug">reset_batt_stats_on_unplug</string>
+    <string name="set_charging_switch">charging_switch</string>
+    <string name="set_apply_on_boot">apply_on_boot</string>
+    <string name="set_apply_on_plug">apply_on_plug</string>
+    <string name="set_max_charging_current">max_charging_current</string>
+    <string name="set_max_charging_voltage">max_charging_voltage</string>
+    <string name="set_lang">lang</string>
+    <string name="set_run_cmd_on_pause">run_cmd_on_pause</string>
+    <string name="set_amp_factor">amp_factor</string>
+    <string name="set_volt_factor">volt_factor</string>
+    <string name="set_loop_cmd">loop_cmd</string>
+    <string name="set_prioritize_batt_idle_mode">prioritize_batt_idle_mode</string>
+    <string name="set_current_workaround">current_workaround</string>
 </resources>

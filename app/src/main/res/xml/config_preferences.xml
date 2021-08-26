@@ -1,8 +1,95 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     app:title="@string/acc">
+    <!--todo or decompose to multiple pages?-->
     <PreferenceCategory
+        app:iconSpaceReserved="false"
         app:title="@string/capacity">
-
+        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+            app:key="@string/set_shutdown_capacity"
+            app:title="@string/set_shutdown_capacity" />
+        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+            app:key="@string/set_cooldown_capacity"
+            app:title="@string/set_cooldown_capacity" />
+        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+            app:key="@string/set_resume_capacity"
+            app:title="@string/set_resume_capacity" />
+        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+            app:key="@string/set_pause_capacity"
+            app:title="@string/set_pause_capacity" />
+        <SwitchPreference
+            app:key="@string/set_capacity_freeze2"
+            app:title="@string/set_capacity_freeze2" />
     </PreferenceCategory>
-
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/temperature">
+        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+            app:key="@string/set_cooldown_temp"
+            app:title="@string/set_cooldown_temp" />
+        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+            app:key="@string/set_max_temp"
+            app:title="@string/set_max_temp" />
+        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+            app:key="@string/set_shutdown_temp"
+            app:title="@string/set_shutdown_temp" />
+        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+            app:key="@string/set_cooldown_charge"
+            app:title="@string/set_cooldown_charge" />
+        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+            app:key="@string/set_cooldown_pause"
+            app:title="@string/set_cooldown_pause" />
+        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+            app:key="@string/set_cooldown_custom"
+            app:title="@string/set_cooldown_custom" />
+        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+            app:key="@string/set_cooldown_current"
+            app:title="@string/set_cooldown_current" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="advance">
+        <!--todo advance string-->
+        <SwitchPreference
+            app:key="@string/set_reset_batt_stats_on_pause"
+            app:title="@string/set_reset_batt_stats_on_pause" />
+        <SwitchPreference
+            app:key="@string/set_reset_batt_stats_on_unplug"
+            app:title="@string/set_reset_batt_stats_on_unplug" />
+        <EditTextPreference
+            app:key="@string/set_charging_switch"
+            app:title="@string/set_charging_switch" />
+        <EditTextPreference
+            app:key="@string/set_apply_on_boot"
+            app:title="@string/set_apply_on_boot" />
+        <EditTextPreference
+            app:key="@string/set_apply_on_plug"
+            app:title="@string/set_apply_on_plug" />
+        <EditTextPreference
+            app:key="@string/set_max_charging_current"
+            app:title="@string/set_max_charging_current" />
+        <EditTextPreference
+            app:key="@string/set_max_charging_voltage"
+            app:title="@string/set_max_charging_voltage" />
+        <EditTextPreference
+            app:key="@string/set_lang"
+            app:title="@string/set_lang" />
+        <EditTextPreference
+            app:key="@string/set_run_cmd_on_pause"
+            app:title="@string/set_run_cmd_on_pause" />
+        <EditTextPreference
+            app:key="@string/set_amp_factor"
+            app:title="@string/set_amp_factor" />
+        <EditTextPreference
+            app:key="@string/set_volt_factor"
+            app:title="@string/set_volt_factor" />
+        <EditTextPreference
+            app:key="@string/set_loop_cmd"
+            app:title="@string/set_loop_cmd" />
+        <SwitchPreference
+            app:key="@string/set_prioritize_batt_idle_mode"
+            app:title="@string/set_prioritize_batt_idle_mode" />
+        <SwitchPreference
+            app:key="@string/set_current_workaround"
+            app:title="@string/set_current_workaround" />
+    </PreferenceCategory>
 </PreferenceScreen>
