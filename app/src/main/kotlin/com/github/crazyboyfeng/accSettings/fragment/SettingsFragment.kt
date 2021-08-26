@@ -21,13 +21,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private fun updateInfo() = lifecycleScope.launchWhenStarted {
         while (isActive) {
             val properties = Command.getInfo()
-            Log.d(TAG,"updateInfo ${properties.size}")
+            Log.d(TAG, "updateInfo ${properties.size}")
             for (property in properties) {
                 val key = property.key as String
                 val preference = findPreference<Preference>(key)
                 if (preference != null) {
                     var summary = property.value as String
-                    if (key == getString(R.string.acc_info_temp)) {
+                    if (key == getString(R.string.info_temp)) {
                         summary = (summary.toFloat() / 10).toString()
                     }
                     preference.summary = summary
@@ -42,7 +42,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.settings_preferences, rootKey)
     }
 
-    private companion object{
-        const val TAG="SettingsFragment"
+    private companion object {
+        const val TAG = "SettingsFragment"
     }
 }
