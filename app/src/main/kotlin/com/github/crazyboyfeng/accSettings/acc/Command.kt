@@ -1,13 +1,14 @@
 package com.github.crazyboyfeng.accSettings.acc
 
+import android.util.Log
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
 object Command {
+    private const val TAG = "Command"
+
     open class AccException : Exception {
         constructor()
         constructor(message: String) : super(message)
@@ -26,10 +27,12 @@ object Command {
     class LockFailedException : AccException()
     class ModuleDisabledException : AccException()
 
-    fun exec(command: String): String {
+    suspend fun exec(command: String): String = withContext(Dispatchers.IO) {
+        //todo what dispatcher should be use
+        Log.v(TAG, command)
         val result = Shell.su(command).exec()
         if (result.isSuccess) {
-            return result.out.joinToString("\n").trim()
+            return@withContext result.out.joinToString("\n").trim()
         } else throw when (result.code) {
             1 -> FailureException()
             2 -> IncorrectSyntaxException()
@@ -47,7 +50,7 @@ object Command {
         }
     }
 
-    private fun execAcc(vararg options: String): String {
+    private suspend fun execAcc(vararg options: String): String {
         val command = buildString {
             append("/dev/.vr25/acc/acca")
             for (option in options) {
@@ -58,23 +61,24 @@ object Command {
         return exec(command)
     }
 
-    fun setConfig(property: String, vararg values: String?) =
+    suspend fun setConfig(property: String, vararg values: String?) =
         execAcc("set \"$property=${values.joinToString(" ")}\"")
 
     private fun getPropertyValue(property: String) = property.split('=', limit = 2)[1]
 
-    fun getConfig(property: String): String = getPropertyValue(execAcc("set", "print $property"))
+    suspend fun getConfig(property: String): String =
+        getPropertyValue(execAcc("set", "print $property"))
 
-    fun getDefaultConfig(property: String): String =
+    suspend fun getDefaultConfig(property: String): String =
         getPropertyValue(execAcc("set", "print-default $property"))
 
-    suspend fun getInfo(): Properties = withContext(Dispatchers.IO) {
+    suspend fun getInfo(): Properties {
         val properties = Properties()
         properties.load(execAcc("info").reader())
-        return@withContext properties
+        return properties
     }
 
-    fun getVersion(): Pair<Int, String?> {
+    suspend fun getVersion(): Pair<Int, String?> {
         val version = execAcc("version")
         if (version.startsWith('v')) {
             try {
@@ -88,29 +92,28 @@ object Command {
         return Pair(0, null)
     }
 
-    fun setDaemonRunning(daemonRunning: Boolean) {
-        GlobalScope.launch(Dispatchers.IO) {
-            //todo what dispatcher should be use
-            if (daemonRunning) {
-                try {
-                    execAcc("daemon start")
-                } catch (e: DaemonExistsException) {
-                    println(e.localizedMessage)
-                }
-            } else {
-                try {
-                    execAcc("daemon stop")
-                } catch (e: DaemonNotExistsException) {
-                    println(e.localizedMessage)
-                }
+    suspend fun setDaemonRunning(daemonRunning: Boolean) {
+        if (daemonRunning) {
+            try {
+                execAcc("daemon start")
+            } catch (e: DaemonExistsException) {
+                Log.i(TAG, e.localizedMessage!!)
+            }
+        } else {
+            try {
+                execAcc("daemon stop")
+            } catch (e: DaemonNotExistsException) {
+                Log.i(TAG, e.localizedMessage!!)
             }
         }
     }
 
-    fun isDaemonRunning(): Boolean = try {
-        execAcc("daemon")
-        true
-    } catch (e: DaemonNotExistsException) {
-        false
+    suspend fun isDaemonRunning(): Boolean {
+        return try {
+            execAcc("daemon")
+            true
+        } catch (e: DaemonNotExistsException) {
+            false
+        }
     }
 }
