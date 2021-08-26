@@ -12,7 +12,7 @@ android {
     compileSdk = 30
     defaultConfig {
         applicationId = "com.github.crazyboyfeng.accSettings"
-        minSdk = 16
+        minSdk = 14
         targetSdk = 30
         versionCode = 20210819
         versionName = "2021.8.19"
