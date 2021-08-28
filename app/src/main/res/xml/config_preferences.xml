@@ -4,16 +4,20 @@
     <PreferenceCategory
         app:iconSpaceReserved="false"
         app:title="@string/capacity">
-        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+        <NumberPickerPreference
+            app:formatSummary="true"
+            app:dialogMessage="dialogmsg"
             app:key="@string/set_shutdown_capacity"
-            app:title="@string/set_shutdown_capacity" />
-        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+            app:minValue="1"
+            app:summary="%d%%"
+            app:title="@string/shutdown_below" />
+        <NumberPickerPreference
             app:key="@string/set_cooldown_capacity"
             app:title="@string/set_cooldown_capacity" />
-        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+        <NumberPickerPreference
             app:key="@string/set_resume_capacity"
             app:title="@string/set_resume_capacity" />
-        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+        <NumberPickerPreference
             app:key="@string/set_pause_capacity"
             app:title="@string/set_pause_capacity" />
         <SwitchPreference
@@ -23,25 +27,25 @@
     <PreferenceCategory
         app:iconSpaceReserved="false"
         app:title="@string/temperature">
-        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+        <NumberPickerPreference
             app:key="@string/set_cooldown_temp"
             app:title="@string/set_cooldown_temp" />
-        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+        <NumberPickerPreference
             app:key="@string/set_max_temp"
             app:title="@string/set_max_temp" />
-        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+        <NumberPickerPreference
             app:key="@string/set_shutdown_temp"
             app:title="@string/set_shutdown_temp" />
-        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+        <NumberPickerPreference
             app:key="@string/set_cooldown_charge"
             app:title="@string/set_cooldown_charge" />
-        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+        <NumberPickerPreference
             app:key="@string/set_cooldown_pause"
             app:title="@string/set_cooldown_pause" />
-        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+        <NumberPickerPreference
             app:key="@string/set_cooldown_custom"
             app:title="@string/set_cooldown_custom" />
-        <nl.invissvenska.numberpickerpreference.NumberDialogPreference
+        <NumberPickerPreference
             app:key="@string/set_cooldown_current"
             app:title="@string/set_cooldown_current" />
     </PreferenceCategory>
