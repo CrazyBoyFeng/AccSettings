@@ -1,7 +1,7 @@
-package com.github.crazyboyfeng.accSettings.fragment
+package crazyboyfeng.accSettings.fragment
 
 import android.os.Bundle
-import com.github.crazyboyfeng.accSettings.R
+import crazyboyfeng.accSettings.R
 import crazyboyfeng.android.preference.PreferenceFragmentCompat
 
 class ConfigFragment : PreferenceFragmentCompat() {

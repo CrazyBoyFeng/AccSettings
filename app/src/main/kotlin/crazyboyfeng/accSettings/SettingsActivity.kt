@@ -1,9 +1,9 @@
-package com.github.crazyboyfeng.accSettings
+package crazyboyfeng.accSettings
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
-import com.github.crazyboyfeng.accSettings.fragment.SettingsFragment
+import crazyboyfeng.accSettings.fragment.SettingsFragment
 
 class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

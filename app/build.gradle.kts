@@ -11,7 +11,7 @@ android {
      */
     compileSdk = 30
     defaultConfig {
-        applicationId = "com.github.crazyboyfeng.accSettings"
+        applicationId = "crazyboyfeng.accSettings"
         minSdk = 14
         targetSdk = 30
         versionCode = 20210819

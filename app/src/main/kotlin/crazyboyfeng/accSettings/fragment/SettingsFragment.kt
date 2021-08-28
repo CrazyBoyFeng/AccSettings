@@ -1,13 +1,13 @@
-package com.github.crazyboyfeng.accSettings.fragment
+package crazyboyfeng.accSettings.fragment
 
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.EditTextPreferencePlus
 import androidx.preference.Preference
-import com.github.crazyboyfeng.accSettings.R
-import com.github.crazyboyfeng.accSettings.acc.Command
-import com.github.crazyboyfeng.accSettings.data.AccDataStore
+import crazyboyfeng.accSettings.R
+import crazyboyfeng.accSettings.acc.Command
+import crazyboyfeng.accSettings.data.AccDataStore
 import com.topjohnwu.superuser.Shell
 import crazyboyfeng.android.preference.PreferenceFragmentCompat
 import kotlinx.coroutines.delay

@@ -1,10 +1,10 @@
-package com.github.crazyboyfeng.accSettings.data
+package crazyboyfeng.accSettings.data
 
 import android.content.res.Resources
 import android.util.Log
 import androidx.preference.PreferenceDataStore
-import com.github.crazyboyfeng.accSettings.R
-import com.github.crazyboyfeng.accSettings.acc.Command
+import crazyboyfeng.accSettings.R
+import crazyboyfeng.accSettings.acc.Command
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking

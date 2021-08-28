@@ -1,4 +1,4 @@
-package com.github.crazyboyfeng.accSettings.acc
+package crazyboyfeng.accSettings.acc
 
 import android.util.Log
 import com.topjohnwu.superuser.Shell
@@ -72,10 +72,10 @@ object Command {
     suspend fun getDefaultConfig(property: String): String =
         getPropertyValue(execAcc("set", "print-default $property"))
 
-    suspend fun getInfo(): Properties {
+    suspend fun getInfo(): Properties = withContext(Dispatchers.IO) {
         val properties = Properties()
         properties.load(execAcc("info").reader())
-        return properties
+        return@withContext properties
     }
 
     suspend fun getVersion(): Pair<Int, String?> {
