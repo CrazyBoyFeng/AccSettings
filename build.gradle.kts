@@ -22,5 +22,4 @@ allprojects {
 
 tasks.wrapper{
     enabled = false
-    gradleVersion = "7.1.1"
 }
