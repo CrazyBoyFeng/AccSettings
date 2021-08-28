@@ -17,25 +17,30 @@
         app:iconSpaceReserved="false"
         app:key="@string/info_status"
         app:title="@string/battery">
-        <Preference
-            app:defaultValue="%"
+        <EditTextPreferencePlus
+            app:formatSummary="true"
             app:key="@string/info_capacity"
+            app:summary="%s%%"
             app:title="@string/capacity" />
-        <Preference
-            app:defaultValue="℃"
+        <EditTextPreferencePlus
+            app:formatSummary="true"
             app:key="@string/info_temp"
+            app:summary="%s℃"
             app:title="@string/temperature" />
-        <Preference
-            app:defaultValue="A"
+        <EditTextPreferencePlus
+            app:formatSummary="true"
             app:key="@string/info_current_now"
+            app:summary="%sA"
             app:title="@string/current" />
-        <Preference
-            app:defaultValue="V"
+        <EditTextPreferencePlus
+            app:formatSummary="true"
             app:key="@string/info_voltage_now"
+            app:summary="%sV"
             app:title="@string/voltage" />
-        <Preference
-            app:defaultValue="W"
+        <EditTextPreferencePlus
+            app:formatSummary="true"
             app:key="@string/info_power_now"
+            app:summary="%sW"
             app:title="@string/power" />
     </PreferenceCategory>
     <PreferenceCategory

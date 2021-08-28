@@ -3,7 +3,7 @@ package com.github.crazyboyfeng.accSettings.fragment
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.Preference
+import androidx.preference.EditTextPreferencePlus
 import androidx.preference.PreferenceFragmentCompat
 import com.github.crazyboyfeng.accSettings.R
 import com.github.crazyboyfeng.accSettings.acc.Command
@@ -24,14 +24,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
             Log.d(TAG, "updateInfo ${properties.size}")
             for (property in properties) {
                 val key = property.key as String
-                val preference = findPreference<Preference>(key)
-                if (preference != null) {
-                    var summary = property.value as String
-                    if (key == getString(R.string.info_temp)) {
-                        summary = (summary.toFloat() / 10).toString()
-                    }
-                    preference.summary = summary
-                }
+                val preference = findPreference<EditTextPreferencePlus>(key)
+                preference?.text=property.value as String
             }
             delay(1000)
         }
@@ -40,6 +34,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         preferenceManager.preferenceDataStore = AccDataStore(resources)
         setPreferencesFromResource(R.xml.settings_preferences, rootKey)
+
+        val infoTemp=findPreference<EditTextPreferencePlus>(getString(R.string.info_temp))
+        infoTemp?.setSummaryProvider {
+            val preference = it as EditTextPreferencePlus
+            (preference.text.toFloat()/10).toString()
+        }
     }
 
     private companion object {
