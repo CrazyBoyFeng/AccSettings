@@ -6,7 +6,6 @@ import androidx.preference.PreferenceFragmentCompat
 import com.github.crazyboyfeng.accSettings.fragment.SettingsFragment
 
 class SettingsActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportFragmentManager.addOnBackStackChangedListener {
