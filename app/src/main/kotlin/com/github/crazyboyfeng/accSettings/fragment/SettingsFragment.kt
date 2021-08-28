@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.EditTextPreferencePlus
+import androidx.preference.Preference
 import com.github.crazyboyfeng.accSettings.R
 import com.github.crazyboyfeng.accSettings.acc.Command
 import com.github.crazyboyfeng.accSettings.data.AccDataStore
@@ -24,8 +25,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
             Log.d(TAG, "updateInfo ${properties.size}")
             for (property in properties) {
                 val key = property.key as String
-                val preference = findPreference<EditTextPreferencePlus>(key)
-                preference?.text=property.value as String
+                when (val preference = findPreference<Preference>(key)) {
+                    is EditTextPreferencePlus -> preference.text = property.value as String
+                    else -> preference?.summary = property.value as String
+                }
             }
             delay(1000)
         }
