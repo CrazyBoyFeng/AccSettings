@@ -4,6 +4,7 @@
         app:iconSpaceReserved="false"
         app:initialExpandedChildrenCount="1"
         app:key="@string/acc"
+        app:persistent="false"
         app:title="@string/acc">
         <SwitchPreference
             app:key="@string/acc_daemon"
