@@ -38,10 +38,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
         preferenceManager.preferenceDataStore = AccDataStore(resources)
         setPreferencesFromResource(R.xml.settings_preferences, rootKey)
 
-        val infoTemp=findPreference<EditTextPreferencePlus>(getString(R.string.info_temp))
+        val infoTemp = findPreference<EditTextPreferencePlus>(getString(R.string.info_temp))
         infoTemp?.setSummaryProvider {
             val preference = it as EditTextPreferencePlus
-            (preference.text.toFloat()/10).toString()
+            val text = preference.text
+            if (text.isNullOrEmpty()) {
+                text
+            } else {
+                "${text.toFloat() / 10}°C"
+            }
         }
     }
 

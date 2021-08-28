@@ -28,7 +28,6 @@
             app:formatSummary="true"
             app:key="@string/info_temp"
             app:persistent="false"
-            app:summary="%s℃"
             app:title="@string/temperature" />
         <EditTextPreferencePlus
             app:formatSummary="true"
