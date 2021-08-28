@@ -16,30 +16,36 @@
         app:enabled="false"
         app:iconSpaceReserved="false"
         app:key="@string/info_status"
+        app:persistent="false"
         app:title="@string/battery">
         <EditTextPreferencePlus
             app:formatSummary="true"
             app:key="@string/info_capacity"
+            app:persistent="false"
             app:summary="%s%%"
             app:title="@string/capacity" />
         <EditTextPreferencePlus
             app:formatSummary="true"
             app:key="@string/info_temp"
+            app:persistent="false"
             app:summary="%s℃"
             app:title="@string/temperature" />
         <EditTextPreferencePlus
             app:formatSummary="true"
             app:key="@string/info_current_now"
+            app:persistent="false"
             app:summary="%sA"
             app:title="@string/current" />
         <EditTextPreferencePlus
             app:formatSummary="true"
             app:key="@string/info_voltage_now"
+            app:persistent="false"
             app:summary="%sV"
             app:title="@string/voltage" />
         <EditTextPreferencePlus
             app:formatSummary="true"
             app:key="@string/info_power_now"
+            app:persistent="false"
             app:summary="%sW"
             app:title="@string/power" />
     </PreferenceCategory>
