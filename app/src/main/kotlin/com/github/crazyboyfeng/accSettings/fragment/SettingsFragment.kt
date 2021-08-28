@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.EditTextPreferencePlus
-import androidx.preference.PreferenceFragmentCompat
 import com.github.crazyboyfeng.accSettings.R
 import com.github.crazyboyfeng.accSettings.acc.Command
 import com.github.crazyboyfeng.accSettings.data.AccDataStore
 import com.topjohnwu.superuser.Shell
+import crazyboyfeng.android.preference.PreferenceFragmentCompat
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 
