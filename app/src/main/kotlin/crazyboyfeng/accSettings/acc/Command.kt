@@ -117,5 +117,5 @@ object Command {
             false
         }
     }
-    fun isRoot():Boolean =Shell.su().exec().code==JOB_NOT_EXECUTED
+    fun isRoot():Boolean =Shell.su().exec().code!=JOB_NOT_EXECUTED
 }
