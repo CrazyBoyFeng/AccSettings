@@ -10,11 +10,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class AccDataStore(private val resources: Resources) : PreferenceDataStore() {
-    override fun getBoolean(key: String, defValue: Boolean): Boolean = runBlocking {
+    override fun getBoolean(key: String, defValue: Boolean): Boolean {
         Log.v(TAG, "getBoolean: $key=$defValue?")
-        when (key) {
-            resources.getString(R.string.acc_daemon) -> Command.isDaemonRunning()
-            else -> super.getBoolean(key, defValue)
+        return runBlocking {
+            when (key) {
+                resources.getString(R.string.acc_daemon) -> Command.isDaemonRunning()
+                else -> super.getBoolean(key, defValue)
+            }
         }
     }
 
