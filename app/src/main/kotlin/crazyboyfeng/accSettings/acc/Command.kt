@@ -2,6 +2,7 @@ package crazyboyfeng.accSettings.acc
 
 import android.util.Log
 import com.topjohnwu.superuser.Shell
+import com.topjohnwu.superuser.Shell.Result.JOB_NOT_EXECUTED
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -37,7 +38,7 @@ object Command {
             1 -> FailureException()
             2 -> IncorrectSyntaxException()
             3 -> NoBusyboxException()
-            4 -> NotRootException()
+            4, JOB_NOT_EXECUTED -> NotRootException()
             7 -> DisableChargingFailedException()
             8 -> DaemonExistsException()
             9 -> DaemonNotExistsException()
@@ -46,7 +47,7 @@ object Command {
             12 -> InitFailedException()
             13 -> LockFailedException()
             14 -> ModuleDisabledException()
-            else -> AccException("exit code: ${result.code}")
+            else -> AccException("${result.code}")
         }
     }
 
