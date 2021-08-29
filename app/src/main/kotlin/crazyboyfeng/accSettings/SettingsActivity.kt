@@ -6,13 +6,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.ContentFrameLayout
 import androidx.preference.PreferenceFragmentCompat
-import crazyboyfeng.accSettings.acc.Command
+import com.topjohnwu.superuser.Shell
 import crazyboyfeng.accSettings.fragment.SettingsFragment
 
 class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (!Command.isRoot()) {
+        if (!Shell.rootAccess()) {
             val textView = TextView(this)
             textView.setText(R.string.need_root_permission)
             textView.gravity = Gravity.CENTER
