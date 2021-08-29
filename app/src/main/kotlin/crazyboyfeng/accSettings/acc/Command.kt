@@ -38,7 +38,7 @@ object Command {
             1 -> FailureException()
             2 -> IncorrectSyntaxException()
             3 -> NoBusyboxException()
-            4, JOB_NOT_EXECUTED -> NotRootException()
+            4 -> NotRootException()
             7 -> DisableChargingFailedException()
             8 -> DaemonExistsException()
             9 -> DaemonNotExistsException()
@@ -117,4 +117,5 @@ object Command {
             false
         }
     }
+    fun isRoot():Boolean =Shell.su().exec().code==JOB_NOT_EXECUTED
 }

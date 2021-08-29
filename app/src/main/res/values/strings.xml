@@ -1,4 +1,6 @@
 <resources>
+    <string name="need_root_permission">Need root permission!</string>
+
     <string name="daemon">Daemon</string>
     <string name="configuration">Configuration</string>
 
@@ -13,4 +15,7 @@
     <string name="current">Current</string>
     <string name="voltage">Voltage</string>
     <string name="power">Power</string>
+
+    <string name="shutdown_below">Shutdown below</string>
+    <string name="shutdown_below_hint">Valid only when discharging and on for more than 15 minutes.</string>
 </resources>

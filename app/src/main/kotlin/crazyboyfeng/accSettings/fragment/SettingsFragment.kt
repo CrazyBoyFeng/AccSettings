@@ -8,14 +8,12 @@ import androidx.preference.Preference
 import crazyboyfeng.accSettings.R
 import crazyboyfeng.accSettings.acc.Command
 import crazyboyfeng.accSettings.data.AccDataStore
-import com.topjohnwu.superuser.Shell
 import crazyboyfeng.android.preference.PreferenceFragmentCompat
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 
 class SettingsFragment : PreferenceFragmentCompat() {
     init {
-        Shell.sh().exec()
         updateInfo()
     }
 
