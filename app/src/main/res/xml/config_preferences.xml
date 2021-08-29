@@ -5,95 +5,149 @@
         app:iconSpaceReserved="false"
         app:title="@string/capacity">
         <NumberPickerPreference
+            app:dialogMessage="@string/hint_capacity_shutdown"
             app:formatSummary="true"
-            app:dialogMessage="dialogmsg"
             app:key="@string/set_shutdown_capacity"
-            app:minValue="1"
-            app:summary="%d%%"
+            app:summary="%s %%"
             app:title="@string/shutdown_below" />
         <NumberPickerPreference
+            app:dialogMessage="@string/hint_cooldown"
+            app:formatSummary="true"
             app:key="@string/set_cooldown_capacity"
-            app:title="@string/set_cooldown_capacity" />
+            app:summary="%s %%"
+            app:title="@string/cooldown_above" />
         <NumberPickerPreference
+            app:formatSummary="true"
             app:key="@string/set_resume_capacity"
-            app:title="@string/set_resume_capacity" />
+            app:summary="%s %%"
+            app:title="@string/charge_below" />
         <NumberPickerPreference
+            app:formatSummary="true"
             app:key="@string/set_pause_capacity"
-            app:title="@string/set_pause_capacity" />
+            app:summary="%s %%"
+            app:title="@string/pause_above" />
         <SwitchPreference
             app:key="@string/set_capacity_freeze2"
-            app:title="@string/set_capacity_freeze2" />
+            app:summary="@string/hint_freeze"
+            app:title="@string/freeze_above_zero" />
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
         app:title="@string/temperature">
         <NumberPickerPreference
+            app:dialogMessage="@string/hint_cooldown"
+            app:formatSummary="true"
             app:key="@string/set_cooldown_temp"
-            app:title="@string/set_cooldown_temp" />
+            app:summary="%s °C"
+            app:title="@string/cooldown_above" />
         <NumberPickerPreference
+            app:formatSummary="true"
             app:key="@string/set_max_temp"
-            app:title="@string/set_max_temp" />
+            app:summary="%s °C"
+            app:title="@string/pause_above" />
         <NumberPickerPreference
+            app:formatSummary="true"
             app:key="@string/set_shutdown_temp"
-            app:title="@string/set_shutdown_temp" />
-        <NumberPickerPreference
-            app:key="@string/set_cooldown_charge"
-            app:title="@string/set_cooldown_charge" />
-        <NumberPickerPreference
-            app:key="@string/set_cooldown_pause"
-            app:title="@string/set_cooldown_pause" />
-        <NumberPickerPreference
-            app:key="@string/set_cooldown_custom"
-            app:title="@string/set_cooldown_custom" />
-        <NumberPickerPreference
-            app:key="@string/set_cooldown_current"
-            app:title="@string/set_cooldown_current" />
+            app:summary="%s °C"
+            app:title="@string/shutdown_above" />
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
-        app:title="advance">
-        <!--todo advance string-->
+        app:title="@string/cooldown">
+        <NumberPickerPreference
+            app:dialogMessage="@string/hint_charge_period"
+            app:formatSummary="true"
+            app:key="@string/set_cooldown_charge"
+            app:summary="%s second(s)"
+            app:title="@string/charge_period" />
+        <!--todo min value? max value?-->
+        <NumberPickerPreference
+            app:dialogMessage="@string/hint_pause_period"
+            app:formatSummary="true"
+            app:key="@string/set_cooldown_pause"
+            app:summary="%s second(s)"
+            app:title="@string/pause_period" />
+        <!--todo min value? max value?-->
+        <NumberPickerPreference
+            app:formatSummary="true"
+            app:key="@string/set_max_temp_pause"
+            app:summary="%s second(s)"
+            app:title="@string/set_max_temp_pause" />
+        <!--todo min value? max value?-->
+        <!--todo necessary?-->
+        <EditTextPreference
+            app:key="@string/set_cooldown_custom"
+            app:title="@string/custom" />
+        <!--todo edittext or list?-->
+        <NumberPickerPreference
+            app:formatSummary="true"
+            app:key="@string/set_cooldown_current"
+            app:summary="%s mA"
+            app:title="@string/current" />
+        <!--todo min value? max value?-->
+        <!--todo disable period?-->
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/miscellaneous">
+        <SwitchPreference
+            app:key="@string/set_prioritize_batt_idle_mode"
+            app:summary="@string/hint_idle_mode"
+            app:title="@string/idle_mode_first" />
         <SwitchPreference
             app:key="@string/set_reset_batt_stats_on_pause"
             app:title="@string/set_reset_batt_stats_on_pause" />
+        <!--todo what?-->
         <SwitchPreference
             app:key="@string/set_reset_batt_stats_on_unplug"
             app:title="@string/set_reset_batt_stats_on_unplug" />
+        <!--todo what?-->
         <EditTextPreference
             app:key="@string/set_charging_switch"
             app:title="@string/set_charging_switch" />
+        <!--todo type?-->
         <EditTextPreference
             app:key="@string/set_apply_on_boot"
             app:title="@string/set_apply_on_boot" />
+        <!--todo type?-->
         <EditTextPreference
             app:key="@string/set_apply_on_plug"
             app:title="@string/set_apply_on_plug" />
+        <!--todo type?-->
         <EditTextPreference
             app:key="@string/set_max_charging_current"
             app:title="@string/set_max_charging_current" />
+        <!--todo type?-->
         <EditTextPreference
             app:key="@string/set_max_charging_voltage"
             app:title="@string/set_max_charging_voltage" />
-        <EditTextPreference
-            app:key="@string/set_lang"
-            app:title="@string/set_lang" />
+        <!--todo type?-->
         <EditTextPreference
             app:key="@string/set_run_cmd_on_pause"
             app:title="@string/set_run_cmd_on_pause" />
-        <EditTextPreference
-            app:key="@string/set_amp_factor"
-            app:title="@string/set_amp_factor" />
-        <EditTextPreference
-            app:key="@string/set_volt_factor"
-            app:title="@string/set_volt_factor" />
+        <!--todo type?-->
         <EditTextPreference
             app:key="@string/set_loop_cmd"
             app:title="@string/set_loop_cmd" />
-        <SwitchPreference
-            app:key="@string/set_prioritize_batt_idle_mode"
-            app:title="@string/set_prioritize_batt_idle_mode" />
+        <!--todo type?-->
+        <EditTextPreference
+            app:key="@string/set_lang"
+            app:title="@string/set_lang" />
+        <!--todo necessary?-->
         <SwitchPreference
             app:key="@string/set_current_workaround"
-            app:title="@string/set_current_workaround" />
+            app:summary="@string/hint_strict_current_control"
+            app:title="@string/strict_current_control" />
+        <!--todo need reboot-->
+        <EditTextPreference
+            app:key="@string/set_amp_factor"
+            app:title="@string/ampere_factor"
+            app:useSimpleSummaryProvider="true" />
+        <!--todo editintegerpreference or long?-->
+        <EditTextPreference
+            app:key="@string/set_volt_factor"
+            app:title="@string/volt_factor"
+            app:useSimpleSummaryProvider="true" />
+        <!--todo editintegerpreference or long?-->
     </PreferenceCategory>
 </PreferenceScreen>
