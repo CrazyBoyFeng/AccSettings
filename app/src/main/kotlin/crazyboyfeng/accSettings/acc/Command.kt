@@ -2,7 +2,6 @@ package crazyboyfeng.accSettings.acc
 
 import android.util.Log
 import com.topjohnwu.superuser.Shell
-import com.topjohnwu.superuser.Shell.Result.JOB_NOT_EXECUTED
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -29,7 +28,6 @@ object Command {
     class ModuleDisabledException : AccException()
 
     suspend fun exec(command: String): String = withContext(Dispatchers.IO) {
-        //todo what dispatcher should be use
         Log.v(TAG, command)
         val result = Shell.su(command).exec()
         if (result.isSuccess) {
@@ -73,10 +71,11 @@ object Command {
     suspend fun getDefaultConfig(property: String): String =
         getPropertyValue(execAcc("set", "print-default $property"))
 
-    suspend fun getInfo(): Properties = withContext(Dispatchers.IO) {
+    suspend fun getInfo(): Properties {
         val properties = Properties()
+        @Suppress("BlockingMethodInNonBlockingContext")
         properties.load(execAcc("info").reader())
-        return@withContext properties
+        return properties
     }
 
     suspend fun getVersion(): Pair<Int, String?> {
@@ -93,29 +92,18 @@ object Command {
         return Pair(0, null)
     }
 
-    suspend fun setDaemonRunning(daemonRunning: Boolean) {
-        if (daemonRunning) {
-            try {
-                execAcc("daemon start")
-            } catch (e: DaemonExistsException) {
-                Log.i(TAG, e.localizedMessage!!)
-            }
-        } else {
-            try {
-                execAcc("daemon stop")
-            } catch (e: DaemonNotExistsException) {
-                Log.i(TAG, e.localizedMessage!!)
-            }
-        }
+    suspend fun setDaemonRunning(daemonRunning: Boolean) = try {
+        execAcc("daemon ${if (daemonRunning) "start" else "stop"}")
+    } catch (e: DaemonExistsException) {
+        Log.i(TAG, "damon exists")
+    } catch (e: DaemonNotExistsException) {
+        Log.i(TAG, "daemon not exists")
     }
 
-    suspend fun isDaemonRunning(): Boolean {
-        return try {
-            execAcc("daemon")
-            true
-        } catch (e: DaemonNotExistsException) {
-            false
-        }
+    suspend fun isDaemonRunning(): Boolean = try {
+        execAcc("daemon")
+        true
+    } catch (e: DaemonNotExistsException) {
+        false
     }
-    fun isRoot():Boolean =Shell.su().exec().code!=JOB_NOT_EXECUTED
 }
