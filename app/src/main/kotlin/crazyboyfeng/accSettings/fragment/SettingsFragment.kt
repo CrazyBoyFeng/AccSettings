@@ -40,11 +40,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         infoTemp?.setSummaryProvider {
             val preference = it as EditTextPreferencePlus
             val text = preference.text
-            if (text.isNullOrEmpty()) {
-                text
-            } else {
-                "${text.toFloat() / 10}°C"
-            }
+            if (text.isNullOrEmpty()) text else (text.toFloat() / 10).toString()
         }
     }
 
