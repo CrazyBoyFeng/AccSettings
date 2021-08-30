@@ -30,6 +30,7 @@
             app:key="@string/set_capacity_freeze2"
             app:summary="@string/hint_freeze"
             app:title="@string/freeze_above_zero" />
+        <!--todo need restart-->
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
@@ -106,6 +107,7 @@
             app:key="@string/set_charging_switch"
             app:title="@string/set_charging_switch" />
         <!--todo type?-->
+        <!--todo need restart-->
         <EditTextPreference
             app:key="@string/set_apply_on_boot"
             app:title="@string/set_apply_on_boot" />
