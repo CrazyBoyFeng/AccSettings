@@ -1,5 +1,9 @@
 <resources>
     <string name="need_root_permission">Need root permission!</string>
+    <string name="updating">Updating…</string>
+    <string name="installed_incompatible">Installed %s\nIncompatible</string>
+    <string name="installed_possibly_incompatible">Installed %s\nPossibly incompatible</string>
+    <string name="command_failed">Command failed</string>
 
     <string name="daemon">Daemon</string>
     <string name="configuration">Configuration</string>

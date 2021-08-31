@@ -1,6 +1,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
+        app:enabled="false"
         app:iconSpaceReserved="false"
         app:initialExpandedChildrenCount="1"
         app:key="@string/acc"
@@ -16,6 +17,7 @@
     <PreferenceCategory
         app:enabled="false"
         app:iconSpaceReserved="false"
+        app:isPreferenceVisible="false"
         app:key="@string/info_status"
         app:persistent="false"
         app:title="@string/battery">
