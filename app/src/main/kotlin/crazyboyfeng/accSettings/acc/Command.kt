@@ -14,7 +14,7 @@ object Command {
         constructor(message: String) : super(message)
     }
 
-    class FailureException : AccException()
+    class FailedException : AccException()
     class IncorrectSyntaxException : AccException()
     class NoBusyboxException : AccException()
     class NotRootException : AccException()
@@ -33,7 +33,7 @@ object Command {
         if (result.isSuccess) {
             return@withContext result.out.joinToString("\n").trim()
         } else throw when (result.code) {
-            1 -> FailureException()
+            1 -> FailedException()
             2 -> IncorrectSyntaxException()
             3 -> NoBusyboxException()
             4 -> NotRootException()
@@ -45,7 +45,7 @@ object Command {
             12 -> InitFailedException()
             13 -> LockFailedException()
             14 -> ModuleDisabledException()
-            else -> AccException("${result.code}")
+            else -> AccException("Exit code: ${result.code}")
         }
     }
 
