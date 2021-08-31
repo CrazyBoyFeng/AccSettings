@@ -36,8 +36,9 @@ class AccHandler {
         }
     }
 
-    fun start() {
-
+    @Throws(Command.AccException::class)
+    suspend fun initial() {
+        Command.exec("test -f /dev/.vr25/acc/acca || /data/adb/vr25/acc/service.sh")
     }
 
     @Throws(Command.AccException::class)
@@ -48,6 +49,5 @@ class AccHandler {
             return
         }
         install(context)
-        start()
     }
 }

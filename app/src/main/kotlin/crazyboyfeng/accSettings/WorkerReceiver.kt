@@ -18,7 +18,7 @@ class WorkerReceiver : BroadcastReceiver() {
             Intent.ACTION_MY_PACKAGE_REPLACED -> run(context, UpdateWorker::class.java)
             Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_LOCKED_BOOT_COMPLETED -> run(
                 context,
-                StartWorker::class.java
+                InitialWorker::class.java
             )
         }
     }
@@ -41,11 +41,11 @@ class WorkerReceiver : BroadcastReceiver() {
         }
     }
 
-    class StartWorker(context: Context, workerParams: WorkerParameters) :
+    class InitialWorker(context: Context, workerParams: WorkerParameters) :
         Worker(context, workerParams) {
         override fun doWork(): Result = runBlocking {
             try {
-                AccHandler().start()
+                AccHandler().initial()
                 Result.success()
             } catch (e: Command.AccException) {
                 Result.failure()
