@@ -39,7 +39,7 @@ dependencies {
 //    implementation("com.google.android.material:material:1.4.0")
 //    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
     implementation("androidx.preference:preference-ktx:1.1.1")
-    implementation("androidx.work:work-runtime-ktx:2.5.0")
+    implementation("androidx.work:work-runtime:2.5.0")
     implementation("com.github.topjohnwu.libsu:core:3.1.2")
     val axpeVersion = "0.4.9"
     implementation("com.github.CrazyBoyFeng.AndroidXPreferenceExtensions:edittext:$axpeVersion")
