@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <receiver
-            android:name=".DaemonReceiver"
+            android:name=".WorkerReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
