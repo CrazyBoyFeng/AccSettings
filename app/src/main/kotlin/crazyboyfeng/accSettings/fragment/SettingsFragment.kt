@@ -42,9 +42,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun checkAcc() = lifecycleScope.launchWhenCreated {
-        accPreferenceCategory.summary = getString(R.string.checking_update)
+        accPreferenceCategory.summary = getString(R.string.initializing)
         val message = try {
-            AccHandler().update(requireContext())
+            AccHandler().initial(requireContext())
             null
         } catch (e: Command.FailedException) {
             getString(R.string.command_failed)

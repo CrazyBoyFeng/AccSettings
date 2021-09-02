@@ -15,10 +15,10 @@ import kotlinx.coroutines.runBlocking
 class WorkerReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent?) {
         when (intent!!.action) {
-            Intent.ACTION_MY_PACKAGE_REPLACED -> run(context, UpdateWorker::class.java)
+            Intent.ACTION_MY_PACKAGE_REPLACED -> run(context, InitialWorker::class.java)
             Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_LOCKED_BOOT_COMPLETED -> run(
                 context,
-                InitialWorker::class.java
+                ServeWorker::class.java
             )
         }
     }
@@ -29,11 +29,11 @@ class WorkerReceiver : BroadcastReceiver() {
         WorkManager.getInstance(context).enqueue(request)
     }
 
-    class UpdateWorker(private val context: Context, workerParams: WorkerParameters) :
+    class InitialWorker(private val context: Context, workerParams: WorkerParameters) :
         Worker(context, workerParams) {
         override fun doWork(): Result = runBlocking {
             try {
-                AccHandler().update(context)
+                AccHandler().initial(context)
                 Result.success()
             } catch (e: Command.AccException) {
                 Result.failure()
@@ -41,11 +41,11 @@ class WorkerReceiver : BroadcastReceiver() {
         }
     }
 
-    class InitialWorker(context: Context, workerParams: WorkerParameters) :
+    class ServeWorker(context: Context, workerParams: WorkerParameters) :
         Worker(context, workerParams) {
         override fun doWork(): Result = runBlocking {
             try {
-                AccHandler().initial()
+                AccHandler().serve()
                 Result.success()
             } catch (e: Command.AccException) {
                 Result.failure()

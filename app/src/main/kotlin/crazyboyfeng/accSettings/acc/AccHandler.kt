@@ -37,12 +37,12 @@ class AccHandler {
     }
 
     @Throws(Command.AccException::class)
-    suspend fun initial() {
+    suspend fun serve() {
         Command.exec("test -f /dev/.vr25/acc/acca || /data/adb/vr25/acc/service.sh")
     }
 
     @Throws(Command.AccException::class)
-    suspend fun update(context: Context) {
+    suspend fun initial(context: Context) {
         val installedVersionCode = Command.getVersion().first
         val bundledVersionCode = context.resources.getInteger(R.integer.acc_version_code)
         if (bundledVersionCode <= installedVersionCode) {
