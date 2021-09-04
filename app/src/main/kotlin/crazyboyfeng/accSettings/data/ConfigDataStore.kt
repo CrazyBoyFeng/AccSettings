@@ -8,6 +8,25 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class ConfigDataStore : PreferenceDataStore() {
+    override fun putInt(key: String, value: Int) {
+        Log.v(TAG, "putInt: $key=$value")
+        GlobalScope.launch {
+            Command.setConfig(key, value.toString())
+        }
+    }
+
+    override fun getInt(key: String, defValue: Int): Int {
+        Log.v(TAG, "getInt: $key=$defValue?")
+        return runBlocking {
+            val value = Command.getConfig(key)
+            if (value.isEmpty()) {
+                defValue
+            } else {
+                value.toInt()
+            }
+        }
+    }
+
     override fun putString(key: String, value: String?) {
         Log.v(TAG, "putString: $key=$value")
         GlobalScope.launch {
