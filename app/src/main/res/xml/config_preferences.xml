@@ -25,7 +25,7 @@
             app:formatSummary="true"
             app:key="@string/set_pause_capacity"
             app:summary="%s %%"
-            app:title="@string/pause_above" />
+            app:title="@string/discharge_above" />
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
@@ -40,7 +40,7 @@
             app:formatSummary="true"
             app:key="@string/set_max_temp"
             app:summary="%s °C"
-            app:title="@string/pause_above" />
+            app:title="@string/discharge_above" />
         <NumberPickerPreference
             app:formatSummary="true"
             app:key="@string/set_shutdown_temp"
@@ -60,13 +60,13 @@
             app:title="@string/charge_period" />
         <!--todo min value? max value?-->
         <NumberPickerPreference
-            app:dialogMessage="@string/hint_pause_period"
+            app:dialogMessage="@string/hint_discharge_period"
             app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_cooldown_pause"
             app:persistent="false"
             app:summary="%s second(s)"
-            app:title="@string/pause_period" />
+            app:title="@string/discharge_period" />
         <!--todo min value? max value?-->
         <NumberPickerPreference
             app:enabled="false"

@@ -23,11 +23,11 @@
     <string name="shutdown_below">Shutdown below</string>
     <string name="cooldown_above">Cooldown above</string>
     <string name="charge_below">Charge below</string>
-    <string name="pause_above">Pause above</string>
+    <string name="discharge_above">Discharge above</string>
     <string name="shutdown_above">Shutdown above</string>
     <string name="cooldown">Cooldown</string>
     <string name="charge_period">Charge period</string>
-    <string name="pause_period">Pause period</string>
+    <string name="discharge_period">Discharge period</string>
     <string name="custom">Custom</string>
     <string name="miscellaneous">Miscellaneous</string>
     <string name="idle_mode_first">Idle mode first</string>
@@ -37,9 +37,9 @@
     <string name="strict_current_control">Strict current control</string>
 
     <string name="hint_capacity_shutdown">Only valid when discharging and running more than 15 minutes</string>
-    <string name="hint_cooldown">Periodically charge and pause\nReduce damage from prolonged high temperature and voltage</string>
+    <string name="hint_cooldown">Periodically charge and discharge\nReduce damage from prolonged high temperature and voltage</string>
     <string name="hint_charge_period">Second(s) of charging period in a cycle\nCooldown disabled when not set by default\nSuggested value 50</string>
-    <string name="hint_pause_period">Second(s) of pausing charging period in a cycle\nCooldown disabled when not set by default\nSuggested value 10 (turn down if feel charging too slow)</string>
+    <string name="hint_discharge_period">Second(s) of pausing charging period in a cycle\nCooldown disabled when not set by default\nSuggested value 10 (turn down if feel charging too slow)</string>
     <string name="hint_idle_mode">Incompatible with some Samsung and other devices</string>
     <string name="hint_strict_current_control">Only use control files match "batt" path\nNeed if current limit affects both input and charging current values\nNeed reboot after changing</string>
 </resources>
