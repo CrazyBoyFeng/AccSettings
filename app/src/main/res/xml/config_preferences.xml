@@ -1,5 +1,5 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:title="@string/acc">
+    app:title="@string/configuration">
     <!--todo decompose to multiple pages?-->
     <PreferenceCategory
         app:iconSpaceReserved="false"
@@ -32,24 +32,18 @@
         app:title="@string/temperature">
         <NumberPickerPreference
             app:dialogMessage="@string/hint_cooldown"
-            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_cooldown_temp"
-            app:persistent="false"
             app:summary="%s °C"
             app:title="@string/cooldown_above" />
         <NumberPickerPreference
-            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_max_temp"
-            app:persistent="false"
             app:summary="%s °C"
             app:title="@string/pause_above" />
         <NumberPickerPreference
-            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_shutdown_temp"
-            app:persistent="false"
             app:summary="%s °C"
             app:title="@string/shutdown_above" />
     </PreferenceCategory>

@@ -12,59 +12,97 @@ import crazyboyfeng.accSettings.data.ConfigDataStore
 import crazyboyfeng.android.preference.PreferenceFragmentCompat
 
 class ConfigFragment : PreferenceFragmentCompat() {
-    private lateinit var shutdownBelow: NumberPickerPreference
-    private lateinit var cooldownAbove: NumberPickerPreference
-    private lateinit var chargeBelow: NumberPickerPreference
-    private lateinit var pauseAbove: NumberPickerPreference
-    private lateinit var preventShutdown: SwitchPreference
+    private lateinit var shutdownCapacity: NumberPickerPreference
+    private lateinit var cooldownCapacity: NumberPickerPreference
+    private lateinit var resumeCapacity: NumberPickerPreference
+    private lateinit var pauseCapacity: NumberPickerPreference
+    private lateinit var cooldownTemp: NumberPickerPreference
+    private lateinit var maxTemp: NumberPickerPreference
+    private lateinit var shutdownTemp: NumberPickerPreference
+    private lateinit var capacityFreeze2: SwitchPreference
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         preferenceManager.preferenceDataStore = ConfigDataStore()
         setPreferencesFromResource(R.xml.config_preferences, rootKey)
-        shutdownBelow = findPreference(getString(R.string.set_shutdown_capacity))!!
-        cooldownAbove = findPreference(getString(R.string.set_cooldown_capacity))!!
-        chargeBelow = findPreference(getString(R.string.set_resume_capacity))!!
-        pauseAbove = findPreference(getString(R.string.set_pause_capacity))!!
-        preventShutdown = findPreference(getString(R.string.set_capacity_freeze2))!!
-        onShutdownBelowSet()
-        onCooldownAboveSet()
-        onChargeBelowSet()
-        onPauseAboveSet()
-        shutdownBelow.setOnPreferenceChangeListener { _, newValue ->
-            onShutdownBelowSet(newValue as Int)
+        shutdownCapacity = findPreference(getString(R.string.set_shutdown_capacity))!!
+        cooldownCapacity = findPreference(getString(R.string.set_cooldown_capacity))!!
+        resumeCapacity = findPreference(getString(R.string.set_resume_capacity))!!
+        pauseCapacity = findPreference(getString(R.string.set_pause_capacity))!!
+        cooldownTemp = findPreference(getString(R.string.set_cooldown_temp))!!
+        maxTemp = findPreference(getString(R.string.set_max_temp))!!
+        shutdownTemp = findPreference(getString(R.string.set_shutdown_temp))!!
+        capacityFreeze2 = findPreference(getString(R.string.set_capacity_freeze2))!!
+
+        onShutdownCapacitySet()
+        shutdownCapacity.setOnPreferenceChangeListener { _, newValue ->
+            onShutdownCapacitySet(newValue as Int)
             true
         }
-        cooldownAbove.setOnPreferenceChangeListener { _, newValue ->
-            onCooldownAboveSet(newValue as Int)
+        onCooldownCapacitySet()
+        cooldownCapacity.setOnPreferenceChangeListener { _, newValue ->
+            onCooldownCapacitySet(newValue as Int)
             true
         }
-        chargeBelow.setOnPreferenceChangeListener { _, newValue ->
-            onChargeBelowSet(newValue as Int)
+        onResumeCapacitySet()
+        resumeCapacity.setOnPreferenceChangeListener { _, newValue ->
+            onResumeCapacitySet(newValue as Int)
             true
         }
-        pauseAbove.setOnPreferenceChangeListener { _, newValue ->
-            onPauseAboveSet(newValue as Int)
+        onPauseCapacitySet()
+        pauseCapacity.setOnPreferenceChangeListener { _, newValue ->
+            onPauseCapacitySet(newValue as Int)
             true
         }
+
+        onCooldownTempSet()
+        onShutdownTempSet()
+        cooldownTemp.setOnPreferenceChangeListener { _, newValue ->
+            onCooldownTempSet(newValue as Int)
+            true
+        }
+        onMaxTempSet()
+        maxTemp.setOnPreferenceChangeListener { _, newValue ->
+            onMaxTempSet(newValue as Int)
+            true
+        }
+        onShutdownTempSet()
+        shutdownTemp.setOnPreferenceChangeListener { _, newValue ->
+            onShutdownTempSet(newValue as Int)
+            true
+        }
+
         loadDefault()
     }
 
-    private fun onShutdownBelowSet(value: Int = shutdownBelow.value) {
-        cooldownAbove.minValue = value + 1
-        preventShutdown.isEnabled = value == 0
+    private fun onShutdownCapacitySet(value: Int = shutdownCapacity.value) {
+        cooldownCapacity.minValue = value + 1
+        capacityFreeze2.isEnabled = value == 0
     }
 
-    private fun onCooldownAboveSet(value: Int = cooldownAbove.value) {
-        shutdownBelow.maxValue = value - 1
-        chargeBelow.minValue = value + 1
+    private fun onCooldownCapacitySet(value: Int = cooldownCapacity.value) {
+        shutdownCapacity.maxValue = value - 1
+        resumeCapacity.minValue = value + 1
     }
 
-    private fun onChargeBelowSet(value: Int = chargeBelow.value) {
-        cooldownAbove.maxValue = value - 1
-        pauseAbove.minValue = value + 1
+    private fun onResumeCapacitySet(value: Int = resumeCapacity.value) {
+        cooldownCapacity.maxValue = value - 1
+        pauseCapacity.minValue = value + 1
     }
 
-    private fun onPauseAboveSet(value: Int = pauseAbove.value) {
-        chargeBelow.maxValue = value - 1
+    private fun onPauseCapacitySet(value: Int = pauseCapacity.value) {
+        resumeCapacity.maxValue = value - 1
+    }
+
+    private fun onCooldownTempSet(value: Int = cooldownTemp.value) {
+        maxTemp.minValue = value + 1
+    }
+
+    private fun onMaxTempSet(value: Int = maxTemp.value) {
+        cooldownTemp.maxValue = value - 1
+        shutdownTemp.minValue = value + 1
+    }
+
+    private fun onShutdownTempSet(value: Int = shutdownTemp.value) {
+        maxTemp.maxValue = value - 1
     }
 
     private fun loadDefault() = lifecycleScope.launchWhenCreated {
