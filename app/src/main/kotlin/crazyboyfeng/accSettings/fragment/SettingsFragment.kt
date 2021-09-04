@@ -17,21 +17,21 @@ import kotlinx.coroutines.isActive
 class SettingsFragment : PreferenceFragmentCompat() {
     private lateinit var accPreferenceCategory: PreferenceCategory
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        refresh(false)
+        reload()
         checkAcc()
     }
 
-    private fun refresh(checked: Boolean) {
-        if (checked) preferenceManager.preferenceDataStore = AccDataStore(resources)
+    private fun reload() {
         setPreferencesFromResource(R.xml.settings_preferences, null)
         accPreferenceCategory = findPreference(getString(R.string.acc))!!
-        if (!checked) {
-            return
-        }
+    }
+
+    private fun enableAcc() {
+        preferenceManager.preferenceDataStore = AccDataStore(resources)
+        reload()
         accPreferenceCategory.isEnabled = true
-        val infoPreferenceCategory =
-            findPreference<PreferenceCategory>(getString(R.string.info_status))
-        infoPreferenceCategory?.isVisible = true
+        val info = findPreference<PreferenceCategory>(getString(R.string.info_status))
+        info?.isVisible = true
         val infoTemp = findPreference<EditTextPreferencePlus>(getString(R.string.info_temp))
         infoTemp?.setSummaryProvider {
             val preference = it as EditTextPreferencePlus
@@ -62,7 +62,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 getString(R.string.installed_incompatible, versions.second)
             return@launchWhenCreated
         }
-        refresh(true)
+        enableAcc()
         if (versions.first > bundledVersionCode) {
             accPreferenceCategory.summary =
                 getString(R.string.installed_possibly_incompatible, versions.second)
