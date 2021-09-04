@@ -1,5 +1,6 @@
 package crazyboyfeng.accSettings.data
 
+import android.util.Log
 import androidx.preference.PreferenceDataStore
 import crazyboyfeng.accSettings.acc.Command
 import kotlinx.coroutines.GlobalScope
@@ -8,17 +9,21 @@ import kotlinx.coroutines.runBlocking
 
 class ConfigDataStore : PreferenceDataStore() {
     override fun putString(key: String, value: String?) {
+        Log.v(TAG, "putString: $key=$value")
         GlobalScope.launch {
             Command.setConfig(key, value)
         }
     }
 
-    override fun getString(key: String, defValue: String?): String? = runBlocking {
-        val value = Command.getConfig(key)
-        if (value.isEmpty()) {
-            defValue
-        } else {
-            value
+    override fun getString(key: String, defValue: String?): String? {
+        Log.v(TAG, "getString: $key=$defValue?")
+        return runBlocking {
+            val value = Command.getConfig(key)
+            if (value.isEmpty()) {
+                defValue
+            } else {
+                value
+            }
         }
     }
 
@@ -33,4 +38,7 @@ class ConfigDataStore : PreferenceDataStore() {
         //TODO
     }
 
+    private companion object {
+        const val TAG = "ConfigDataStore"
+    }
 }
