@@ -14,6 +14,36 @@ class ConfigFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         preferenceManager.preferenceDataStore = ConfigDataStore()
         setPreferencesFromResource(R.xml.config_preferences, rootKey)
+        val shutdownBelow =
+            findPreference<NumberPickerPreference>(getString(R.string.set_shutdown_capacity))!!
+        val cooldownAbove =
+            findPreference<NumberPickerPreference>(getString(R.string.set_cooldown_capacity))!!
+        val chargeBelow =
+            findPreference<NumberPickerPreference>(getString(R.string.set_resume_capacity))!!
+        val pauseAbove =
+            findPreference<NumberPickerPreference>(getString(R.string.set_pause_capacity))!!
+        shutdownBelow.setOnPreferenceChangeListener { _, newValue ->
+            val shutdown = newValue as Int
+            cooldownAbove.minValue = shutdown + 1
+            true
+        }
+        cooldownAbove.setOnPreferenceChangeListener { _, newValue ->
+            val cooldown = newValue as Int
+            shutdownBelow.maxValue = cooldown - 1
+            chargeBelow.minValue = cooldown + 1
+            true
+        }
+        chargeBelow.setOnPreferenceChangeListener { _, newValue ->
+            val charge = newValue as Int
+            cooldownAbove.maxValue = charge - 1
+            pauseAbove.minValue = charge + 1
+            true
+        }
+        pauseAbove.setOnPreferenceChangeListener { _, newValue ->
+            val pause = newValue as Int
+            chargeBelow.maxValue = pause - 1
+            true
+        }
         loadDefault()
     }
 

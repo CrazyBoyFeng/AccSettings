@@ -1,6 +1,6 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     app:title="@string/acc">
-    <!--todo or decompose to multiple pages?-->
+    <!--todo decompose to multiple pages?-->
     <PreferenceCategory
         app:iconSpaceReserved="false"
         app:title="@string/capacity">
@@ -12,24 +12,18 @@
             app:title="@string/shutdown_below" />
         <NumberPickerPreference
             app:dialogMessage="@string/hint_cooldown"
-            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_cooldown_capacity"
-            app:persistent="false"
             app:summary="%s %%"
             app:title="@string/cooldown_above" />
         <NumberPickerPreference
-            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_resume_capacity"
-            app:persistent="false"
             app:summary="%s %%"
             app:title="@string/charge_below" />
         <NumberPickerPreference
-            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_pause_capacity"
-            app:persistent="false"
             app:summary="%s %%"
             app:title="@string/pause_above" />
         <SwitchPreference
