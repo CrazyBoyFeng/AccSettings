@@ -74,10 +74,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
             val properties = Command.getInfo()
             Log.d(TAG, "updateInfo ${properties.size}")
             for (property in properties) {
+                val value = property.value as String
+                if (value.isEmpty()) {
+                    continue
+                }//value not empty
                 val key = property.key as String
                 when (val preference = findPreference<Preference>(key)) {
-                    is EditTextPreferencePlus -> preference.text = property.value as String
-                    else -> preference?.summary = property.value as String
+                    is EditTextPreferencePlus -> preference.text = value
+                    else -> preference?.summary = value
                 }
             }
             delay(1000)
