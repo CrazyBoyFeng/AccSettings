@@ -26,13 +26,6 @@
             app:key="@string/set_pause_capacity"
             app:summary="%s %%"
             app:title="@string/pause_above" />
-        <SwitchPreference
-            app:enabled="false"
-            app:key="@string/set_capacity_freeze2"
-            app:persistent="false"
-            app:summary="@string/hint_freeze"
-            app:title="@string/freeze_above_zero" />
-        <!--todo need restart-->
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
@@ -107,9 +100,8 @@
         <!--todo disable period?-->
     </PreferenceCategory>
     <PreferenceCategory
-        app:enabled="false"
         app:iconSpaceReserved="false"
-        app:persistent="false"
+        app:initialExpandedChildrenCount="5"
         app:title="@string/miscellaneous">
         <SwitchPreference
             app:enabled="false"
@@ -178,6 +170,12 @@
             app:persistent="false"
             app:title="@string/set_lang" />
         <!--todo necessary?-->
+        <SwitchPreference
+            app:dependency="@string/set_shutdown_capacity"
+            app:disableDependentsState="true"
+            app:key="@string/set_capacity_freeze2"
+            app:title="@string/prevent_shutdown" />
+        <!--todo need restart-->
         <SwitchPreference
             app:enabled="false"
             app:key="@string/set_current_workaround"
