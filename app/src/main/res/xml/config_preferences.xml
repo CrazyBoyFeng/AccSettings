@@ -12,22 +12,30 @@
             app:title="@string/shutdown_below" />
         <NumberPickerPreference
             app:dialogMessage="@string/hint_cooldown"
+            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_cooldown_capacity"
+            app:persistent="false"
             app:summary="%s %%"
             app:title="@string/cooldown_above" />
         <NumberPickerPreference
+            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_resume_capacity"
+            app:persistent="false"
             app:summary="%s %%"
             app:title="@string/charge_below" />
         <NumberPickerPreference
+            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_pause_capacity"
+            app:persistent="false"
             app:summary="%s %%"
             app:title="@string/pause_above" />
         <SwitchPreference
+            app:enabled="false"
             app:key="@string/set_capacity_freeze2"
+            app:persistent="false"
             app:summary="@string/hint_freeze"
             app:title="@string/freeze_above_zero" />
         <!--todo need restart-->
@@ -37,18 +45,24 @@
         app:title="@string/temperature">
         <NumberPickerPreference
             app:dialogMessage="@string/hint_cooldown"
+            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_cooldown_temp"
+            app:persistent="false"
             app:summary="%s °C"
             app:title="@string/cooldown_above" />
         <NumberPickerPreference
+            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_max_temp"
+            app:persistent="false"
             app:summary="%s °C"
             app:title="@string/pause_above" />
         <NumberPickerPreference
+            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_shutdown_temp"
+            app:persistent="false"
             app:summary="%s °C"
             app:title="@string/shutdown_above" />
     </PreferenceCategory>
@@ -57,97 +71,137 @@
         app:title="@string/cooldown">
         <NumberPickerPreference
             app:dialogMessage="@string/hint_charge_period"
+            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_cooldown_charge"
+            app:persistent="false"
             app:summary="%s second(s)"
             app:title="@string/charge_period" />
         <!--todo min value? max value?-->
         <NumberPickerPreference
             app:dialogMessage="@string/hint_pause_period"
+            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_cooldown_pause"
+            app:persistent="false"
             app:summary="%s second(s)"
             app:title="@string/pause_period" />
         <!--todo min value? max value?-->
         <NumberPickerPreference
+            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_max_temp_pause"
+            app:persistent="false"
             app:summary="%s second(s)"
             app:title="@string/set_max_temp_pause" />
         <!--todo min value? max value?-->
         <!--todo necessary?-->
         <EditTextPreference
+            app:enabled="false"
             app:key="@string/set_cooldown_custom"
+            app:persistent="false"
             app:title="@string/custom" />
         <!--todo edittext or list?-->
         <NumberPickerPreference
+            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_cooldown_current"
+            app:persistent="false"
             app:summary="%s mA"
             app:title="@string/current" />
         <!--todo min value? max value?-->
         <!--todo disable period?-->
     </PreferenceCategory>
     <PreferenceCategory
+        app:enabled="false"
         app:iconSpaceReserved="false"
+        app:persistent="false"
         app:title="@string/miscellaneous">
         <SwitchPreference
+            app:enabled="false"
             app:key="@string/set_prioritize_batt_idle_mode"
+            app:persistent="false"
             app:summary="@string/hint_idle_mode"
             app:title="@string/idle_mode_first" />
         <SwitchPreference
+            app:enabled="false"
             app:key="@string/set_reset_batt_stats_on_pause"
+            app:persistent="false"
             app:title="@string/set_reset_batt_stats_on_pause" />
         <!--todo what?-->
         <SwitchPreference
+            app:enabled="false"
             app:key="@string/set_reset_batt_stats_on_unplug"
+            app:persistent="false"
             app:title="@string/set_reset_batt_stats_on_unplug" />
         <!--todo what?-->
         <EditTextPreference
+            app:enabled="false"
             app:key="@string/set_charging_switch"
+            app:persistent="false"
             app:title="@string/set_charging_switch" />
         <!--todo type?-->
         <!--todo need restart-->
         <EditTextPreference
+            app:enabled="false"
             app:key="@string/set_apply_on_boot"
+            app:persistent="false"
             app:title="@string/set_apply_on_boot" />
         <!--todo type?-->
         <EditTextPreference
+            app:enabled="false"
             app:key="@string/set_apply_on_plug"
+            app:persistent="false"
             app:title="@string/set_apply_on_plug" />
         <!--todo type?-->
         <EditTextPreference
+            app:enabled="false"
             app:key="@string/set_max_charging_current"
+            app:persistent="false"
             app:title="@string/set_max_charging_current" />
         <!--todo type?-->
         <EditTextPreference
+            app:enabled="false"
             app:key="@string/set_max_charging_voltage"
+            app:persistent="false"
             app:title="@string/set_max_charging_voltage" />
         <!--todo type?-->
         <EditTextPreference
+            app:enabled="false"
             app:key="@string/set_run_cmd_on_pause"
+            app:persistent="false"
             app:title="@string/set_run_cmd_on_pause" />
         <!--todo type?-->
         <EditTextPreference
+            app:enabled="false"
             app:key="@string/set_loop_cmd"
+            app:persistent="false"
             app:title="@string/set_loop_cmd" />
         <!--todo type?-->
         <EditTextPreference
+            app:enabled="false"
             app:key="@string/set_lang"
+            app:persistent="false"
             app:title="@string/set_lang" />
         <!--todo necessary?-->
         <SwitchPreference
+            app:enabled="false"
             app:key="@string/set_current_workaround"
+            app:persistent="false"
             app:summary="@string/hint_strict_current_control"
             app:title="@string/strict_current_control" />
         <!--todo need reboot-->
         <EditTextPreference
+            app:enabled="false"
             app:key="@string/set_amp_factor"
+            app:persistent="false"
             app:title="@string/ampere_factor"
             app:useSimpleSummaryProvider="true" />
         <!--todo editintegerpreference or long?-->
         <EditTextPreference
+            app:enabled="false"
             app:key="@string/set_volt_factor"
+            app:persistent="false"
             app:title="@string/volt_factor"
             app:useSimpleSummaryProvider="true" />
         <!--todo editintegerpreference or long?-->
