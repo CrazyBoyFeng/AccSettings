@@ -30,10 +30,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         preferenceManager.preferenceDataStore = AccDataStore(resources)
         reload()
         accPreferenceCategory.isEnabled = true
-        val info = findPreference<PreferenceCategory>(getString(R.string.info_status))
-        info?.isVisible = true
-        val infoTemp = findPreference<EditTextPreferencePlus>(getString(R.string.info_temp))
-        infoTemp?.setSummaryProvider {
+        val info = findPreference<PreferenceCategory>(getString(R.string.info_status))!!
+        info.isVisible = true
+        val infoTemp = findPreference<EditTextPreferencePlus>(getString(R.string.info_temp))!!
+        infoTemp.setSummaryProvider {
             val preference = it as EditTextPreferencePlus
             val text = preference.text
             if (text.isNullOrEmpty()) text else (text.toFloat() / 10).toString()
