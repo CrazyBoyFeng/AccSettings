@@ -68,8 +68,14 @@ object Command {
     suspend fun getConfig(property: String): String =
         getPropertyValue(execAcc("set", "print $property"))
 
-    suspend fun getDefaultConfig(property: String): String =
-        getPropertyValue(execAcc("set", "print-default $property"))
+//    suspend fun getDefaultConfig(property: String): String = getPropertyValue(execAcc("set", "print-default $property"))
+
+    suspend fun getDefaultConfig(): Properties {
+        val properties = Properties()
+        @Suppress("BlockingMethodInNonBlockingContext")
+        properties.load(execAcc("set", "print-default").reader())
+        return properties
+    }
 
     suspend fun getInfo(): Properties {
         val properties = Properties()
