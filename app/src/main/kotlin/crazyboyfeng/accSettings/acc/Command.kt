@@ -63,12 +63,10 @@ object Command {
     suspend fun setConfig(property: String, vararg values: String?) =
         execAcc("set \"$property=${values.joinToString(" ")}\"")
 
-    private fun getPropertyValue(property: String) = property.split('=', limit = 2)[1]
+    private fun getPropertyValue(property: String) = property.split('=', '\n')[1]
 
     suspend fun getConfig(property: String): String =
         getPropertyValue(execAcc("set", "print $property"))
-
-//    suspend fun getDefaultConfig(property: String): String = getPropertyValue(execAcc("set", "print-default $property"))
 
     suspend fun getDefaultConfig(): Properties {
         val properties = Properties()
