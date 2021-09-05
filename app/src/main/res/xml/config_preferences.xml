@@ -1,4 +1,5 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:title="@string/configuration">
     <!--todo decompose to multiple pages?-->
     <PreferenceCategory
@@ -50,48 +51,35 @@
     <PreferenceCategory
         app:iconSpaceReserved="false"
         app:title="@string/cooldown">
-        <NumberPickerPreference
+        <EditTextPreferencePlus
+            android:hint="@string/hint_period"
+            android:inputType="number"
             app:dialogMessage="@string/hint_charge_period"
-            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_cooldown_charge"
-            app:persistent="false"
             app:summary="%s second(s)"
             app:title="@string/charge_period" />
-        <!--todo min value? max value?-->
-        <NumberPickerPreference
+        <EditTextPreferencePlus
+            android:hint="@string/hint_period"
+            android:inputType="number"
             app:dialogMessage="@string/hint_discharge_period"
-            app:enabled="false"
             app:formatSummary="true"
             app:key="@string/set_cooldown_pause"
-            app:persistent="false"
             app:summary="%s second(s)"
             app:title="@string/discharge_period" />
-        <!--todo min value? max value?-->
-        <NumberPickerPreference
-            app:enabled="false"
+        <EditTextPreferencePlus
+            android:hint="(mA)"
+            android:inputType="number"
             app:formatSummary="true"
-            app:key="@string/set_max_temp_pause"
-            app:persistent="false"
-            app:summary="%s second(s)"
-            app:title="@string/set_max_temp_pause" />
-        <!--todo min value? max value?-->
-        <!--todo necessary?-->
-        <EditTextPreference
+            app:key="@string/set_cooldown_current"
+            app:summary="%s mA"
+            app:title="@string/current" />
+        <EditTextPreferencePlus
             app:enabled="false"
             app:key="@string/set_cooldown_custom"
             app:persistent="false"
             app:title="@string/custom" />
         <!--todo edittext or list?-->
-        <NumberPickerPreference
-            app:enabled="false"
-            app:formatSummary="true"
-            app:key="@string/set_cooldown_current"
-            app:persistent="false"
-            app:summary="%s mA"
-            app:title="@string/current" />
-        <!--todo min value? max value?-->
-        <!--todo disable period?-->
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
