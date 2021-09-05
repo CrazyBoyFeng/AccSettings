@@ -36,10 +36,11 @@
     <string name="volt_factor">Volt factor</string>
     <string name="strict_current_control">Strict current control</string>
 
-    <string name="hint_capacity_shutdown">Only valid when discharging and running more than 15 minutes</string>
-    <string name="hint_cooldown">Periodically charge and discharge\nReduce damage from prolonged high temperature and voltage</string>
-    <string name="hint_charge_period">Second(s) of charging period in a cycle\nCooldown disabled when not set by default\nSuggested value 50</string>
-    <string name="hint_discharge_period">Second(s) of pausing charging period in a cycle\nCooldown disabled when not set by default\nSuggested value 10 (turn down if feel charging too slow)</string>
+    <string name="hint_capacity_shutdown">Only valid when discharging and running more than 15 minutes.</string>
+    <string name="hint_cooldown">Periodically charge and discharge.\nReduce damage from prolonged high temperature and voltage.</string>
+    <string name="hint_period">Second(s) of duration in each cycle</string>
+    <string name="hint_charge_period">Cooldown disabled if unset.\n50 suggested if set.</string>
+    <string name="hint_discharge_period">Cooldown disabled if unset.\n10 suggested if set. Turn down if feel charge too slow.</string>
     <string name="hint_idle_mode">Incompatible with some Samsung and other devices</string>
-    <string name="hint_strict_current_control">Only use control files match "batt" path\nNeed if current limit affects both input and charging current values\nNeed reboot after changing</string>
+    <string name="hint_strict_current_control">Only use control files match "batt" path.\nNeed if current limit affects both input and charging current values.\nNeed reboot after changing.</string>
 </resources>

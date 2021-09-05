@@ -26,6 +26,7 @@
     <string name="set_cooldown_pause">cooldown_pause</string>
     <string name="set_cooldown_custom">cooldown_custom</string>
     <string name="set_cooldown_current">cooldown_current</string>
+    <!--misc-->
     <string name="set_reset_batt_stats_on_pause">reset_batt_stats_on_pause</string>
     <string name="set_reset_batt_stats_on_unplug">reset_batt_stats_on_unplug</string>
     <string name="set_charging_switch">charging_switch</string>
