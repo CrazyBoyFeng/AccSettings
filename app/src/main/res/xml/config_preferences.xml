@@ -192,4 +192,21 @@
             app:useSimpleSummaryProvider="true" />
         <!--todo editintegerpreference or long?-->
     </PreferenceCategory>
+    <EditTextPreferencePlus
+        app:formatSummary="true"
+        app:isPreferenceVisible="false"
+        app:key="@string/set_max_temp_pause"
+        app:persistent="false"
+        app:summary="%s second(s)"
+        app:title="@string/set_max_temp_pause">
+        <!--redundant, sync with cooldown_pause if necessary-->
+    </EditTextPreferencePlus>
+    <ListPreference
+        app:isPreferenceVisible="false"
+        app:key="@string/set_lang"
+        app:persistent="false"
+        app:title="@string/set_lang"
+        app:useSimpleSummaryProvider="true">
+        <!--unuseful for app users-->
+    </ListPreference>
 </PreferenceScreen>

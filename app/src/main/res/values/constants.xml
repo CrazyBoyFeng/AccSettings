@@ -20,7 +20,6 @@
     <!--temperature-->
     <string name="set_cooldown_temp">cooldown_temp</string>
     <string name="set_max_temp">max_temp</string>
-    <string name="set_max_temp_pause">max_temp_pause</string>
     <string name="set_shutdown_temp">shutdown_temp</string>
     <!--cooldownRatio-->
     <string name="set_cooldown_charge">cooldown_charge</string>
@@ -34,11 +33,13 @@
     <string name="set_apply_on_plug">apply_on_plug</string>
     <string name="set_max_charging_current">max_charging_current</string>
     <string name="set_max_charging_voltage">max_charging_voltage</string>
-    <string name="set_lang">lang</string>
     <string name="set_run_cmd_on_pause">run_cmd_on_pause</string>
     <string name="set_amp_factor">amp_factor</string>
     <string name="set_volt_factor">volt_factor</string>
     <string name="set_loop_cmd">loop_cmd</string>
     <string name="set_prioritize_batt_idle_mode">prioritize_batt_idle_mode</string>
     <string name="set_current_workaround">current_workaround</string>
+    <!--unused-->
+    <string name="set_max_temp_pause">max_temp_pause</string>
+    <string name="set_lang">lang</string>
 </resources>
