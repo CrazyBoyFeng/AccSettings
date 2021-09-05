@@ -158,12 +158,6 @@
             app:persistent="false"
             app:title="@string/set_loop_cmd" />
         <!--todo type?-->
-        <EditTextPreference
-            app:enabled="false"
-            app:key="@string/set_lang"
-            app:persistent="false"
-            app:title="@string/set_lang" />
-        <!--todo necessary?-->
         <SwitchPreference
             app:dependency="@string/set_shutdown_capacity"
             app:disableDependentsState="true"
