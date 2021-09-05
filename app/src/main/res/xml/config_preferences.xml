@@ -50,6 +50,7 @@
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
+        app:initialExpandedChildrenCount="3"
         app:title="@string/cooldown">
         <EditTextPreferencePlus
             android:hint="@string/hint_period"
