@@ -45,7 +45,7 @@
     <string name="apply_on_plug">Apply on plug</string>
     <string name="commands">Commands</string>
     <string name="run_on_pause">Run on pause</string>
-    <string name="run_loop">Run loop</string>
+    <string name="loop">Loop</string>
     <string name="unit_multipliers">Unit multipliers</string>
     <string name="ampere_factor">Ampere factor</string>
     <string name="volt_factor">Volt factor</string>

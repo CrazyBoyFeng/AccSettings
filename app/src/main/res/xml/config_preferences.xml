@@ -163,7 +163,7 @@
                 app:useSimpleSummaryProvider="true" />
             <EditTextPreference
                 app:key="@string/set_loop_cmd"
-                app:title="@string/run_loop"
+                app:title="@string/loop"
                 app:useSimpleSummaryProvider="true" />
         </PreferenceCategory>
         <PreferenceCategory
