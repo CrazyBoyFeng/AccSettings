@@ -59,7 +59,8 @@
             app:formatSummary="true"
             app:key="@string/set_cooldown_charge"
             app:summary="%s s"
-            app:title="@string/charge_period" />
+            app:title="@string/charge_period"
+            app:useSimpleSummaryProvider="true" />
         <EditTextPreferencePlus
             android:hint="@string/hint_period"
             android:inputType="number"
@@ -68,7 +69,8 @@
             app:formatSummary="true"
             app:key="@string/set_cooldown_pause"
             app:summary="%s s"
-            app:title="@string/cooldown_period" />
+            app:title="@string/cooldown_period"
+            app:useSimpleSummaryProvider="true" />
         <EditTextPreferencePlus
             android:hint="(mA)"
             android:inputType="number"
@@ -77,7 +79,8 @@
             app:formatSummary="true"
             app:key="@string/set_cooldown_current"
             app:summary="%s mA"
-            app:title="@string/cooldown_current" />
+            app:title="@string/cooldown_current"
+            app:useSimpleSummaryProvider="true" />
         <Preference
             app:enabled="false"
             app:key="@string/set_cooldown_custom"
