@@ -65,17 +65,6 @@ class ConfigDataStore : PreferenceDataStore() {
         }
     }
 
-    override fun putStringSet(key: String, values: MutableSet<String>?) {
-        GlobalScope.launch {
-            Command.setConfig(key, *values!!.toTypedArray())
-        }
-    }
-
-    override fun getStringSet(key: String, defValues: MutableSet<String>?): MutableSet<String> {
-        return super.getStringSet(key, defValues)!!
-        //TODO
-    }
-
     private companion object {
         const val TAG = "ConfigDataStore"
     }
