@@ -11,6 +11,7 @@ import crazyboyfeng.accSettings.acc.Command
 import crazyboyfeng.accSettings.data.ConfigDataStore
 import crazyboyfeng.android.preference.PreferenceFragmentCompat
 
+@Suppress("unused")
 class ConfigFragment : PreferenceFragmentCompat() {
     private lateinit var shutdownCapacity: NumberPickerPreference
     private lateinit var cooldownCapacity: NumberPickerPreference
@@ -37,16 +38,14 @@ class ConfigFragment : PreferenceFragmentCompat() {
             onShutdownCapacitySet(newValue as Int)
             true
         }
-        onCooldownCapacitySet()
-        cooldownCapacity.setOnPreferenceChangeListener { _, newValue ->
-            onCooldownCapacitySet(newValue as Int)
+        onMiddleCapacitySet(cooldownCapacity.value)
+        onMiddleCapacitySet(resumeCapacity.value)
+        val onMiddleCapacityChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
+            onMiddleCapacitySet(newValue as Int)
             true
         }
-        onResumeCapacitySet()
-        resumeCapacity.setOnPreferenceChangeListener { _, newValue ->
-            onResumeCapacitySet(newValue as Int)
-            true
-        }
+        cooldownCapacity.onPreferenceChangeListener = onMiddleCapacityChangeListener
+        resumeCapacity.onPreferenceChangeListener = onMiddleCapacityChangeListener
         onPauseCapacitySet()
         pauseCapacity.setOnPreferenceChangeListener { _, newValue ->
             onPauseCapacitySet(newValue as Int)
@@ -54,7 +53,6 @@ class ConfigFragment : PreferenceFragmentCompat() {
         }
 
         onCooldownTempSet()
-        onShutdownTempSet()
         cooldownTemp.setOnPreferenceChangeListener { _, newValue ->
             onCooldownTempSet(newValue as Int)
             true
@@ -75,20 +73,21 @@ class ConfigFragment : PreferenceFragmentCompat() {
 
     private fun onShutdownCapacitySet(value: Int = shutdownCapacity.value) {
         cooldownCapacity.minValue = value + 1
+        resumeCapacity.maxValue = value + 1
         capacityFreeze2.isEnabled = value == 0
     }
 
-    private fun onCooldownCapacitySet(value: Int = cooldownCapacity.value) {
-        shutdownCapacity.maxValue = value - 1
-        resumeCapacity.minValue = value + 1
-    }
 
-    private fun onResumeCapacitySet(value: Int = resumeCapacity.value) {
-        cooldownCapacity.maxValue = value - 1
-        pauseCapacity.minValue = value + 1
+    private fun onMiddleCapacitySet(value: Int) {
+        if (value - 1 < shutdownCapacity.maxValue) {
+            shutdownCapacity.maxValue = value - 1
+        } else if (pauseCapacity.minValue < value + 1) {
+            pauseCapacity.minValue = value + 1
+        }
     }
 
     private fun onPauseCapacitySet(value: Int = pauseCapacity.value) {
+        cooldownCapacity.maxValue = value - 1
         resumeCapacity.maxValue = value - 1
     }
 
