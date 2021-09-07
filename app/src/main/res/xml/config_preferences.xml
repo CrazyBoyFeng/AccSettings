@@ -1,7 +1,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:title="@string/configuration">
-    <!--todo decompose to multiple pages?-->
     <PreferenceCategory
         app:iconSpaceReserved="false"
         app:title="@string/capacity">
@@ -26,7 +25,7 @@
             app:formatSummary="true"
             app:key="@string/set_pause_capacity"
             app:summary="%s %%"
-            app:title="@string/discharge_above" />
+            app:title="@string/pause_above" />
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
@@ -41,7 +40,7 @@
             app:formatSummary="true"
             app:key="@string/set_max_temp"
             app:summary="%s °C"
-            app:title="@string/discharge_above" />
+            app:title="@string/pause_above" />
         <NumberPickerPreference
             app:formatSummary="true"
             app:key="@string/set_shutdown_temp"
@@ -51,7 +50,7 @@
     <PreferenceCategory
         app:iconSpaceReserved="false"
         app:initialExpandedChildrenCount="3"
-        app:title="@string/cooldown">
+        app:title="@string/cooldown_cycle">
         <EditTextPreferencePlus
             android:hint="@string/hint_period"
             android:inputType="number"
@@ -104,6 +103,17 @@
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
+        app:title="@string/statistics">
+        <!--todo what?-->
+        <SwitchPreference
+            app:key="@string/set_reset_batt_stats_on_pause"
+            app:title="@string/reset_on_pause" />
+        <SwitchPreference
+            app:key="@string/set_reset_batt_stats_on_unplug"
+            app:title="@string/reset_on_unplug" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
         app:initialExpandedChildrenCount="5"
         app:title="@string/miscellaneous">
         <SwitchPreference
@@ -112,18 +122,6 @@
             app:persistent="false"
             app:summary="@string/hint_idle_mode"
             app:title="@string/idle_mode_first" />
-        <SwitchPreference
-            app:enabled="false"
-            app:key="@string/set_reset_batt_stats_on_pause"
-            app:persistent="false"
-            app:title="@string/set_reset_batt_stats_on_pause" />
-        <!--todo what?-->
-        <SwitchPreference
-            app:enabled="false"
-            app:key="@string/set_reset_batt_stats_on_unplug"
-            app:persistent="false"
-            app:title="@string/set_reset_batt_stats_on_unplug" />
-        <!--todo what?-->
         <EditTextPreference
             app:enabled="false"
             app:key="@string/set_charging_switch"
