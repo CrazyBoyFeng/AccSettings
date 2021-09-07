@@ -114,79 +114,79 @@
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
-        app:initialExpandedChildrenCount="5"
+        app:initialExpandedChildrenCount="1"
         app:title="@string/miscellaneous">
         <SwitchPreference
-            app:enabled="false"
             app:key="@string/set_prioritize_batt_idle_mode"
-            app:persistent="false"
             app:summary="@string/hint_idle_mode"
             app:title="@string/idle_mode_first" />
-        <EditTextPreference
+        <Preference
             app:enabled="false"
             app:key="@string/set_charging_switch"
             app:persistent="false"
-            app:title="@string/set_charging_switch" />
-        <!--todo type?-->
-        <!--todo need restart-->
-        <EditTextPreference
-            app:enabled="false"
-            app:key="@string/set_apply_on_boot"
-            app:persistent="false"
-            app:title="@string/set_apply_on_boot" />
-        <!--todo type?-->
-        <EditTextPreference
-            app:enabled="false"
-            app:key="@string/set_apply_on_plug"
-            app:persistent="false"
-            app:title="@string/set_apply_on_plug" />
-        <!--todo type?-->
-        <EditTextPreference
-            app:enabled="false"
-            app:key="@string/set_run_cmd_on_pause"
-            app:persistent="false"
-            app:title="@string/set_run_cmd_on_pause" />
-        <!--todo type?-->
-        <EditTextPreference
-            app:enabled="false"
-            app:key="@string/set_loop_cmd"
-            app:persistent="false"
-            app:title="@string/set_loop_cmd" />
-        <!--todo type?-->
+            app:title="@string/charging_switch">
+            <!--todo type?-->
+            <!--todo need restart-->
+        </Preference>
         <SwitchPreference
             app:dependency="@string/set_shutdown_capacity"
             app:disableDependentsState="true"
             app:key="@string/set_capacity_freeze2"
-            app:title="@string/prevent_shutdown" />
-        <!--todo need restart-->
+            app:title="@string/prevent_shutdown">
+            <!--todo need restart-->
+        </SwitchPreference>
         <SwitchPreference
-            app:enabled="false"
             app:key="@string/set_current_workaround"
-            app:persistent="false"
             app:summary="@string/hint_strict_current_control"
-            app:title="@string/strict_current_control" />
-        <!--todo need reboot-->
-        <EditTextPreference
-            app:enabled="false"
-            app:key="@string/set_amp_factor"
-            app:persistent="false"
-            app:title="@string/ampere_factor"
-            app:useSimpleSummaryProvider="true" />
-        <!--todo editintegerpreference or long?-->
-        <EditTextPreference
-            app:enabled="false"
-            app:key="@string/set_volt_factor"
-            app:persistent="false"
-            app:title="@string/volt_factor"
-            app:useSimpleSummaryProvider="true" />
-        <!--todo editintegerpreference or long?-->
+            app:title="@string/strict_current_control">
+            <!--todo need reboot-->
+        </SwitchPreference>
+        <PreferenceCategory
+            app:iconSpaceReserved="false"
+            app:title="@string/properties">
+            <!--todo type?-->
+            <EditTextPreference
+                app:key="@string/set_apply_on_boot"
+                app:title="@string/apply_on_boot"
+                app:useSimpleSummaryProvider="true" />
+            <EditTextPreference
+                app:key="@string/set_apply_on_plug"
+                app:title="@string/apply_on_plug"
+                app:useSimpleSummaryProvider="true" />
+        </PreferenceCategory>
+        <PreferenceCategory
+            app:iconSpaceReserved="false"
+            app:title="@string/commands">
+            <EditTextPreference
+                app:key="@string/set_run_cmd_on_pause"
+                app:title="@string/run_on_pause"
+                app:useSimpleSummaryProvider="true" />
+            <EditTextPreference
+                app:key="@string/set_loop_cmd"
+                app:title="@string/run_loop"
+                app:useSimpleSummaryProvider="true" />
+        </PreferenceCategory>
+        <PreferenceCategory
+            app:iconSpaceReserved="false"
+            app:title="@string/unit_multipliers">
+            <EditTextPreferencePlus
+                android:inputType="number"
+                app:key="@string/set_amp_factor"
+                app:title="@string/ampere_factor"
+                app:useSimpleSummaryProvider="true" />
+            <EditTextPreferencePlus
+                android:inputType="number"
+                app:key="@string/set_volt_factor"
+                app:title="@string/volt_factor"
+                app:useSimpleSummaryProvider="true" />
+        </PreferenceCategory>
     </PreferenceCategory>
     <EditTextPreferencePlus
         app:formatSummary="true"
         app:isPreferenceVisible="false"
         app:key="@string/set_max_temp_pause"
         app:persistent="false"
-        app:summary="%s second(s)"
+        app:summary="%s s"
         app:title="@string/set_max_temp_pause">
         <!--redundant, sync with cooldown_pause if necessary-->
     </EditTextPreferencePlus>

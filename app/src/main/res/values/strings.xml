@@ -37,10 +37,18 @@
     <string name="reset_on_unplug">Reset on unplug</string>
     <string name="miscellaneous">Miscellaneous</string>
     <string name="idle_mode_first">Idle mode first</string>
+    <string name="charging_switch">Charging switch</string>
     <string name="prevent_shutdown">Prevent shutdown</string>
+    <string name="strict_current_control">Strict current control</string>
+    <string name="properties">Properties</string>
+    <string name="apply_on_boot">Apply on boot</string>
+    <string name="apply_on_plug">Apply on plug</string>
+    <string name="commands">Commands</string>
+    <string name="run_on_pause">Run on pause</string>
+    <string name="run_loop">Run loop</string>
+    <string name="unit_multipliers">Unit multipliers</string>
     <string name="ampere_factor">Ampere factor</string>
     <string name="volt_factor">Volt factor</string>
-    <string name="strict_current_control">Strict current control</string>
 
     <string name="hint_between">Between %d and %d!</string>
     <string name="hint_capacity_shutdown">Only valid when discharging and running more than 15 minutes.</string>
