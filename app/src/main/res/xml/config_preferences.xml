@@ -59,18 +59,15 @@
             app:formatSummary="true"
             app:key="@string/set_cooldown_charge"
             app:summary="%s s"
-            app:title="@string/charge_period"
-            app:useSimpleSummaryProvider="true" />
+            app:title="@string/charge_period" />
         <EditTextPreferencePlus
             android:hint="@string/hint_period"
             android:inputType="number"
-            app:dependency="@string/set_cooldown_charge"
             app:dialogMessage="@string/hint_cooldown_period"
             app:formatSummary="true"
             app:key="@string/set_cooldown_pause"
             app:summary="%s s"
-            app:title="@string/cooldown_period"
-            app:useSimpleSummaryProvider="true" />
+            app:title="@string/cooldown_period" />
         <EditTextPreferencePlus
             android:hint="(mA)"
             android:inputType="number"
@@ -79,8 +76,7 @@
             app:formatSummary="true"
             app:key="@string/set_cooldown_current"
             app:summary="%s mA"
-            app:title="@string/cooldown_current"
-            app:useSimpleSummaryProvider="true" />
+            app:title="@string/cooldown_current" />
         <Preference
             app:enabled="false"
             app:key="@string/set_cooldown_custom"
@@ -97,16 +93,14 @@
             app:formatSummary="true"
             app:key="@string/set_max_charging_current"
             app:summary="%s mA"
-            app:title="@string/max_charging_current"
-            app:useSimpleSummaryProvider="true" />
+            app:title="@string/max_charging_current" />
         <EditTextPreferencePlus
             android:hint="(mV)"
             android:inputType="number"
             app:formatSummary="true"
             app:key="@string/set_max_charging_voltage"
             app:summary="%s mV"
-            app:title="@string/max_charging_voltage"
-            app:useSimpleSummaryProvider="true" />
+            app:title="@string/max_charging_voltage" />
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
