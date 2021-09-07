@@ -2,7 +2,10 @@ package crazyboyfeng.accSettings.fragment
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
+import androidx.preference.EditTextPreferencePlus
 import androidx.preference.NumberPickerPreference
 import androidx.preference.Preference
 import androidx.preference.SwitchPreference
@@ -20,6 +23,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
     private lateinit var cooldownTemp: NumberPickerPreference
     private lateinit var maxTemp: NumberPickerPreference
     private lateinit var shutdownTemp: NumberPickerPreference
+    private lateinit var maxChargingVoltage: EditTextPreferencePlus
     private lateinit var capacityFreeze2: SwitchPreference
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         preferenceManager.preferenceDataStore = ConfigDataStore()
@@ -31,6 +35,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
         cooldownTemp = findPreference(getString(R.string.set_cooldown_temp))!!
         maxTemp = findPreference(getString(R.string.set_max_temp))!!
         shutdownTemp = findPreference(getString(R.string.set_shutdown_temp))!!
+        maxChargingVoltage = findPreference(getString(R.string.set_max_charging_voltage))!!
         capacityFreeze2 = findPreference(getString(R.string.set_capacity_freeze2))!!
 
         onShutdownCapacitySet()
@@ -66,6 +71,20 @@ class ConfigFragment : PreferenceFragmentCompat() {
         shutdownTemp.setOnPreferenceChangeListener { _, newValue ->
             onShutdownTempSet(newValue as Int)
             true
+        }
+
+        maxChargingVoltage.setOnBindEditTextListener {
+            it.doOnTextChanged { text, _, _, _ ->
+                val number = text.toString().toInt()
+                val minValue = 3700
+                val maxValue = 4200
+                it.error = if (number < minValue || number > maxValue) {
+                    getString(R.string.hint_between, minValue, maxValue)
+                } else {
+                    null
+                }
+                it.rootView.findViewById<Button>(android.R.id.button1).isEnabled = it.error == null
+            }
         }
 
         loadDefault()

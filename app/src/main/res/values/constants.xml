@@ -26,14 +26,15 @@
     <string name="set_cooldown_pause">cooldown_pause</string>
     <string name="set_cooldown_custom">cooldown_custom</string>
     <string name="set_cooldown_current">cooldown_current</string>
+    <!--power-->
+    <string name="set_max_charging_current">max_charging_current</string>
+    <string name="set_max_charging_voltage">max_charging_voltage</string>
     <!--misc-->
     <string name="set_reset_batt_stats_on_pause">reset_batt_stats_on_pause</string>
     <string name="set_reset_batt_stats_on_unplug">reset_batt_stats_on_unplug</string>
     <string name="set_charging_switch">charging_switch</string>
     <string name="set_apply_on_boot">apply_on_boot</string>
     <string name="set_apply_on_plug">apply_on_plug</string>
-    <string name="set_max_charging_current">max_charging_current</string>
-    <string name="set_max_charging_voltage">max_charging_voltage</string>
     <string name="set_run_cmd_on_pause">run_cmd_on_pause</string>
     <string name="set_amp_factor">amp_factor</string>
     <string name="set_volt_factor">volt_factor</string>

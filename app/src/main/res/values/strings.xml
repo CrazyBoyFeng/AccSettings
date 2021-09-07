@@ -30,6 +30,8 @@
     <string name="cooldown_period">Cooldown period</string>
     <string name="cooldown_current">Cooldown current</string>
     <string name="custom">Custom</string>
+    <string name="max_charging_current">Max charging current</string>
+    <string name="max_charging_voltage">Max charging voltage</string>
     <string name="miscellaneous">Miscellaneous</string>
     <string name="idle_mode_first">Idle mode first</string>
     <string name="prevent_shutdown">Prevent shutdown</string>
@@ -37,6 +39,7 @@
     <string name="volt_factor">Volt factor</string>
     <string name="strict_current_control">Strict current control</string>
 
+    <string name="hint_between">Between %d and %d!</string>
     <string name="hint_capacity_shutdown">Only valid when discharging and running more than 15 minutes.</string>
     <string name="hint_cooldown">Periodically charge and discharge.\nReduce damage from prolonged high temperature and voltage.</string>
     <string name="hint_period">Second(s) during each cycle</string>

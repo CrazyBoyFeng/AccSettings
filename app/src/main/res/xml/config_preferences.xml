@@ -90,6 +90,26 @@
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
+        app:title="@string/power">
+        <EditTextPreferencePlus
+            android:hint="(mA)"
+            android:inputType="number"
+            app:formatSummary="true"
+            app:key="@string/set_max_charging_current"
+            app:summary="%s mA"
+            app:title="@string/max_charging_current"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreferencePlus
+            android:hint="(mV)"
+            android:inputType="number"
+            app:formatSummary="true"
+            app:key="@string/set_max_charging_voltage"
+            app:summary="%s mV"
+            app:title="@string/max_charging_voltage"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
         app:initialExpandedChildrenCount="5"
         app:title="@string/miscellaneous">
         <SwitchPreference
@@ -128,18 +148,6 @@
             app:key="@string/set_apply_on_plug"
             app:persistent="false"
             app:title="@string/set_apply_on_plug" />
-        <!--todo type?-->
-        <EditTextPreference
-            app:enabled="false"
-            app:key="@string/set_max_charging_current"
-            app:persistent="false"
-            app:title="@string/set_max_charging_current" />
-        <!--todo type?-->
-        <EditTextPreference
-            app:enabled="false"
-            app:key="@string/set_max_charging_voltage"
-            app:persistent="false"
-            app:title="@string/set_max_charging_voltage" />
         <!--todo type?-->
         <EditTextPreference
             app:enabled="false"
