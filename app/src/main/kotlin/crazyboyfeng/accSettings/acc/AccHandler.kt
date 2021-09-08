@@ -25,7 +25,7 @@ class AccHandler {
         val accVersionCode = resources.getInteger(R.integer.acc_version_code)
         val accVersionName = resources.getString(R.string.acc_version_name)
         try {
-            cacheAssertFile("acc_v${accVersionName}_.${accVersionCode}.tar.gz")
+            cacheAssertFile("acc_v${accVersionName}_.${accVersionCode}.tgz")
             val installShFile = cacheAssertFile("install-tarball.sh")
             val command = "sh ${installShFile.absolutePath} acc --non-interactive"
             Command.exec(command)
