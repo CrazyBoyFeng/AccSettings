@@ -120,27 +120,22 @@
             app:key="@string/set_prioritize_batt_idle_mode"
             app:summary="@string/hint_idle_mode"
             app:title="@string/idle_mode_first" />
-        <Preference
-            app:enabled="false"
-            app:key="@string/set_charging_switch"
-            app:persistent="false"
-            app:title="@string/charging_switch">
-            <!--todo type?-->
-            <!--todo need restart-->
-        </Preference>
         <SwitchPreference
             app:dependency="@string/set_shutdown_capacity"
             app:disableDependentsState="true"
             app:key="@string/set_capacity_freeze2"
-            app:title="@string/prevent_shutdown">
-            <!--todo need restart-->
-        </SwitchPreference>
+            app:title="@string/prevent_shutdown" />
         <SwitchPreference
             app:key="@string/set_current_workaround"
             app:summary="@string/hint_strict_current_control"
-            app:title="@string/strict_current_control">
-            <!--todo need reboot-->
-        </SwitchPreference>
+            app:title="@string/strict_current_control" />
+        <EditTextPreferencePlus
+            app:formatSummary="true"
+            app:key="@string/set_charging_switch"
+            app:summary="%s"
+            app:title="@string/charging_switch">
+            <!--todo type?-->
+        </EditTextPreferencePlus>
         <PreferenceCategory
             app:iconSpaceReserved="false"
             app:title="@string/properties">
