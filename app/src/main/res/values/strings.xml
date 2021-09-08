@@ -58,5 +58,5 @@
     <string name="hint_cooldown_period">Pause (or limit if set cooldown current) charging during each cycle.\nCooldown disabled if unset.\n10 suggested if set.\nTurn down if charge too slow.</string>
     <string name="hint_cooldown_current">Limit charging instead of pausing during cooldown period.</string>
     <string name="hint_idle_mode">Incompatible with some Samsung and other devices.</string>
-    <string name="hint_strict_current_control">Only use control files match "batt" path.\nNeed if current limit affects both input and charging current values.\nNeed reboot after changing.</string>
+    <string name="hint_strict_current_control">Only use control files match \"batt\".\nNeed if current limit affects both input and charging current.\nChange takes effect after reboot.</string>
 </resources>
