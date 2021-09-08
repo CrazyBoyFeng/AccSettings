@@ -75,15 +75,14 @@ class ConfigFragment : PreferenceFragmentCompat() {
 
         maxChargingVoltage.setOnBindEditTextListener {
             it.doOnTextChanged { text, _, _, _ ->
-                val number = text.toString().toInt()
-                val minValue = 3700
-                val maxValue = 4200
-                it.error = if (number < minValue || number > maxValue) {
-                    getString(R.string.hint_between, minValue, maxValue)
-                } else {
-                    null
-                }
-                it.rootView.findViewById<Button>(android.R.id.button1).isEnabled = it.error == null
+                it.error =
+                    if (text.isNullOrEmpty() || text.toString().toInt() in VOLT_MIN..VOLT_MAX) {
+                        null
+                    } else {
+                        getString(R.string.hint_between, VOLT_MIN, VOLT_MAX)
+                    }
+                it.rootView.findViewById<Button>(android.R.id.button1)?.isEnabled =
+                    it.error.isNullOrEmpty()
             }
         }
 
@@ -140,5 +139,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
 
     private companion object {
         const val TAG = "ConfigFragment"
+        const val VOLT_MIN = 3700
+        const val VOLT_MAX = 4200
     }
 }
