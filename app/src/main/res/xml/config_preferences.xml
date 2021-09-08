@@ -76,12 +76,10 @@
             app:key="@string/set_cooldown_current"
             app:summary="%s mA"
             app:title="@string/cooldown_current" />
-        <Preference
-            app:enabled="false"
+        <EditTextPreference
             app:key="@string/set_cooldown_custom"
-            app:persistent="false"
-            app:title="@string/custom" />
-        <!--todo edittext or list?-->
+            app:title="@string/custom"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
