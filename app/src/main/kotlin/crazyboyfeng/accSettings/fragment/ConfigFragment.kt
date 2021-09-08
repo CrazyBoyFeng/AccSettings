@@ -5,10 +5,7 @@ import android.util.Log
 import android.widget.Button
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.EditTextPreferencePlus
-import androidx.preference.NumberPickerPreference
-import androidx.preference.Preference
-import androidx.preference.SwitchPreference
+import androidx.preference.*
 import crazyboyfeng.accSettings.R
 import crazyboyfeng.accSettings.acc.Command
 import crazyboyfeng.accSettings.data.ConfigDataStore
@@ -23,6 +20,9 @@ class ConfigFragment : PreferenceFragmentCompat() {
     private lateinit var cooldownTemp: NumberPickerPreference
     private lateinit var maxTemp: NumberPickerPreference
     private lateinit var shutdownTemp: NumberPickerPreference
+    private lateinit var cooldownCharge: EditTextPreferencePlus
+    private lateinit var cooldownPause: EditTextPreferencePlus
+    private lateinit var cooldownCustom: EditTextPreference
     private lateinit var maxChargingVoltage: EditTextPreferencePlus
     private lateinit var capacityFreeze2: SwitchPreference
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -35,6 +35,9 @@ class ConfigFragment : PreferenceFragmentCompat() {
         cooldownTemp = findPreference(getString(R.string.set_cooldown_temp))!!
         maxTemp = findPreference(getString(R.string.set_max_temp))!!
         shutdownTemp = findPreference(getString(R.string.set_shutdown_temp))!!
+        cooldownCharge = findPreference(getString(R.string.set_cooldown_charge))!!
+        cooldownPause = findPreference(getString(R.string.set_cooldown_pause))!!
+        cooldownCustom = findPreference(getString(R.string.set_cooldown_custom))!!
         maxChargingVoltage = findPreference(getString(R.string.set_max_charging_voltage))!!
         capacityFreeze2 = findPreference(getString(R.string.set_capacity_freeze2))!!
 
@@ -70,6 +73,22 @@ class ConfigFragment : PreferenceFragmentCompat() {
         onShutdownTempSet()
         shutdownTemp.setOnPreferenceChangeListener { _, newValue ->
             onShutdownTempSet(newValue as Int)
+            true
+        }
+
+        onCooldownChargeSet()
+        cooldownCharge.setOnPreferenceChangeListener { _, newValue ->
+            onCooldownChargeSet(newValue as CharSequence)
+            true
+        }
+        onCooldownPauseSet()
+        cooldownPause.setOnPreferenceChangeListener { _, newValue ->
+            onCooldownPauseSet(newValue as CharSequence)
+            true
+        }
+        onCooldownCustomSet()
+        cooldownCustom.setOnPreferenceChangeListener { _, newValue ->
+            onCooldownCustomSet(newValue as CharSequence)
             true
         }
 
@@ -120,6 +139,24 @@ class ConfigFragment : PreferenceFragmentCompat() {
 
     private fun onShutdownTempSet(value: Int = shutdownTemp.value) {
         maxTemp.maxValue = value - 1
+    }
+
+    private fun onCooldownChargeSet(value: CharSequence? = cooldownCharge.text) {
+        val isValueEmpty = value.isNullOrEmpty()
+        val isCooldownPauseEmpty = cooldownPause.text.isNullOrEmpty()
+        cooldownCustom.isEnabled = isValueEmpty && isCooldownPauseEmpty
+    }
+
+    private fun onCooldownPauseSet(value: CharSequence? = cooldownPause.text) {
+        val isCooldownChargeEmpty = cooldownCharge.text.isNullOrEmpty()
+        val isValueEmpty = value.isNullOrEmpty()
+        cooldownCustom.isEnabled = isCooldownChargeEmpty && isValueEmpty
+    }
+
+    private fun onCooldownCustomSet(value: CharSequence? = cooldownCustom.text) {
+        val isValueEmpty = value.isNullOrEmpty()
+        cooldownCharge.isEnabled = isValueEmpty
+        cooldownPause.isEnabled = isValueEmpty
     }
 
     private fun loadDefault() = lifecycleScope.launchWhenCreated {
