@@ -54,6 +54,7 @@
         <EditTextPreferencePlus
             android:hint="@string/hint_period"
             android:inputType="number"
+            android:maxLength="4"
             app:dialogMessage="@string/hint_charge_period"
             app:formatSummary="true"
             app:key="@string/set_cooldown_charge"
@@ -62,6 +63,7 @@
         <EditTextPreferencePlus
             android:hint="@string/hint_period"
             android:inputType="number"
+            android:maxLength="4"
             app:dialogMessage="@string/hint_cooldown_period"
             app:formatSummary="true"
             app:key="@string/set_cooldown_pause"
@@ -70,6 +72,7 @@
         <EditTextPreferencePlus
             android:hint="(mA)"
             android:inputType="number"
+            android:maxLength="4"
             app:dependency="@string/set_cooldown_pause"
             app:dialogMessage="@string/hint_cooldown_current"
             app:formatSummary="true"
@@ -87,6 +90,7 @@
         <EditTextPreferencePlus
             android:hint="(mA)"
             android:inputType="number"
+            android:maxLength="4"
             app:formatSummary="true"
             app:key="@string/set_max_charging_current"
             app:summary="%s mA"
@@ -94,10 +98,26 @@
         <EditTextPreferencePlus
             android:hint="(mV)"
             android:inputType="number"
+            android:maxLength="4"
             app:formatSummary="true"
             app:key="@string/set_max_charging_voltage"
             app:summary="%s mV"
             app:title="@string/max_charging_voltage" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:initialExpandedChildrenCount="1"
+        app:title="@string/charging_switch">
+        <SwitchPreference
+            app:dependency="@string/set_charging_switch"
+            app:disableDependentsState="true"
+            app:key="@string/set_prioritize_batt_idle_mode"
+            app:summary="@string/hint_idle_mode"
+            app:title="@string/idle_mode_first" />
+        <EditTextPreference
+            app:key="@string/set_charging_switch"
+            app:title="@string/custom"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
@@ -115,10 +135,6 @@
         app:initialExpandedChildrenCount="1"
         app:title="@string/miscellaneous">
         <SwitchPreference
-            app:key="@string/set_prioritize_batt_idle_mode"
-            app:summary="@string/hint_idle_mode"
-            app:title="@string/idle_mode_first" />
-        <SwitchPreference
             app:dependency="@string/set_shutdown_capacity"
             app:disableDependentsState="true"
             app:key="@string/set_capacity_freeze2"
@@ -127,13 +143,6 @@
             app:key="@string/set_current_workaround"
             app:summary="@string/hint_strict_current_control"
             app:title="@string/strict_current_control" />
-        <EditTextPreferencePlus
-            app:formatSummary="true"
-            app:key="@string/set_charging_switch"
-            app:summary="%s"
-            app:title="@string/charging_switch">
-            <!--todo type?-->
-        </EditTextPreferencePlus>
         <PreferenceCategory
             app:iconSpaceReserved="false"
             app:title="@string/properties">
@@ -175,6 +184,9 @@
         </PreferenceCategory>
     </PreferenceCategory>
     <EditTextPreferencePlus
+        android:hint="@string/hint_period"
+        android:inputType="number"
+        android:maxLength="4"
         app:formatSummary="true"
         app:isPreferenceVisible="false"
         app:key="@string/set_max_temp_pause"
