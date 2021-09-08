@@ -109,8 +109,6 @@
         app:initialExpandedChildrenCount="1"
         app:title="@string/charging_switch">
         <SwitchPreference
-            app:dependency="@string/set_charging_switch"
-            app:disableDependentsState="true"
             app:key="@string/set_prioritize_batt_idle_mode"
             app:summary="@string/hint_idle_mode"
             app:title="@string/idle_mode_first" />

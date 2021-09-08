@@ -29,12 +29,13 @@
     <!--power-->
     <string name="set_max_charging_current">max_charging_current</string>
     <string name="set_max_charging_voltage">max_charging_voltage</string>
+    <!--chargingSwitch-->
+    <string name="set_prioritize_batt_idle_mode">prioritize_batt_idle_mode</string>
+    <string name="set_charging_switch">charging_switch</string>
     <!--resetBattStats-->
     <string name="set_reset_batt_stats_on_pause">reset_batt_stats_on_pause</string>
     <string name="set_reset_batt_stats_on_unplug">reset_batt_stats_on_unplug</string>
     <!--advanced-->
-    <string name="set_charging_switch">charging_switch</string>
-    <string name="set_prioritize_batt_idle_mode">prioritize_batt_idle_mode</string>
     <string name="set_current_workaround">current_workaround</string>
     <!--properties-->
     <string name="set_apply_on_boot">apply_on_boot</string>

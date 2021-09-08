@@ -24,6 +24,8 @@ class ConfigFragment : PreferenceFragmentCompat() {
     private lateinit var cooldownPause: EditTextPreferencePlus
     private lateinit var cooldownCustom: EditTextPreference
     private lateinit var maxChargingVoltage: EditTextPreferencePlus
+    private lateinit var prioritizeBattIdleMode: SwitchPreference
+    private lateinit var chargingSwitch: EditTextPreference
     private lateinit var capacityFreeze2: SwitchPreference
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         preferenceManager.preferenceDataStore = ConfigDataStore()
@@ -39,6 +41,8 @@ class ConfigFragment : PreferenceFragmentCompat() {
         cooldownPause = findPreference(getString(R.string.set_cooldown_pause))!!
         cooldownCustom = findPreference(getString(R.string.set_cooldown_custom))!!
         maxChargingVoltage = findPreference(getString(R.string.set_max_charging_voltage))!!
+        prioritizeBattIdleMode = findPreference(getString(R.string.set_prioritize_batt_idle_mode))!!
+        chargingSwitch = findPreference(getString(R.string.set_charging_switch))!!
         capacityFreeze2 = findPreference(getString(R.string.set_capacity_freeze2))!!
 
         onShutdownCapacitySet()
@@ -105,6 +109,12 @@ class ConfigFragment : PreferenceFragmentCompat() {
             }
         }
 
+        onChargingSwitchSet()
+        chargingSwitch.setOnPreferenceChangeListener { _, newValue ->
+            onChargingSwitchSet(newValue as CharSequence)
+            true
+        }
+
         loadDefault()
     }
 
@@ -157,6 +167,10 @@ class ConfigFragment : PreferenceFragmentCompat() {
         val isValueEmpty = value.isNullOrEmpty()
         cooldownCharge.isEnabled = isValueEmpty
         cooldownPause.isEnabled = isValueEmpty
+    }
+
+    private fun onChargingSwitchSet(value: CharSequence? = chargingSwitch.text) {
+        prioritizeBattIdleMode.isEnabled = value.isNullOrEmpty()
     }
 
     private fun loadDefault() = lifecycleScope.launchWhenCreated {
