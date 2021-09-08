@@ -51,7 +51,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         } catch (e: Command.AccException) {
             e.localizedMessage
         }//todo other exceptions?
-        if (message != null) {
+        if (message != null) {//todo notice user to read log when failed
             accPreferenceCategory.summary = message
             return@launchWhenCreated
         }//updated

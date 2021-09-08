@@ -10,8 +10,6 @@ import java.io.IOException
 
 
 class AccHandler {
-    //todo Should I throw an exception or return the result?
-    //todo notice to read log when failed
     private suspend fun install(context: Context) {
         suspend fun cacheAssertFile(fileName: String): File = withContext(Dispatchers.IO) {
             val cachedFile = File(context.cacheDir, fileName)
