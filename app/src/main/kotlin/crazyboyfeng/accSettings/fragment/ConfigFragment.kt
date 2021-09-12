@@ -145,7 +145,6 @@ class ConfigFragment : PreferenceFragmentCompat() {
         capacityFreeze2.isEnabled = value == 0
     }
 
-
     private fun onMiddleCapacitySet(value: Int) {
         if (value - 1 < shutdownCapacity.maxValue) {
             shutdownCapacity.maxValue = value - 1
