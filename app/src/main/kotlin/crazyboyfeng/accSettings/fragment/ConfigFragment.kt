@@ -141,7 +141,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
 
     private fun onShutdownCapacitySet(value: Int = shutdownCapacity.value) {
         cooldownCapacity.minValue = value + 1
-        resumeCapacity.maxValue = value + 1
+        resumeCapacity.minValue = value + 1
         capacityFreeze2.isEnabled = value == 0
     }
 
