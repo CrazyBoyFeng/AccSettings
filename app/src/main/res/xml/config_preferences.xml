@@ -106,8 +106,7 @@
             app:title="@string/idle_mode_first" />
         <EditTextPreference
             app:key="@string/set_charging_switch"
-            app:title="@string/custom"
-            app:useSimpleSummaryProvider="true" />
+            app:title="@string/custom"/>
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"

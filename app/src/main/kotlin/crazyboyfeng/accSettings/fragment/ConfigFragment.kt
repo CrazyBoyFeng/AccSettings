@@ -120,6 +120,16 @@ class ConfigFragment : PreferenceFragmentCompat() {
             }
         }
 
+        chargingSwitch.summaryProvider = Preference.SummaryProvider<EditTextPreference> {
+            val text = it.text
+            if (text.isNullOrEmpty()) {
+                getString(androidx.preference.R.string.not_set)
+            } else when (text.toIntOrNull()) {
+                in 0 until VOLT_MIN -> "$text mA"
+                in VOLT_MIN..VOLT_MAX -> "$text mV"
+                else -> text
+            }
+        }
         onChargingSwitchSet()
         chargingSwitch.setOnPreferenceChangeListener { _, newValue ->
             onChargingSwitchSet(newValue as CharSequence)
