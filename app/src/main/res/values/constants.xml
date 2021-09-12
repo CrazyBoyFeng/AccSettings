@@ -16,6 +16,7 @@
     <string name="set_cooldown_capacity">cooldown_capacity</string>
     <string name="set_resume_capacity">resume_capacity</string>
     <string name="set_pause_capacity">pause_capacity</string>
+    <string name="capacity_voltage">capacity_voltage</string>
     <string name="set_capacity_freeze2">capacity_freeze2</string>
     <!--temperature-->
     <string name="set_cooldown_temp">cooldown_temp</string>
