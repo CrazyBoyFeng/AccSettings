@@ -48,7 +48,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
         val capacitySummaryProvider = Preference.SummaryProvider<NumberPickerPreference> {
             when (val value = it.value) {
                 in 0..100 -> "$value %"
-                in VOLT_MIN..VOLT_MAX -> "$value mV"
+                in 3000..VOLT_MAX -> "$value mV"
                 else -> getString(androidx.preference.R.string.not_set)
             }
         }
