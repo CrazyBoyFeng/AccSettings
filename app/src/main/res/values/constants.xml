@@ -35,7 +35,7 @@
     <!--resetBattStats-->
     <string name="set_reset_batt_stats_on_pause">reset_batt_stats_on_pause</string>
     <string name="set_reset_batt_stats_on_unplug">reset_batt_stats_on_unplug</string>
-    <!--advanced-->
+    <!--miscellaneous-->
     <string name="set_current_workaround">current_workaround</string>
     <!--properties-->
     <string name="set_apply_on_boot">apply_on_boot</string>
