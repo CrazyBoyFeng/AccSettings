@@ -3,6 +3,7 @@
     app:title="@string/configuration">
     <PreferenceCategory
         app:iconSpaceReserved="false"
+        app:initialExpandedChildrenCount="4"
         app:title="@string/capacity">
         <NumberPickerPreference
             app:dialogMessage="@string/hint_capacity_shutdown"
