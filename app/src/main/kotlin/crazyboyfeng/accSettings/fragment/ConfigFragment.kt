@@ -48,7 +48,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
         val capacitySummaryProvider = Preference.SummaryProvider<NumberPickerPreference> {
             when (val value = it.value) {
                 in 0..100 -> "$value %"
-                in 3000..VOLT_MAX -> "$value mV"
+                in VOLT_MIN..VOLT_MAX -> "$value mV"
                 else -> getString(androidx.preference.R.string.not_set)
             }
         }
@@ -110,10 +110,10 @@ class ConfigFragment : PreferenceFragmentCompat() {
         maxChargingVoltage.setOnBindEditTextListener {
             it.doOnTextChanged { text, _, _, _ ->
                 it.error =
-                    if (text.isNullOrEmpty() || text.toString().toInt() in VOLT_MIN..VOLT_MAX) {
+                    if (text.isNullOrEmpty() || text.toString().toInt() in VOLT_AVG..VOLT_MAX) {
                         null
                     } else {
-                        getString(R.string.hint_between, VOLT_MIN, VOLT_MAX)
+                        getString(R.string.hint_between, VOLT_AVG, VOLT_MAX)
                     }
                 it.rootView.findViewById<Button>(android.R.id.button1)?.isEnabled =
                     it.error.isNullOrEmpty()
@@ -125,8 +125,8 @@ class ConfigFragment : PreferenceFragmentCompat() {
             if (text.isNullOrEmpty()) {
                 getString(androidx.preference.R.string.not_set)
             } else when (text.toIntOrNull()) {
-                in 0 until VOLT_MIN -> "$text mA"
-                in VOLT_MIN..VOLT_MAX -> "$text mV"
+                in 0 until VOLT_AVG -> "$text mA"
+                in VOLT_AVG..VOLT_MAX -> "$text mV"
                 else -> text
             }
         }
@@ -211,7 +211,8 @@ class ConfigFragment : PreferenceFragmentCompat() {
 
     private companion object {
         const val TAG = "ConfigFragment"
-        const val VOLT_MIN = 3700
+        const val VOLT_MIN = 3000
+        const val VOLT_AVG = 3700
         const val VOLT_MAX = 4200
     }
 }
