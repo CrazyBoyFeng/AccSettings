@@ -45,6 +45,17 @@ class ConfigFragment : PreferenceFragmentCompat() {
         chargingSwitch = findPreference(getString(R.string.set_charging_switch))!!
         capacityFreeze2 = findPreference(getString(R.string.set_capacity_freeze2))!!
 
+        val capacitySummaryProvider = Preference.SummaryProvider<NumberPickerPreference> {
+            when (val value = it.value) {
+                in 0..100 -> "$value %"
+                in VOLT_MIN..VOLT_MAX -> "$value mV"
+                else -> getString(androidx.preference.R.string.not_set)
+            }
+        }
+        shutdownCapacity.summaryProvider = capacitySummaryProvider
+        cooldownCapacity.summaryProvider = capacitySummaryProvider
+        resumeCapacity.summaryProvider = capacitySummaryProvider
+        pauseCapacity.summaryProvider = capacitySummaryProvider
         onShutdownCapacitySet()
         shutdownCapacity.setOnPreferenceChangeListener { _, newValue ->
             onShutdownCapacitySet(newValue as Int)

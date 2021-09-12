@@ -6,25 +6,17 @@
         app:title="@string/capacity">
         <NumberPickerPreference
             app:dialogMessage="@string/hint_capacity_shutdown"
-            app:formatSummary="true"
             app:key="@string/set_shutdown_capacity"
-            app:summary="%s %%"
             app:title="@string/shutdown_below" />
         <NumberPickerPreference
             app:dialogMessage="@string/hint_cooldown"
-            app:formatSummary="true"
             app:key="@string/set_cooldown_capacity"
-            app:summary="%s %%"
             app:title="@string/cooldown_above" />
         <NumberPickerPreference
-            app:formatSummary="true"
             app:key="@string/set_resume_capacity"
-            app:summary="%s %%"
             app:title="@string/charge_below" />
         <NumberPickerPreference
-            app:formatSummary="true"
             app:key="@string/set_pause_capacity"
-            app:summary="%s %%"
             app:title="@string/pause_above" />
     </PreferenceCategory>
     <PreferenceCategory
