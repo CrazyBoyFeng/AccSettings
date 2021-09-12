@@ -17,6 +17,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
     private lateinit var cooldownCapacity: NumberPickerPreference
     private lateinit var resumeCapacity: NumberPickerPreference
     private lateinit var pauseCapacity: NumberPickerPreference
+    private lateinit var capacityVoltage: SwitchPreference
     private lateinit var cooldownTemp: NumberPickerPreference
     private lateinit var maxTemp: NumberPickerPreference
     private lateinit var shutdownTemp: NumberPickerPreference
@@ -34,6 +35,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
         cooldownCapacity = findPreference(getString(R.string.set_cooldown_capacity))!!
         resumeCapacity = findPreference(getString(R.string.set_resume_capacity))!!
         pauseCapacity = findPreference(getString(R.string.set_pause_capacity))!!
+        capacityVoltage = findPreference(getString(R.string.capacity_voltage))!!
         cooldownTemp = findPreference(getString(R.string.set_cooldown_temp))!!
         maxTemp = findPreference(getString(R.string.set_max_temp))!!
         shutdownTemp = findPreference(getString(R.string.set_shutdown_temp))!!
@@ -56,22 +58,24 @@ class ConfigFragment : PreferenceFragmentCompat() {
         cooldownCapacity.summaryProvider = capacitySummaryProvider
         resumeCapacity.summaryProvider = capacitySummaryProvider
         pauseCapacity.summaryProvider = capacitySummaryProvider
-        onShutdownCapacitySet()
-        shutdownCapacity.setOnPreferenceChangeListener { _, newValue ->
-            onShutdownCapacitySet(newValue as Int)
-            true
+        val capacityOnBindNumberPickerListener = NumberPickerPreference.OnBindNumberPickerListener {
+            it.setOnValueChangedListener { picker, oldVal, newVal ->
+                if (oldVal == 100 && newVal == 100 + 1) {
+                    picker.value = VOLT_MIN
+                } else if (oldVal == VOLT_MIN && newVal == VOLT_MIN - 1) {
+                    picker.value = 100
+                }
+                val valid = newVal in 0..100 || newVal in VOLT_MIN..VOLT_MAX
+                picker.rootView.findViewById<Button>(android.R.id.button1)?.isEnabled = valid
+            }
         }
-        onMiddleCapacitySet(cooldownCapacity.value)
-        onMiddleCapacitySet(resumeCapacity.value)
-        val onMiddleCapacityChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
-            onMiddleCapacitySet(newValue as Int)
-            true
-        }
-        cooldownCapacity.onPreferenceChangeListener = onMiddleCapacityChangeListener
-        resumeCapacity.onPreferenceChangeListener = onMiddleCapacityChangeListener
-        onPauseCapacitySet()
-        pauseCapacity.setOnPreferenceChangeListener { _, newValue ->
-            onPauseCapacitySet(newValue as Int)
+        shutdownCapacity.onBindNumberPickerListener = capacityOnBindNumberPickerListener
+        cooldownCapacity.onBindNumberPickerListener = capacityOnBindNumberPickerListener
+        resumeCapacity.onBindNumberPickerListener = capacityOnBindNumberPickerListener
+        pauseCapacity.onBindNumberPickerListener = capacityOnBindNumberPickerListener
+        onCapacityVoltageSet()
+        capacityVoltage.setOnPreferenceChangeListener { _, newValue ->
+            onCapacityVoltageSet(newValue as Boolean)
             true
         }
 
@@ -139,6 +143,53 @@ class ConfigFragment : PreferenceFragmentCompat() {
         loadDefault()
     }
 
+    private fun onCapacityVoltageSet(checked: Boolean = capacityVoltage.isChecked) {
+        if (checked) {
+            shutdownCapacity.onPreferenceChangeListener = null
+            cooldownCapacity.onPreferenceChangeListener = null
+            resumeCapacity.onPreferenceChangeListener = null
+            pauseCapacity.onPreferenceChangeListener = null
+            shutdownCapacity.maxValue = VOLT_MAX
+            cooldownCapacity.minValue = 0
+            cooldownCapacity.maxValue = VOLT_MAX
+            resumeCapacity.minValue = 0
+            resumeCapacity.maxValue = VOLT_MAX
+            pauseCapacity.minValue = 0
+            pauseCapacity.maxValue = VOLT_MAX
+        } else {
+            pauseCapacity.maxValue = 100
+            onShutdownCapacitySet()
+            onMiddleCapacitySet(cooldownCapacity.value)
+            onMiddleCapacitySet(resumeCapacity.value)
+            onPauseCapacitySet()
+            shutdownCapacity.setOnPreferenceChangeListener { _, newValue ->
+                onShutdownCapacitySet(newValue as Int)
+                true
+            }
+            val onMiddleCapacityChangeListener =
+                Preference.OnPreferenceChangeListener { _, newValue ->
+                    onMiddleCapacitySet(newValue as Int)
+                    true
+                }
+            cooldownCapacity.onPreferenceChangeListener = onMiddleCapacityChangeListener
+            resumeCapacity.onPreferenceChangeListener = onMiddleCapacityChangeListener
+            pauseCapacity.setOnPreferenceChangeListener { _, newValue ->
+                onPauseCapacitySet(newValue as Int)
+                true
+            }
+        }
+    }
+
+    private fun onCapacitySetVoltage(value: Int): Boolean {
+        if (value in VOLT_MIN..VOLT_MAX) {
+            if (!capacityVoltage.isChecked) {
+                capacityVoltage.isChecked = true
+            }
+            capacityVoltage.isEnabled = false
+        }
+        return capacityVoltage.isChecked
+    }
+
     private fun onShutdownCapacitySet(value: Int = shutdownCapacity.value) {
         cooldownCapacity.minValue = value + 1
         resumeCapacity.minValue = value + 1
@@ -148,7 +199,8 @@ class ConfigFragment : PreferenceFragmentCompat() {
     private fun onMiddleCapacitySet(value: Int) {
         if (value - 1 < shutdownCapacity.maxValue) {
             shutdownCapacity.maxValue = value - 1
-        } else if (pauseCapacity.minValue < value + 1) {
+        }
+        if (pauseCapacity.minValue < value + 1) {
             pauseCapacity.minValue = value + 1
         }
     }
