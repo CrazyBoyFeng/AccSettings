@@ -37,7 +37,7 @@ dependencies {
     implementation("androidx.preference:preference-ktx:1.1.1")
     implementation("androidx.work:work-runtime:2.6.0")
     implementation("com.github.topjohnwu.libsu:core:3.1.2")
-    val axpeVersion = "0.7.1"
+    val axpeVersion = "0.8.2"
     implementation("com.github.CrazyBoyFeng.AndroidXPreferenceExtensions:edittext:$axpeVersion")
     implementation("com.github.CrazyBoyFeng.AndroidXPreferenceExtensions:numberpicker:$axpeVersion")
 //    testImplementation("junit:junit:4.13.2")
