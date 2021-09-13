@@ -27,7 +27,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun enableAcc() {
-        preferenceManager.preferenceDataStore = AccDataStore(resources)
+        preferenceManager.preferenceDataStore = AccDataStore(requireContext())
         reload()
         accPreferenceCategory.isEnabled = true
         val info = findPreference<PreferenceCategory>(getString(R.string.info_status))!!
