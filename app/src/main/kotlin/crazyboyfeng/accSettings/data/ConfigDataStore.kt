@@ -1,23 +1,31 @@
 package crazyboyfeng.accSettings.data
 
+import android.content.Context
 import android.util.Log
 import androidx.preference.PreferenceDataStore
+import crazyboyfeng.accSettings.R
 import crazyboyfeng.accSettings.acc.Command
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class ConfigDataStore : PreferenceDataStore() {
+class ConfigDataStore(private val context: Context) : PreferenceDataStore() {
     override fun putBoolean(key: String, value: Boolean) {
         Log.v(TAG, "putBoolean: $key=$value")
         GlobalScope.launch {
-            Command.setConfig(key, value.toString())
+            if (key != context.getString(R.string.capacity_voltage)) {
+                Command.setConfig(key, value.toString())
+            }
+            onConfigChangeListener?.onConfigChanged(key)
         }
     }
 
     override fun getBoolean(key: String, defValue: Boolean): Boolean {
         Log.v(TAG, "getBoolean: $key=$defValue?")
         return runBlocking {
+            if (key == context.getString(R.string.capacity_voltage)) {
+                return@runBlocking defValue
+            }
             val value = Command.getConfig(key)
             if (value.isEmpty()) {
                 defValue
@@ -31,6 +39,7 @@ class ConfigDataStore : PreferenceDataStore() {
         Log.v(TAG, "putInt: $key=$value")
         GlobalScope.launch {
             Command.setConfig(key, value.toString())
+            onConfigChangeListener?.onConfigChanged(key)
         }
     }
 
@@ -50,6 +59,7 @@ class ConfigDataStore : PreferenceDataStore() {
         Log.v(TAG, "putString: $key=$value")
         GlobalScope.launch {
             Command.setConfig(key, value)
+            onConfigChangeListener?.onConfigChanged(key)
         }
     }
 
@@ -64,6 +74,12 @@ class ConfigDataStore : PreferenceDataStore() {
             }
         }
     }
+
+    fun interface OnConfigChangeListener {
+        fun onConfigChanged(key: String)
+    }
+
+    var onConfigChangeListener: OnConfigChangeListener? = null
 
     private companion object {
         const val TAG = "ConfigDataStore"

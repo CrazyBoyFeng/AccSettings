@@ -21,7 +21,6 @@
             app:title="@string/pause_above" />
         <SwitchPreference
             app:key="@string/capacity_voltage"
-            app:persistent="false"
             app:title="@string/support_in_voltage" />
     </PreferenceCategory>
     <PreferenceCategory

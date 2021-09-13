@@ -29,7 +29,9 @@ class ConfigFragment : PreferenceFragmentCompat() {
     private lateinit var chargingSwitch: EditTextPreference
     private lateinit var capacityFreeze2: SwitchPreference
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        preferenceManager.preferenceDataStore = ConfigDataStore()
+        val configDataStore = ConfigDataStore(requireContext())
+        preferenceManager.preferenceDataStore = configDataStore
+
         setPreferencesFromResource(R.xml.config_preferences, rootKey)
         shutdownCapacity = findPreference(getString(R.string.set_shutdown_capacity))!!
         cooldownCapacity = findPreference(getString(R.string.set_cooldown_capacity))!!
@@ -46,6 +48,23 @@ class ConfigFragment : PreferenceFragmentCompat() {
         prioritizeBattIdleMode = findPreference(getString(R.string.set_prioritize_batt_idle_mode))!!
         chargingSwitch = findPreference(getString(R.string.set_charging_switch))!!
         capacityFreeze2 = findPreference(getString(R.string.set_capacity_freeze2))!!
+
+        configDataStore.onConfigChangeListener = ConfigDataStore.OnConfigChangeListener {
+            when (it) {
+                shutdownCapacity.key -> onShutdownCapacitySet()
+                cooldownCapacity.key -> onMiddleCapacitySet(cooldownCapacity)
+                resumeCapacity.key -> onMiddleCapacitySet(resumeCapacity)
+                pauseCapacity.key -> onPauseCapacitySet()
+                capacityVoltage.key -> onCapacityVoltageSet()
+                cooldownTemp.key -> onCooldownTempSet()
+                maxTemp.key -> onMaxTempSet()
+                shutdownTemp.key -> onShutdownTempSet()
+                cooldownCharge.key -> onCooldownChargeSet()
+                cooldownPause.key -> onCooldownPauseSet()
+                cooldownCustom.key -> onCooldownCustomSet()
+                chargingSwitch.key -> onChargingSwitchSet()
+            }
+        }
 
         val capacitySummaryProvider = Preference.SummaryProvider<NumberPickerPreference> {
             when (val value = it.value) {
@@ -74,42 +93,14 @@ class ConfigFragment : PreferenceFragmentCompat() {
         resumeCapacity.onBindNumberPickerListener = capacityOnBindNumberPickerListener
         pauseCapacity.onBindNumberPickerListener = capacityOnBindNumberPickerListener
         onCapacityVoltageSet()
-        capacityVoltage.setOnPreferenceChangeListener { _, newValue ->
-            onCapacityVoltageSet(newValue as Boolean)
-            true
-        }
 
         onCooldownTempSet()
-        cooldownTemp.setOnPreferenceChangeListener { _, newValue ->
-            onCooldownTempSet(newValue as Int)
-            true
-        }
         onMaxTempSet()
-        maxTemp.setOnPreferenceChangeListener { _, newValue ->
-            onMaxTempSet(newValue as Int)
-            true
-        }
         onShutdownTempSet()
-        shutdownTemp.setOnPreferenceChangeListener { _, newValue ->
-            onShutdownTempSet(newValue as Int)
-            true
-        }
 
         onCooldownChargeSet()
-        cooldownCharge.setOnPreferenceChangeListener { _, newValue ->
-            onCooldownChargeSet(newValue as CharSequence)
-            true
-        }
         onCooldownPauseSet()
-        cooldownPause.setOnPreferenceChangeListener { _, newValue ->
-            onCooldownPauseSet(newValue as CharSequence)
-            true
-        }
         onCooldownCustomSet()
-        cooldownCustom.setOnPreferenceChangeListener { _, newValue ->
-            onCooldownCustomSet(newValue as CharSequence)
-            true
-        }
 
         maxChargingVoltage.setOnBindEditTextListener {
             it.doOnTextChanged { text, _, _, _ ->
@@ -124,8 +115,8 @@ class ConfigFragment : PreferenceFragmentCompat() {
             }
         }
 
-        chargingSwitch.summaryProvider = Preference.SummaryProvider<EditTextPreference> {
-            val text = it.text
+        chargingSwitch.setSummaryProvider {
+            val text = (it as EditTextPreference).text
             if (text.isNullOrEmpty()) {
                 getString(androidx.preference.R.string.not_set)
             } else when (text.toIntOrNull()) {
@@ -135,20 +126,59 @@ class ConfigFragment : PreferenceFragmentCompat() {
             }
         }
         onChargingSwitchSet()
-        chargingSwitch.setOnPreferenceChangeListener { _, newValue ->
-            onChargingSwitchSet(newValue as CharSequence)
-            true
-        }
 
         loadDefault()
+
     }
 
-    private fun onCapacityVoltageSet(checked: Boolean = capacityVoltage.isChecked) {
-        if (checked) {
-            shutdownCapacity.onPreferenceChangeListener = null
-            cooldownCapacity.onPreferenceChangeListener = null
-            resumeCapacity.onPreferenceChangeListener = null
-            pauseCapacity.onPreferenceChangeListener = null
+    private fun onCapacitySetInVoltage(): Boolean {
+        fun inVoltage(preference: NumberPickerPreference) = preference.value in VOLT_MIN..VOLT_MAX
+        val shutdownInVoltage = inVoltage(shutdownCapacity)
+        val cooldownInVoltage = inVoltage(cooldownCapacity)
+        val resumeInVoltage = inVoltage(resumeCapacity)
+        val pauseInVoltage = inVoltage(pauseCapacity)
+        val inVoltage = shutdownInVoltage || cooldownInVoltage || resumeInVoltage || pauseInVoltage
+        if (inVoltage) {
+            capacityVoltage.isChecked = true
+        }
+        capacityVoltage.isEnabled = !inVoltage
+        return capacityVoltage.isChecked
+    }
+
+    private fun onShutdownCapacitySet() {
+        if (onCapacitySetInVoltage()) {
+            return
+        }
+        val value = shutdownCapacity.value
+        cooldownCapacity.minValue = value + 1
+        resumeCapacity.minValue = value + 1
+        capacityFreeze2.isEnabled = value == 0 || value == VOLT_MIN
+    }
+
+    private fun onMiddleCapacitySet(preference: NumberPickerPreference) {
+        if (onCapacitySetInVoltage()) {
+            return
+        }
+        val value = preference.value
+        if (value - 1 < shutdownCapacity.maxValue) {
+            shutdownCapacity.maxValue = value - 1
+        }
+        if (pauseCapacity.minValue < value + 1) {
+            pauseCapacity.minValue = value + 1
+        }
+    }
+
+    private fun onPauseCapacitySet() {
+        if (onCapacitySetInVoltage()) {
+            return
+        }
+        val value = pauseCapacity.value
+        cooldownCapacity.maxValue = value - 1
+        resumeCapacity.maxValue = value - 1
+    }
+
+    private fun onCapacityVoltageSet() {
+        if (capacityVoltage.isChecked) {
             shutdownCapacity.maxValue = VOLT_MAX
             cooldownCapacity.minValue = 0
             cooldownCapacity.maxValue = VOLT_MAX
@@ -159,90 +189,46 @@ class ConfigFragment : PreferenceFragmentCompat() {
         } else {
             pauseCapacity.maxValue = 100
             onShutdownCapacitySet()
-            onMiddleCapacitySet(cooldownCapacity.value)
-            onMiddleCapacitySet(resumeCapacity.value)
+            onMiddleCapacitySet(cooldownCapacity)
+            onMiddleCapacitySet(resumeCapacity)
             onPauseCapacitySet()
-            shutdownCapacity.setOnPreferenceChangeListener { _, newValue ->
-                onShutdownCapacitySet(newValue as Int)
-                true
-            }
-            val onMiddleCapacityChangeListener =
-                Preference.OnPreferenceChangeListener { _, newValue ->
-                    onMiddleCapacitySet(newValue as Int)
-                    true
-                }
-            cooldownCapacity.onPreferenceChangeListener = onMiddleCapacityChangeListener
-            resumeCapacity.onPreferenceChangeListener = onMiddleCapacityChangeListener
-            pauseCapacity.setOnPreferenceChangeListener { _, newValue ->
-                onPauseCapacitySet(newValue as Int)
-                true
-            }
         }
     }
 
-    private fun onCapacitySetVoltage(value: Int): Boolean {
-        if (value in VOLT_MIN..VOLT_MAX) {
-            if (!capacityVoltage.isChecked) {
-                capacityVoltage.isChecked = true
-            }
-            capacityVoltage.isEnabled = false
-        }
-        return capacityVoltage.isChecked
+    private fun onCooldownTempSet() {
+        maxTemp.minValue = cooldownTemp.value + 1
     }
 
-    private fun onShutdownCapacitySet(value: Int = shutdownCapacity.value) {
-        cooldownCapacity.minValue = value + 1
-        resumeCapacity.minValue = value + 1
-        capacityFreeze2.isEnabled = value == 0
-    }
-
-    private fun onMiddleCapacitySet(value: Int) {
-        if (value - 1 < shutdownCapacity.maxValue) {
-            shutdownCapacity.maxValue = value - 1
-        }
-        if (pauseCapacity.minValue < value + 1) {
-            pauseCapacity.minValue = value + 1
-        }
-    }
-
-    private fun onPauseCapacitySet(value: Int = pauseCapacity.value) {
-        cooldownCapacity.maxValue = value - 1
-        resumeCapacity.maxValue = value - 1
-    }
-
-    private fun onCooldownTempSet(value: Int = cooldownTemp.value) {
-        maxTemp.minValue = value + 1
-    }
-
-    private fun onMaxTempSet(value: Int = maxTemp.value) {
+    private fun onMaxTempSet() {
+        val value = maxTemp.value
         cooldownTemp.maxValue = value - 1
         shutdownTemp.minValue = value + 1
     }
 
-    private fun onShutdownTempSet(value: Int = shutdownTemp.value) {
-        maxTemp.maxValue = value - 1
+    private fun onShutdownTempSet() {
+        maxTemp.maxValue = shutdownTemp.value - 1
     }
 
-    private fun onCooldownChargeSet(value: CharSequence? = cooldownCharge.text) {
-        val isValueEmpty = value.isNullOrEmpty()
+    private fun onCooldownChargeSet() {
+        val isValueEmpty = cooldownCharge.text.isNullOrEmpty()
         val isCooldownPauseEmpty = cooldownPause.text.isNullOrEmpty()
         cooldownCustom.isEnabled = isValueEmpty && isCooldownPauseEmpty
     }
 
-    private fun onCooldownPauseSet(value: CharSequence? = cooldownPause.text) {
+    private fun onCooldownPauseSet() {
         val isCooldownChargeEmpty = cooldownCharge.text.isNullOrEmpty()
-        val isValueEmpty = value.isNullOrEmpty()
+        val isValueEmpty = cooldownPause.text.isNullOrEmpty()
         cooldownCustom.isEnabled = isCooldownChargeEmpty && isValueEmpty
     }
 
-    private fun onCooldownCustomSet(value: CharSequence? = cooldownCustom.text) {
-        val isValueEmpty = value.isNullOrEmpty()
+    private fun onCooldownCustomSet() {
+        val isValueEmpty = cooldownCustom.text.isNullOrEmpty()
         cooldownCharge.isEnabled = isValueEmpty
         cooldownPause.isEnabled = isValueEmpty
     }
 
-    private fun onChargingSwitchSet(value: CharSequence? = chargingSwitch.text) {
-        prioritizeBattIdleMode.isEnabled = value.isNullOrEmpty()
+    private fun onChargingSwitchSet() {
+        prioritizeBattIdleMode.isEnabled = chargingSwitch.text.isNullOrEmpty()
     }
 
     private fun loadDefault() = lifecycleScope.launchWhenCreated {
