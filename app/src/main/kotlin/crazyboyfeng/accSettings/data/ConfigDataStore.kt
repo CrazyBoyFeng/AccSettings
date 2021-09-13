@@ -10,11 +10,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class ConfigDataStore(private val context: Context) : PreferenceDataStore() {
+    private var capacityVoltage: Boolean = false
     override fun putBoolean(key: String, value: Boolean) {
         Log.v(TAG, "putBoolean: $key=$value")
         GlobalScope.launch {
-            if (key != context.getString(R.string.capacity_voltage)) {
-                Command.setConfig(key, value.toString())
+            when (key) {
+                context.getString(R.string.capacity_voltage) -> capacityVoltage = value
+                else -> Command.setConfig(key, value.toString())
             }
             onConfigChangeListener?.onConfigChanged(key)
         }
@@ -23,14 +25,16 @@ class ConfigDataStore(private val context: Context) : PreferenceDataStore() {
     override fun getBoolean(key: String, defValue: Boolean): Boolean {
         Log.v(TAG, "getBoolean: $key=$defValue?")
         return runBlocking {
-            if (key == context.getString(R.string.capacity_voltage)) {
-                return@runBlocking defValue
-            }
-            val value = Command.getConfig(key)
-            if (value.isEmpty()) {
-                defValue
-            } else {
-                value.toBoolean()
+            when (key) {
+                context.getString(R.string.capacity_voltage) -> capacityVoltage
+                else -> {
+                    val value = Command.getConfig(key)
+                    if (value.isEmpty()) {
+                        defValue
+                    } else {
+                        value.toBoolean()
+                    }
+                }
             }
         }
     }
