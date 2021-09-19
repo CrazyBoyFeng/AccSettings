@@ -21,6 +21,7 @@
             app:title="@string/pause_above" />
         <SwitchPreference
             app:key="@string/set_capacity_mask"
+            app:summary="@string/prevent_shutdown"
             app:title="@string/pause_as_full" />
         <SwitchPreference
             app:key="@string/capacity_voltage"
