@@ -14,8 +14,8 @@ android {
         applicationId = "crazyboyfeng.accSettings"
         minSdk = 14
         targetSdk = 30
-        versionCode = 202109201
-        versionName = "2021.9.20.1"
+        versionCode = 202109202
+        versionName = "2021.9.20.2"
 //        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
         resValue("string", "version_name", versionName!!)
     }
