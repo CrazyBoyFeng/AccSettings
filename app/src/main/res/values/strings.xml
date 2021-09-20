@@ -34,13 +34,12 @@
     <string name="custom">Custom</string>
     <string name="max_charging_current">Max charging current</string>
     <string name="max_charging_voltage">Max charging voltage</string>
+    <string name="charging_switch">Charging switch</string>
+    <string name="idle_mode_first">Idle mode first</string>
     <string name="statistics">Statistics</string>
     <string name="reset_on_pause">Reset on pause</string>
     <string name="reset_on_unplug">Reset on unplug</string>
     <string name="miscellaneous">Miscellaneous</string>
-    <string name="idle_mode_first">Idle mode first</string>
-    <string name="charging_switch">Charging switch</string>
-    <string name="prevent_shutdown">Prevent shutdown</string>
     <string name="strict_current_control">Strict current control</string>
     <string name="properties">Properties</string>
     <string name="apply_on_boot">Apply on boot</string>
@@ -55,6 +54,7 @@
     <string name="hint_between">Between %d and %d!</string>
     <string name="hint_capacity_shutdown">Only valid when discharging and running more than 15 minutes.</string>
     <string name="hint_cooldown">Periodically charge and pause.\nReduce damage from prolonged high temperature and voltage.</string>
+    <string name="hint_prevent_shutdown">Also prevent shutdown.</string>
     <string name="hint_period">Second(s) during each cycle</string>
     <string name="hint_charge_period">Cooldown disabled if unset.\n50 suggested if set.</string>
     <string name="hint_cooldown_period">Pause (or limit if set cooldown current) charging during each cycle.\nCooldown disabled if unset.\n10 suggested if set.\nTurn down if charge too slow.</string>

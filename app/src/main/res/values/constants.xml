@@ -18,7 +18,6 @@
     <string name="set_pause_capacity">pause_capacity</string>
     <string name="set_capacity_mask">capacity_mask</string>
     <string name="capacity_voltage">capacity_voltage</string>
-    <string name="set_capacity_freeze2">capacity_freeze2</string>
     <!--temperature-->
     <string name="set_cooldown_temp">cooldown_temp</string>
     <string name="set_max_temp">max_temp</string>

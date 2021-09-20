@@ -21,7 +21,7 @@
             app:title="@string/pause_above" />
         <SwitchPreference
             app:key="@string/set_capacity_mask"
-            app:summary="@string/prevent_shutdown"
+            app:summary="@string/hint_prevent_shutdown"
             app:title="@string/pause_as_full" />
         <SwitchPreference
             app:key="@string/capacity_voltage"
@@ -131,11 +131,6 @@
         app:iconSpaceReserved="false"
         app:initialExpandedChildrenCount="1"
         app:title="@string/miscellaneous">
-        <SwitchPreference
-            app:enabled="false"
-            app:key="@string/set_capacity_freeze2"
-            app:persistent="false"
-            app:title="@string/prevent_shutdown" />
         <SwitchPreference
             app:key="@string/set_current_workaround"
             app:summary="@string/hint_strict_current_control"

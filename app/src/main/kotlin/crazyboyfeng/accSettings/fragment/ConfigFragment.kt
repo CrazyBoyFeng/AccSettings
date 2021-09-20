@@ -28,7 +28,6 @@ class ConfigFragment : PreferenceFragmentCompat() {
     private lateinit var maxChargingVoltage: EditTextPreferencePlus
     private lateinit var prioritizeBattIdleMode: SwitchPreference
     private lateinit var chargingSwitch: EditTextPreference
-    private lateinit var capacityFreeze2: SwitchPreference
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         val configDataStore = ConfigDataStore(requireContext())
         preferenceManager.preferenceDataStore = configDataStore
@@ -49,7 +48,6 @@ class ConfigFragment : PreferenceFragmentCompat() {
         maxChargingVoltage = findPreference(getString(R.string.set_max_charging_voltage))!!
         prioritizeBattIdleMode = findPreference(getString(R.string.set_prioritize_batt_idle_mode))!!
         chargingSwitch = findPreference(getString(R.string.set_charging_switch))!!
-        capacityFreeze2 = findPreference(getString(R.string.set_capacity_freeze2))!!
 
         configDataStore.onConfigChangeListener = ConfigDataStore.OnConfigChangeListener {
             when (it) {
@@ -57,7 +55,6 @@ class ConfigFragment : PreferenceFragmentCompat() {
                 cooldownCapacity.key -> onMiddleCapacitySet(cooldownCapacity)
                 resumeCapacity.key -> onMiddleCapacitySet(resumeCapacity)
                 pauseCapacity.key -> onPauseCapacitySet()
-                capacityMask.key -> onCapacityMaskSet()
                 capacityVoltage.key -> onCapacityVoltageSet()
                 cooldownTemp.key -> onCooldownTempSet()
                 maxTemp.key -> onMaxTempSet()
@@ -157,7 +154,6 @@ class ConfigFragment : PreferenceFragmentCompat() {
         val value = shutdownCapacity.value
         cooldownCapacity.minValue = value + 1
         resumeCapacity.minValue = value + 1
-//        capacityFreeze2.isEnabled = value == 0 || value == VOLT_MIN
     }
 
     private fun onMiddleCapacitySet(preference: NumberPickerPreference) {
@@ -181,10 +177,6 @@ class ConfigFragment : PreferenceFragmentCompat() {
         val value = pauseCapacity.value
         cooldownCapacity.maxValue = value - 1
         resumeCapacity.maxValue = value - 1
-    }
-
-    private fun onCapacityMaskSet() {
-        capacityFreeze2.isChecked = capacityMask.isChecked
     }
 
     private fun onCapacityVoltageSet() {
