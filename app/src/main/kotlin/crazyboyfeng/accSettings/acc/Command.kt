@@ -96,13 +96,16 @@ object Command {
         return Pair(0, null)
     }
 
-    suspend fun setDaemonRunning(daemonRunning: Boolean) = try {
-        execAcc("daemon ${if (daemonRunning) "start" else "stop"}")
+    private suspend fun setDaemon(option: String) = try {
+        execAcc("daemon $option")
     } catch (e: DaemonExistsException) {
-        Log.i(TAG, "damon exists")
+        Log.i(TAG, "daemon exists")
     } catch (e: DaemonNotExistsException) {
         Log.i(TAG, "daemon not exists")
     }
+
+    suspend fun setDaemonRunning(daemonRunning: Boolean) =
+        setDaemon(if (daemonRunning) "start" else "stop")
 
     suspend fun isDaemonRunning(): Boolean = try {
         execAcc("daemon")
@@ -110,4 +113,6 @@ object Command {
     } catch (e: DaemonNotExistsException) {
         false
     }
+
+    suspend fun restartDaemon() = setDaemon("restart")
 }

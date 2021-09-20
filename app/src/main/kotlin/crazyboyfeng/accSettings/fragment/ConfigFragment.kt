@@ -10,6 +10,8 @@ import crazyboyfeng.accSettings.R
 import crazyboyfeng.accSettings.acc.Command
 import crazyboyfeng.accSettings.data.ConfigDataStore
 import crazyboyfeng.android.preference.PreferenceFragmentCompat
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @Suppress("unused")
 class ConfigFragment : PreferenceFragmentCompat() {
@@ -62,7 +64,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
                 cooldownCharge.key -> onCooldownChargeSet()
                 cooldownPause.key -> onCooldownPauseSet()
                 cooldownCustom.key -> onCooldownCustomSet()
-                chargingSwitch.key -> onChargingSwitchSet()
+                chargingSwitch.key -> onChargingSwitchChanged()
             }
         }
 
@@ -231,6 +233,11 @@ class ConfigFragment : PreferenceFragmentCompat() {
 
     private fun onChargingSwitchSet() {
         prioritizeBattIdleMode.isEnabled = chargingSwitch.text.isNullOrEmpty()
+    }
+
+    private fun onChargingSwitchChanged() {
+        onChargingSwitchSet()
+        GlobalScope.launch { Command.restartDaemon() }
     }
 
     private fun loadDefault() = lifecycleScope.launchWhenCreated {
