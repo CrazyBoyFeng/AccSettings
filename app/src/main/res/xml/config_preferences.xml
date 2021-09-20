@@ -20,6 +20,10 @@
             app:key="@string/set_pause_capacity"
             app:title="@string/pause_above" />
         <SwitchPreference
+            app:key="@string/set_capacity_sync"
+            app:summary="@string/hint_prevent_shutdown"
+            app:title="@string/read_from_kernel" />
+        <SwitchPreference
             app:key="@string/set_capacity_mask"
             app:summary="@string/hint_prevent_shutdown"
             app:title="@string/pause_as_full" />

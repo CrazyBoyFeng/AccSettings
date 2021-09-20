@@ -24,6 +24,7 @@
     <string name="cooldown_above">Cooldown above</string>
     <string name="charge_below">Charge below</string>
     <string name="pause_above">Pause above</string>
+    <string name="read_from_kernel">Read from kernel</string>
     <string name="pause_as_full">Pause as full</string>
     <string name="support_in_voltage">Support in voltage</string>
     <string name="shutdown_above">Shutdown above</string>
