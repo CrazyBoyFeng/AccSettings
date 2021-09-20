@@ -30,6 +30,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
     private lateinit var maxChargingVoltage: EditTextPreferencePlus
     private lateinit var prioritizeBattIdleMode: SwitchPreference
     private lateinit var chargingSwitch: EditTextPreference
+    private lateinit var currentWorkaround: SwitchPreference
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         val configDataStore = ConfigDataStore(requireContext())
         preferenceManager.preferenceDataStore = configDataStore
@@ -50,6 +51,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
         maxChargingVoltage = findPreference(getString(R.string.set_max_charging_voltage))!!
         prioritizeBattIdleMode = findPreference(getString(R.string.set_prioritize_batt_idle_mode))!!
         chargingSwitch = findPreference(getString(R.string.set_charging_switch))!!
+        currentWorkaround = findPreference(getString(R.string.set_current_workaround))!!
 
         configDataStore.onConfigChangeListener = ConfigDataStore.OnConfigChangeListener {
             when (it) {
@@ -65,6 +67,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
                 cooldownPause.key -> onCooldownPauseSet()
                 cooldownCustom.key -> onCooldownCustomSet()
                 chargingSwitch.key -> onChargingSwitchChanged()
+                currentWorkaround.key -> onCurrentWorkaroundChanged()
             }
         }
 
@@ -238,6 +241,10 @@ class ConfigFragment : PreferenceFragmentCompat() {
     private fun onChargingSwitchChanged() {
         onChargingSwitchSet()
         GlobalScope.launch { Command.restartDaemon() }
+    }
+
+    private fun onCurrentWorkaroundChanged() {
+        GlobalScope.launch { Command.reinitialize() }
     }
 
     private fun loadDefault() = lifecycleScope.launchWhenCreated {

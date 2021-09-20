@@ -115,4 +115,6 @@ object Command {
     }
 
     suspend fun restartDaemon() = setDaemon("restart")
+
+    suspend fun reinitialize() = exec("/dev/.vr25/acc/accd --init")
 }
