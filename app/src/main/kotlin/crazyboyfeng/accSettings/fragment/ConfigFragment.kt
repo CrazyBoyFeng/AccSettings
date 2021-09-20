@@ -18,7 +18,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
     private lateinit var resumeCapacity: NumberPickerPreference
     private lateinit var pauseCapacity: NumberPickerPreference
     private lateinit var capacityMask: SwitchPreference
-    private lateinit var capacityVoltage: SwitchPreference
+    private lateinit var supportInVoltage: SwitchPreference
     private lateinit var cooldownTemp: NumberPickerPreference
     private lateinit var maxTemp: NumberPickerPreference
     private lateinit var shutdownTemp: NumberPickerPreference
@@ -38,7 +38,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
         resumeCapacity = findPreference(getString(R.string.set_resume_capacity))!!
         pauseCapacity = findPreference(getString(R.string.set_pause_capacity))!!
         capacityMask = findPreference(getString(R.string.set_capacity_mask))!!
-        capacityVoltage = findPreference(getString(R.string.capacity_voltage))!!
+        supportInVoltage = findPreference(getString(R.string.support_in_voltage))!!
         cooldownTemp = findPreference(getString(R.string.set_cooldown_temp))!!
         maxTemp = findPreference(getString(R.string.set_max_temp))!!
         shutdownTemp = findPreference(getString(R.string.set_shutdown_temp))!!
@@ -55,7 +55,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
                 cooldownCapacity.key -> onMiddleCapacitySet(cooldownCapacity)
                 resumeCapacity.key -> onMiddleCapacitySet(resumeCapacity)
                 pauseCapacity.key -> onPauseCapacitySet()
-                capacityVoltage.key -> onCapacityVoltageSet()
+                supportInVoltage.key -> onSupportInVoltageSet()
                 cooldownTemp.key -> onCooldownTempSet()
                 maxTemp.key -> onMaxTempSet()
                 shutdownTemp.key -> onShutdownTempSet()
@@ -92,7 +92,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
         cooldownCapacity.onBindNumberPickerListener = capacityOnBindNumberPickerListener
         resumeCapacity.onBindNumberPickerListener = capacityOnBindNumberPickerListener
         pauseCapacity.onBindNumberPickerListener = capacityOnBindNumberPickerListener
-        onCapacityVoltageSet()
+        onSupportInVoltageSet()
 
         onCooldownTempSet()
         onMaxTempSet()
@@ -134,21 +134,21 @@ class ConfigFragment : PreferenceFragmentCompat() {
     private fun inVoltage(preference: NumberPickerPreference) =
         preference.value in VOLT_MIN..VOLT_MAX
 
-    private fun onCapacitySetInVoltage(): Boolean {
+    private fun capacitiesInVoltage(): Boolean {
         val shutdownInVoltage = inVoltage(shutdownCapacity)
         val cooldownInVoltage = inVoltage(cooldownCapacity)
         val resumeInVoltage = inVoltage(resumeCapacity)
         val pauseInVoltage = inVoltage(pauseCapacity)
         val inVoltage = shutdownInVoltage || cooldownInVoltage || resumeInVoltage || pauseInVoltage
         if (inVoltage) {
-            capacityVoltage.isChecked = true
+            supportInVoltage.isChecked = true
         }
-        capacityVoltage.isEnabled = !inVoltage
-        return capacityVoltage.isChecked
+        supportInVoltage.isEnabled = !inVoltage
+        return supportInVoltage.isChecked
     }
 
     private fun onShutdownCapacitySet() {
-        if (onCapacitySetInVoltage()) {
+        if (capacitiesInVoltage()) {
             return
         }
         val value = shutdownCapacity.value
@@ -157,7 +157,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
     }
 
     private fun onMiddleCapacitySet(preference: NumberPickerPreference) {
-        if (onCapacitySetInVoltage()) {
+        if (capacitiesInVoltage()) {
             return
         }
         val value = preference.value
@@ -171,7 +171,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
 
     private fun onPauseCapacitySet() {
         capacityMask.isEnabled = !inVoltage(pauseCapacity)
-        if (onCapacitySetInVoltage()) {
+        if (capacitiesInVoltage()) {
             return
         }
         val value = pauseCapacity.value
@@ -179,8 +179,8 @@ class ConfigFragment : PreferenceFragmentCompat() {
         resumeCapacity.maxValue = value - 1
     }
 
-    private fun onCapacityVoltageSet() {
-        if (capacityVoltage.isChecked) {
+    private fun onSupportInVoltageSet() {
+        if (supportInVoltage.isChecked) {
             shutdownCapacity.maxValue = VOLT_MAX
             cooldownCapacity.minValue = 0
             cooldownCapacity.maxValue = VOLT_MAX

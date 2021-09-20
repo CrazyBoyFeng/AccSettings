@@ -24,7 +24,7 @@
             app:summary="@string/hint_prevent_shutdown"
             app:title="@string/pause_as_full" />
         <SwitchPreference
-            app:key="@string/capacity_voltage"
+            app:key="@string/support_in_voltage"
             app:title="@string/support_in_voltage" />
     </PreferenceCategory>
     <PreferenceCategory
