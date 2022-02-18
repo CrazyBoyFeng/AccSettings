@@ -1,5 +1,6 @@
 package crazyboyfeng.accSettings.acc
 
+import android.content.Context
 import android.util.Log
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.Dispatchers
@@ -60,6 +61,10 @@ object Command {
         return exec(command)
     }
 
+    suspend fun isAccInstalled(): Boolean = withContext(Dispatchers.IO) {
+        Shell.sh("test -f /dev/.vr25/acc/acca").exec().isSuccess
+    }
+
     suspend fun setConfig(property: String, vararg values: String?) =
         execAcc("set \"$property=${values.joinToString(" ")}\"")
 
@@ -82,16 +87,22 @@ object Command {
         return properties
     }
 
-    suspend fun getVersion(): Pair<Int, String?> {
-        val version = execAcc("version")
-        if (version.startsWith('v')) {
-            try {
-                val versionCode = version.substringAfter('(').substringBefore(')').toInt()
-                val versionName = version.substringAfter('v').substringBefore(' ')
-                return Pair(versionCode, versionName)
-            } catch (e: NumberFormatException) {
-                e.printStackTrace()//may be cause by upgraded acc
+    // TODO Handle exceptions in better way. if dev/.vr25/ delete, app fails to handle it.
+    suspend fun getVersion(context: Context): Pair<Int, String?> {
+        if (isAccInstalled()) {
+            val version = execAcc("version")
+            if (version.startsWith('v')) {
+                return try {
+                    val versionCode = version.substringAfter('(').substringBefore(')').toInt()
+                    val versionName = version.substringAfter('v').substringBefore(' ')
+                    Pair(versionCode, versionName)
+                } catch (e: NumberFormatException) {
+                    e.printStackTrace()//may be cause by upgraded acc
+                    Pair(0, null)
+                }
             }
+        } else {
+            AccHandler().install(context)
         }
         return Pair(0, null)
     }

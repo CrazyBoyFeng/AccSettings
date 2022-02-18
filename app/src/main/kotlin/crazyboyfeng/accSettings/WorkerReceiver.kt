@@ -41,11 +41,11 @@ class WorkerReceiver : BroadcastReceiver() {
         }
     }
 
-    class ServeWorker(context: Context, workerParams: WorkerParameters) :
+    class ServeWorker(private val context: Context, workerParams: WorkerParameters) :
         Worker(context, workerParams) {
         override fun doWork(): Result = runBlocking {
             try {
-                AccHandler().serve()
+                AccHandler().serve(context)
                 Result.success()
             } catch (e: Command.AccException) {
                 Result.failure()

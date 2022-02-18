@@ -8,10 +8,11 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
-
 class AccHandler {
-    private suspend fun install(context: Context) {
-        suspend fun cacheAssertFile(fileName: String): File = withContext(Dispatchers.IO) {
+
+    @Suppress("BlockingMethodInNonBlockingContext")
+    suspend fun install(context: Context) {
+        suspend fun cacheAssetFile(fileName: String): File = withContext(Dispatchers.IO) {
             val cachedFile = File(context.cacheDir, fileName)
             context.assets.open(fileName).use { input ->
                 FileOutputStream(cachedFile).use { output ->
@@ -25,9 +26,9 @@ class AccHandler {
         val accVersionCode = resources.getInteger(R.integer.acc_version_code)
         val accVersionName = resources.getString(R.string.acc_version_name)
         try {
-            cacheAssertFile("acc_v${accVersionName}_.${accVersionCode}.tgz")
-            val installShFile = cacheAssertFile("install-tarball.sh")
-            val command = "sh ${installShFile.absolutePath} acc --non-interactive"
+            cacheAssetFile("acc_v${accVersionName}_${accVersionCode}.tgz")
+            val installShFile = cacheAssetFile("install-tarball.sh")
+            val command = "sh ${installShFile.absolutePath}"
             Command.exec(command)
         } catch (e: IOException) {
             e.printStackTrace()
@@ -35,13 +36,17 @@ class AccHandler {
     }
 
     @Throws(Command.AccException::class)
-    suspend fun serve() {
-        Command.exec("test -f /dev/.vr25/acc/acca || /data/adb/vr25/acc/service.sh")
+    suspend fun serve(context: Context) {
+        if (Command.isAccInstalled()) {
+            Command.exec("test -f /dev/.vr25/acc/acca || /data/adb/vr25/acc/service.sh")
+        } else {
+            install(context)
+        }
     }
 
     @Throws(Command.AccException::class)
     suspend fun initial(context: Context) {
-        val installedVersionCode = Command.getVersion().first
+        val installedVersionCode = Command.getVersion(context).first
         val bundledVersionCode = context.resources.getInteger(R.integer.acc_version_code)
         if (bundledVersionCode <= installedVersionCode) {
             return
