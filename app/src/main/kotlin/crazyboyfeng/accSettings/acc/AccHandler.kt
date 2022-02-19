@@ -11,7 +11,7 @@ import java.io.IOException
 
 class AccHandler {
     private suspend fun install(context: Context) {
-        suspend fun cacheAssertFile(fileName: String): File = withContext(Dispatchers.IO) {
+        suspend fun cacheAssetFile(fileName: String): File = withContext(Dispatchers.IO) {
             val cachedFile = File(context.cacheDir, fileName)
             context.assets.open(fileName).use { input ->
                 FileOutputStream(cachedFile).use { output ->
@@ -25,8 +25,8 @@ class AccHandler {
         val accVersionCode = resources.getInteger(R.integer.acc_version_code)
         val accVersionName = resources.getString(R.string.acc_version_name)
         try {
-            cacheAssertFile("acc_v${accVersionName}_${accVersionCode}.tgz")
-            val installShFile = cacheAssertFile("install-tarball.sh")
+            cacheAssetFile("acc_v${accVersionName}_${accVersionCode}.tgz")
+            val installShFile = cacheAssetFile("install-tarball.sh")
             val command = "sh ${installShFile.absolutePath} acc --non-interactive"
             Command.exec(command)
         } catch (e: IOException) {
