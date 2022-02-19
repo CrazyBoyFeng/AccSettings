@@ -27,7 +27,7 @@ class AccHandler {
         try {
             cacheAssetFile("acc_v${accVersionName}_${accVersionCode}.tgz")
             val installShFile = cacheAssetFile("install-tarball.sh")
-            val command = "sh ${installShFile.absolutePath} acc --non-interactive"
+            val command = "sh ${installShFile.absolutePath} acc"
             Command.exec(command)
         } catch (e: IOException) {
             e.printStackTrace()
