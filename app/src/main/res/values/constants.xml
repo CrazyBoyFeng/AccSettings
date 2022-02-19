@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources translatable="false">
-    <integer name="acc_version_code">202201080</integer>
-    <string name="acc_version_name">2022.1.8</string>
+    <integer name="acc_version_code">202202030</integer>
+    <string name="acc_version_name">2022.2.3</string>
     <string name="acc_daemon">acc_daemon</string>
     <!--battery info-->
     <string name="info_status">STATUS</string>
