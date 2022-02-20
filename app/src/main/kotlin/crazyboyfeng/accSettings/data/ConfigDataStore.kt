@@ -71,10 +71,8 @@ class ConfigDataStore(private val context: Context) : PreferenceDataStore() {
         Log.v(TAG, "getString: $key=$defValue?")
         return runBlocking {
             val value = Command.getConfig(key)
-            if (value.isEmpty()) {
+            value.ifEmpty {
                 defValue
-            } else {
-                value
             }
         }
     }
