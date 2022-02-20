@@ -34,10 +34,10 @@ android {
 
 dependencies {
 //    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation("androidx.preference:preference-ktx:1.1.1")
+    implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.work:work-runtime:2.7.1")
     implementation("com.github.topjohnwu.libsu:core:3.2.1")
-    val axpeVersion = "0.8.2"
+    val axpeVersion = "0.9.0"
     implementation("com.github.CrazyBoyFeng.AndroidXPreferenceExtensions:edittext:$axpeVersion")
     implementation("com.github.CrazyBoyFeng.AndroidXPreferenceExtensions:numberpicker:$axpeVersion")
 //    testImplementation("junit:junit:4.13.2")
