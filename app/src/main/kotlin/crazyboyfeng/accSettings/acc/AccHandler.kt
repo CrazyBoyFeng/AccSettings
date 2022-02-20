@@ -26,6 +26,7 @@ class AccHandler {
         val accVersionCode = resources.getInteger(R.integer.acc_version_code)
         val accVersionName = resources.getString(R.string.acc_version_name)
         try {
+            context.cacheDir.listFiles()?.forEach { it.delete() }
             cacheAssetFile("acc_v${accVersionName}_${accVersionCode}.tgz")
             val installShFile = cacheAssetFile("install-tarball.sh")
             val command = "sh ${installShFile.absolutePath} acc"
