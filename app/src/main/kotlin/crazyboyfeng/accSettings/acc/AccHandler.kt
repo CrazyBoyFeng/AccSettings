@@ -9,9 +9,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 
 class AccHandler {
-
-    @Suppress("BlockingMethodInNonBlockingContext")
-    suspend fun install(context: Context) {
+    private suspend fun install(context: Context) {
         suspend fun cacheAssetFile(fileName: String): File = withContext(Dispatchers.IO) {
             val cachedFile = File(context.cacheDir, fileName)
             context.assets.open(fileName).use { input ->
@@ -28,7 +26,7 @@ class AccHandler {
         try {
             cacheAssetFile("acc_v${accVersionName}_${accVersionCode}.tgz")
             val installShFile = cacheAssetFile("install-tarball.sh")
-            val command = "sh ${installShFile.absolutePath}"
+            val command = "sh ${installShFile.absolutePath} acc"
             Command.exec(command)
         } catch (e: IOException) {
             e.printStackTrace()
