@@ -13,6 +13,7 @@ class AccHandler {
     private suspend fun install(context: Context) {
         suspend fun cacheAssetFile(fileName: String): File = withContext(Dispatchers.IO) {
             val cachedFile = File(context.cacheDir, fileName)
+            @Suppress("BlockingMethodInNonBlockingContext")
             context.assets.open(fileName).use { input ->
                 FileOutputStream(cachedFile).use { output ->
                     input.copyTo(output)
