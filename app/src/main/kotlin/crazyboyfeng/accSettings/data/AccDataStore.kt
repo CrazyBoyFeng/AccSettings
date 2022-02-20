@@ -5,9 +5,7 @@ import android.util.Log
 import androidx.preference.PreferenceDataStore
 import crazyboyfeng.accSettings.R
 import crazyboyfeng.accSettings.acc.Command
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 class AccDataStore(private val context: Context) : PreferenceDataStore() {
     override fun getBoolean(key: String, defValue: Boolean): Boolean {
@@ -22,7 +20,7 @@ class AccDataStore(private val context: Context) : PreferenceDataStore() {
 
     override fun putBoolean(key: String, value: Boolean) {
         Log.v(TAG, "putBoolean: $key=$value")
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.Default).launch {
             when (key) {
                 context.getString(R.string.acc_daemon) -> Command.setDaemonRunning(value)
                 else -> super.putBoolean(key, value)

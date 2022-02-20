@@ -10,7 +10,8 @@ import crazyboyfeng.accSettings.R
 import crazyboyfeng.accSettings.acc.Command
 import crazyboyfeng.accSettings.data.ConfigDataStore
 import crazyboyfeng.android.preference.PreferenceFragmentCompat
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Suppress("unused")
@@ -240,11 +241,11 @@ class ConfigFragment : PreferenceFragmentCompat() {
 
     private fun onChargingSwitchChanged() {
         onChargingSwitchSet()
-        GlobalScope.launch { Command.restartDaemon() }
+        CoroutineScope(Dispatchers.Default).launch { Command.restartDaemon() }
     }
 
     private fun onCurrentWorkaroundChanged() {
-        GlobalScope.launch { Command.reinitialize() }
+        CoroutineScope(Dispatchers.Default).launch { Command.reinitialize() }
     }
 
     private fun loadDefault() = lifecycleScope.launchWhenCreated {

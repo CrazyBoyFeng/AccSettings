@@ -5,15 +5,13 @@ import android.util.Log
 import androidx.preference.PreferenceDataStore
 import crazyboyfeng.accSettings.R
 import crazyboyfeng.accSettings.acc.Command
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 class ConfigDataStore(private val context: Context) : PreferenceDataStore() {
     private var supportInVoltage: Boolean = false
     override fun putBoolean(key: String, value: Boolean) {
         Log.v(TAG, "putBoolean: $key=$value")
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.Default).launch {
             when (key) {
                 context.getString(R.string.support_in_voltage) -> supportInVoltage = value
                 else -> Command.setConfig(key, value.toString())
@@ -41,7 +39,7 @@ class ConfigDataStore(private val context: Context) : PreferenceDataStore() {
 
     override fun putInt(key: String, value: Int) {
         Log.v(TAG, "putInt: $key=$value")
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.Default).launch {
             Command.setConfig(key, value.toString())
             onConfigChangeListener?.onConfigChanged(key)
         }
@@ -61,7 +59,7 @@ class ConfigDataStore(private val context: Context) : PreferenceDataStore() {
 
     override fun putString(key: String, value: String?) {
         Log.v(TAG, "putString: $key=$value")
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.Default).launch {
             Command.setConfig(key, value)
             onConfigChangeListener?.onConfigChanged(key)
         }
