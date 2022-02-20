@@ -9,7 +9,7 @@ android {
      * compileSdk doesn't make sense,
      * just generally be consistent with targetSdk.
      */
-    compileSdk = 31
+    compileSdk = 32
     defaultConfig {
         applicationId = "crazyboyfeng.accSettings"
         minSdk = 14
