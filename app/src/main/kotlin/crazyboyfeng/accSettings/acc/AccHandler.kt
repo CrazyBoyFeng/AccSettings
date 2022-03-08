@@ -43,10 +43,14 @@ class AccHandler {
 
     @Throws(Command.AccException::class)
     suspend fun initial(context: Context) {
-        val installedVersionCode = Command.getVersion().first
-        val bundledVersionCode = context.resources.getInteger(R.integer.acc_version_code)
-        if (bundledVersionCode <= installedVersionCode) {
-            return
+        try {
+            val installedVersionCode = Command.getVersion().first
+            val bundledVersionCode = context.resources.getInteger(R.integer.acc_version_code)
+            if (bundledVersionCode <= installedVersionCode) {
+                return
+            }
+        } catch (e: Command.AccException) {
+//            e.printStackTrace()
         }
         install(context)
     }
