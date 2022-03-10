@@ -41,6 +41,21 @@ class SettingsFragment : PreferenceFragmentCompat() {
         updateInfo()
     }
 
+    private suspend fun testVersion() {
+        val versions = Command.getVersion()
+        val bundledVersionCode = resources.getInteger(R.integer.acc_version_code)
+        if (versions.first < bundledVersionCode) {
+            accPreferenceCategory.summary =
+                getString(R.string.installed_incompatible, versions.second)
+            return
+        }
+        enableAcc()
+        if (versions.first > bundledVersionCode) {
+            accPreferenceCategory.summary =
+                getString(R.string.installed_possibly_incompatible, versions.second)
+        }
+    }
+
     private fun checkAcc() = lifecycleScope.launchWhenCreated {
         accPreferenceCategory.summary = getString(R.string.initializing)
         val message = try {
@@ -55,18 +70,21 @@ class SettingsFragment : PreferenceFragmentCompat() {
             accPreferenceCategory.summary = message
             return@launchWhenCreated
         }//updated
-        delay(1000)
-        val versions = Command.getVersion()
-        val bundledVersionCode = resources.getInteger(R.integer.acc_version_code)
-        if (versions.first < bundledVersionCode) {
-            accPreferenceCategory.summary =
-                getString(R.string.installed_incompatible, versions.second)
-            return@launchWhenCreated
-        }
-        enableAcc()
-        if (versions.first > bundledVersionCode) {
-            accPreferenceCategory.summary =
-                getString(R.string.installed_possibly_incompatible, versions.second)
+        var i = 0
+        while (isActive) {
+            try {
+                testVersion()
+                return@launchWhenCreated
+            } catch (e: Command.AccException) {
+                if (i < 5) {
+                    delay(1000)
+                    i++
+                    continue
+                } else {
+                    accPreferenceCategory.summary = e.localizedMessage
+                    return@launchWhenCreated
+                }
+            }
         }
     }
 
