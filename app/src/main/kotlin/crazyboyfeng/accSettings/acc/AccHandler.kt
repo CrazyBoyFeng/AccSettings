@@ -1,6 +1,7 @@
 package crazyboyfeng.accSettings.acc
 
 import android.content.Context
+import android.util.Log
 import crazyboyfeng.accSettings.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -34,6 +35,7 @@ class AccHandler {
         } catch (e: IOException) {
             e.printStackTrace()
         }
+        Log.d(TAG,"install end")
     }
 
     @Throws(Command.AccException::class)
@@ -53,5 +55,8 @@ class AccHandler {
 //            e.printStackTrace()
         }
         install(context)
+    }
+    private companion object {
+        const val TAG = "AccHandler"
     }
 }
