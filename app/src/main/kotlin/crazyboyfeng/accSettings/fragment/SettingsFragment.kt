@@ -55,6 +55,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             accPreferenceCategory.summary = message
             return@launchWhenCreated
         }//updated
+        delay(1000)
         val versions = Command.getVersion()
         val bundledVersionCode = resources.getInteger(R.integer.acc_version_code)
         if (versions.first < bundledVersionCode) {
