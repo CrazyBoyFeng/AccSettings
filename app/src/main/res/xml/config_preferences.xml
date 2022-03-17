@@ -10,12 +10,12 @@
             app:key="@string/set_shutdown_capacity"
             app:title="@string/shutdown_below" />
         <NumberPickerPreference
-            app:key="@string/set_resume_capacity"
-            app:title="@string/charge_below" />
-        <NumberPickerPreference
             app:dialogMessage="@string/hint_cooldown"
             app:key="@string/set_cooldown_capacity"
             app:title="@string/cooldown_above" />
+        <NumberPickerPreference
+            app:key="@string/set_resume_capacity"
+            app:title="@string/charge_below" />
         <NumberPickerPreference
             app:key="@string/set_pause_capacity"
             app:title="@string/pause_above" />

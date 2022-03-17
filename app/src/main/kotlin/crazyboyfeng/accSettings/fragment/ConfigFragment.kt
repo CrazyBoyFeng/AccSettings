@@ -38,8 +38,8 @@ class ConfigFragment : PreferenceFragmentCompat() {
 
         setPreferencesFromResource(R.xml.config_preferences, rootKey)
         shutdownCapacity = findPreference(getString(R.string.set_shutdown_capacity))!!
-        resumeCapacity = findPreference(getString(R.string.set_resume_capacity))!!
         cooldownCapacity = findPreference(getString(R.string.set_cooldown_capacity))!!
+        resumeCapacity = findPreference(getString(R.string.set_resume_capacity))!!
         pauseCapacity = findPreference(getString(R.string.set_pause_capacity))!!
         capacityMask = findPreference(getString(R.string.set_capacity_mask))!!
         supportInVoltage = findPreference(getString(R.string.support_in_voltage))!!
@@ -57,8 +57,8 @@ class ConfigFragment : PreferenceFragmentCompat() {
         configDataStore.onConfigChangeListener = ConfigDataStore.OnConfigChangeListener {
             when (it) {
                 shutdownCapacity.key -> onShutdownCapacitySet()
-                resumeCapacity.key -> onResumeCapacitySet()
-                cooldownCapacity.key -> onCooldownCapacitySet()
+                cooldownCapacity.key -> onMiddleCapacitySet()
+                resumeCapacity.key -> onMiddleCapacitySet()
                 pauseCapacity.key -> onPauseCapacitySet()
                 supportInVoltage.key -> onSupportInVoltageSet()
                 cooldownTemp.key -> onCooldownTempSet()
@@ -161,22 +161,16 @@ class ConfigFragment : PreferenceFragmentCompat() {
         resumeCapacity.minValue = value + 1
     }
 
-    private fun onResumeCapacitySet() {
+    private fun onMiddleCapacitySet() {
         if (capacitiesInVoltage()) {
             return
         }
-        val value = resumeCapacity.value
-        shutdownCapacity.maxValue = value - 1
-        cooldownCapacity.minValue = value + 1
-    }
-
-    private fun onCooldownCapacitySet() {
-        if (capacitiesInVoltage()) {
-            return
-        }
-        val value = cooldownCapacity.value
-        resumeCapacity.maxValue = value - 1
-        pauseCapacity.minValue = value + 1
+        val cooldownCapacityValue = cooldownCapacity.value
+        val resumeCapacityValue = resumeCapacity.value
+        shutdownCapacity.maxValue =
+            (if (cooldownCapacityValue < resumeCapacityValue) cooldownCapacityValue else resumeCapacityValue) - 1
+        pauseCapacity.minValue =
+            (if (cooldownCapacityValue > resumeCapacityValue) cooldownCapacityValue else resumeCapacityValue) + 1
     }
 
     private fun onPauseCapacitySet() {
@@ -201,8 +195,7 @@ class ConfigFragment : PreferenceFragmentCompat() {
         } else {
             pauseCapacity.maxValue = 100
             onShutdownCapacitySet()
-            onResumeCapacitySet()
-            onCooldownCapacitySet()
+            onMiddleCapacitySet()
             onPauseCapacitySet()
         }
     }
