@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="crazyboyfeng.accSettings">
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/acc_settings"
@@ -19,7 +20,9 @@
         </activity>
         <receiver
             android:name=".WorkerReceiver"
-            android:exported="false">
+            android:directBootAware="true"
+            android:exported="false"
+            tools:targetApi="n">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
